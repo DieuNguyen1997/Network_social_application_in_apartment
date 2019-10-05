@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.SettingImageProfileActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/cover_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/img_cover_photo_setting_profile"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profile_cover_image_height"
+            android:background="@color/colorPrimary" />
+
+        <ImageView
+            android:id="@+id/btn_back_setting_profile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_arrow_back_black_24dp" />
+
+        <ImageButton
+            android:id="@+id/btn_camera_cover_photo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignBottom="@+id/img_cover_photo_setting_profile"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_photo_camera_black_24dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchor="@+id/cover_photo"
+        app:layout_anchorGravity="bottom|center">
+
+        <ImageView
+            android:id="@+id/img_avatar_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_avatar_profile" />
+
+        <ImageButton
+            android:id="@+id/btn_camera_avatar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignBottom="@+id/img_avatar_profile"
+            android:src="@drawable/ic_photo_camera_black_24dp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_anchor="@+id/image"
+        app:layout_anchorGravity="center|bottom">
+
+        <EditText
+            android:id="@+id/edt_username_setting_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_username_setting_profile"
+            android:hint="@string/setting_profie_username"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/txt_username_setting_profile"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_anchor="@+id/username"
+        app:layout_anchorGravity="center|bottom">
+
+        <EditText
+            android:id="@+id/edt_des_setting_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_username_setting_profile"
+            android:hint="@string/setting_profie_des"
+            android:textColor="@color/colorPray"
+            android:textSize="@dimen/txt_des_setting_profile" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_anchor="@+id/edt_des_setting_profile"
+        app:layout_anchorGravity="center|bottom">
+
+        <Button
+            android:id="@+id/btn_next_setting_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_btn_setting_profile"
+            android:text="@string/setting_profie_btn_next"
+            android:textColor="@color/colorPray"
+            android:textSize="@dimen/txt_des_setting_profile" />
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

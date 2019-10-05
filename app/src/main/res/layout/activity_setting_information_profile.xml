@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.SettingInformationProfileActivity">
+
+    <include layout="@layout/layout_app_bar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/setting_infomation_label_phone"
+        android:text="@string/label_phone_setting_information"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edt_phone_setting_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_gender_setting_information"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:id="@+id/radio_group_gender"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/radio_btn_male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radio_button_male" />
+
+        <RadioButton
+            android:id="@+id/radio_btn_female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radio_button_female" />
+
+        <RadioButton
+            android:id="@+id/radio_btn_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radio_button_other_gender" />
+    </RadioGroup>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/label_birthday_setting_information"
+            android:textStyle="bold" />
+
+        <TextView
+            android:text="07/09/1997"
+            android:id="@+id/setting_information_txt_birthday"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8" />
+
+        <ImageButton
+            android:id="@+id/btn_calender_setting_information"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_calendar" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_room_setting_information"
+            android:textStyle="bold" />
+        <Spinner
+            android:id="@+id/spinner_name_room_setting_information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </Spinner>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_save_setting_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/setting_information_btn_save" />
+</LinearLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="txt_username_post">22dp</dimen>
+    <dimen name="txt_time_posted">15dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="profile_cover_image_height">200dp</dimen>
+    <dimen name="txt_username_setting_profile">25sp</dimen>
+    <dimen name="margin_top_username_setting_profile">50dp</dimen>
+    <dimen name="txt_des_setting_profile">18sp</dimen>
+    <dimen name="margin_top_btn_setting_profile">70dp</dimen>
+    <dimen name="setting_infomation_label_phone">20dp</dimen>
+    <dimen name="margin_left_username">20dp</dimen>
+    <dimen name="margin_left_image">20dp</dimen>
+    <dimen name="margin_top_10dp">10dp</dimen>
+    <dimen name="margin_top_20dp">20dp</dimen>
+    <dimen name="margin_10dp">10dp</dimen>
+    <dimen name="margin_left_10dp">10dp</dimen>
+    <dimen name="margin_5dp">5dp</dimen>
+    <dimen name="item_list_image_size">70dp</dimen>
+    <dimen name="margin_100dp">100dp</dimen>
+    <dimen name="margin_150dp">150dp</dimen>
+    <dimen name="txt_size_18sp">18sp</dimen>
+    <dimen name="margin_20dp">20dp</dimen>
+</resources>

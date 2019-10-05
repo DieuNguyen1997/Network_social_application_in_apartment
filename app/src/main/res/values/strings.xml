@@ -1,0 +1,77 @@
+<resources>
+    <string name="app_name">Mạng xã hội cho cư dân</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_toolbar_add">Tạo bài viết</string>
+    <string name="content_post_add">Bạn đang nghĩ gì?</string>
+    <string name="title_post_add">Tiêu đề bài viết</string>
+    <string name="txt_username">Diệu Nguyễn</string>
+    <string name="txt_title_post_list">Konichiwa</string>
+    <string name="txt_content_post_list">Watashi wa Diệu desu. PTIT daigaku no gakusei desu. Douzo zoroshiku o negaishimasu.</string>
+    <string name="txt_time_posted">Just now</string>
+    <string name="home_toolbar_title">Apartment</string>
+    <string name="wellcome_app">Welcome</string>
+    <string name="title_activity_add_post">AddPostActivity</string>
+    <string name="setting_profie_username">Dieu Nguyen</string>
+    <string name="setting_profie_des">Thích là nhích</string>
+    <string name="setting_profie_btn_next">Bước tiếp theo</string>
+    <string name="label_phone_setting_information">Điện thoại di động</string>
+    <string name="label_birthday_setting_information">Ngày sinh</string>
+    <string name="label_gender_setting_information">Giới tính</string>
+    <string name="radio_button_male">Nam</string>
+    <string name="radio_button_female">Nữ</string>
+    <string name="radio_button_other_gender">Khác</string>
+    <string name="label_date_setting_information">Ngày sinh</string>
+    <string name="label_year_setting_information">Năm sinh</string>
+    <string name="setting_information_btn_save">Save</string>
+    <string name="activity_register_signup_with_google">Sign up with google</string>
+    <string name="activity_login_with_facebook">Login with Facebook</string>
+    <string name="fragment_profile_edit_profile">Chỉnh sửa thông tin cá nhân</string>
+    <string name="fragment_profile_change_password">Thay đổi mật khẩu</string>
+    <string name="dialog_change_password_title">Thay đổi mật khẩu</string>
+    <string name="dialog_change_password_edt_pass_current">Mật khẩu hiện tại</string>
+    <string name="dialog_change_password_edt_pass_new">Mật khẩu mới</string>
+    <string name="dialog_change_password_edt_repass_new">Nhập lại mật khẩu mới</string>
+    <string name="dialog_change_password_btn_save">Lưu</string>
+    <string name="txt_image_video">Ảnh/Video</string>
+    <string name="txt_take_camera">Máy ảnh</string>
+    <string name="txt_background_post">Màu nền</string>
+    <string name="activity_add_post_btn_post">Đăng bài</string>
+    <string name="item_list_txt_location">Phòng 203</string>
+    <string name="label_room_setting_information">Số phòng</string>
+    <string name="profile_txt_update">Chỉnh sửa thông tin cá nhân</string>
+    <string name="profile_txt_change_password">Thay đổi mật khẩu</string>
+
+    <array name="name_room">
+        <item>101</item>
+        <item>102</item>
+        <item>104</item>
+        <item>105</item>
+        <item>106</item>
+        <item>107</item>
+        <item>108</item>
+        <item>109</item>
+        <item>110</item>
+        <item>201</item>
+        <item>202</item>
+        <item>204</item>
+        <item>205</item>
+        <item>206</item>
+        <item>207</item>
+        <item>208</item>
+        <item>209</item>
+        <item>210</item>
+        <item>301</item>
+        <item>302</item>
+        <item>304</item>
+        <item>305</item>
+        <item>306</item>
+        <item>307</item>
+        <item>308</item>
+        <item>309</item>
+        <item>310</item>
+    </array>
+
+
+</resources>
