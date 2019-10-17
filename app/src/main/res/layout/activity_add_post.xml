@@ -7,26 +7,31 @@
     android:orientation="vertical"
     tools:context=".activities.AddPostActivity">
 
-    <include layout="@layout/layout_app_bar" />
+    <include layout="@layout/layout_app_bar"
+        android:id="@+id/toolbar_add_post"/>
 
 
     <LinearLayout
-        android:layout_margin="@dimen/margin_10dp"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_10dp"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_avatar_home" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/margin_5dp"
+                android:id="@+id/img_avatar_add_post"
+                android:src="@drawable/ic_meo"
+                android:layout_width="@dimen/size_50dp"
+                android:layout_height="@dimen/size_50dp" />
 
             <TextView
-                android:id="@+id/txt_username"
+                android:id="@+id/txt_username_add_post"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -56,78 +61,52 @@
             android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
 
         <androidx.cardview.widget.CardView
-            android:layout_marginTop="@dimen/margin_top_10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_10dp">
 
-            <LinearLayout
+            <Button
+                android:id="@+id/btn_choose_image_add_post"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:drawableLeft="@drawable/ic_photo_camera_black_24dp"
+                android:text="@string/text_btn_choose_image_add_post" />
 
-                <ImageButton
-                    android:layout_width="40dp"
-                    android:layout_height="40dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/margin_left_username"
-                    android:text="@string/txt_image_video" />
-            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <LinearLayout
+            <Button
+                android:id="@+id/btn_take_image_add_post"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:drawableLeft="@drawable/ic_photo_camera_black_24dp"
+                android:text="@string/text_btn_take_image_add_photo" />
 
-                <ImageButton
-                    android:layout_width="40dp"
-                    android:layout_height="40dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/margin_left_username"
-                    android:text="@string/txt_take_camera" />
-            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <LinearLayout
+            <Button
+                android:id="@+id/btn_choose_background_add_post"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:drawableLeft="@drawable/ic_photo_camera_black_24dp"
+                android:text="@string/txt_background_post" />
 
-                <ImageButton
-                    android:layout_width="40dp"
-                    android:layout_height="40dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/margin_left_username"
-                    android:text="@string/txt_background_post" />
-            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <Button
-            android:layout_gravity="center"
-            android:background="@drawable/bg_btn"
+            android:id="@+id/btn_post_add_post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="@dimen/margin_top_10dp"
+            android:background="@drawable/bg_btn"
             android:text="@string/activity_add_post_btn_post" />
     </LinearLayout>
 

@@ -45,11 +45,12 @@
         app:layout_anchor="@+id/cover_photo"
         app:layout_anchorGravity="bottom|center">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:src="@drawable/ic_meo"
             android:id="@+id/img_avatar_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_avatar_profile" />
+            />
 
         <ImageButton
             android:id="@+id/btn_camera_avatar"

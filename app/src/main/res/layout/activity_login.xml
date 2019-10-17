@@ -5,44 +5,67 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="5dp"
+    android:padding="@dimen/margin_5dp"
+    android:background="@color/color_bg_toolbar"
     tools:context=".activities.LoginActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="@dimen/size_70dp"
+        android:fontFamily="@font/"
         android:text="Đăng nhập"
-        android:textSize="30sp" />
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/txt_size_50sp"
+        android:textStyle="bold" />
 
     <LinearLayout
+        android:layout_marginTop="@dimen/size_30dp"
+        android:padding="@dimen/margin_5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="@dimen/margin_10dp"
         android:orientation="vertical">
 
         <EditText
+            android:textColorHint="@color/colorWhite"
+            android:textColor="@color/colorWhite"
+            android:layout_margin="@dimen/margin_5dp"
+            android:background="@drawable/custom_edittext_login"
             android:id="@+id/edt_username_lg"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_perm_identity_black_24dp"
-            android:hint="Nhập tên tài khoản" />
+            android:layout_height="@dimen/size_50dp"
+            android:drawableLeft="@drawable/custom_ic_username"
+            android:hint="Tên tài khoản" />
 
         <EditText
+            android:textColorHint="@color/colorWhite"
+            android:textColor="@color/colorWhite"
+            android:layout_margin="@dimen/margin_5dp"
+            android:background="@drawable/custom_edittext_login"
+            android:drawableLeft="@drawable/custom_ic_password"
             android:id="@+id/edt_password_lg"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nhập mật khẩu"
+            android:layout_height="@dimen/size_50dp"
+            android:hint="Mật khẩu"
             android:inputType="textPassword" />
 
         <EditText
+            android:textColorHint="@color/colorWhite"
+            android:textColor="@color/colorWhite"
+            android:layout_margin="5dp"
+            android:background="@drawable/custom_edittext_login"
+            android:drawableLeft="@drawable/custom_ic_password"
             android:id="@+id/edt_repassword_lg"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/size_50dp"
             android:hint="Nhập lại mật khẩu"
             android:inputType="textPassword" />
 
         <CheckBox
+            android:textColor="@color/colorWhite"
             android:id="@+id/cbx_nho_pass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,50 +75,57 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginTop="@dimen/margin_20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
             android:layout_gravity="center"
-            android:text="Đăng nhập" />
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:background="@drawable/bg_btn"
+                android:id="@+id/btn_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đăng nhập" />
 
-        <Button
-            android:id="@+id/btn_reset"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Reset" />
+            <Button
+                android:layout_marginLeft="@dimen/size_30dp"
+                android:background="@drawable/bg_btn"
+                android:id="@+id/btn_reset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Reset" />
+        </LinearLayout>
 
         <TextView
+            android:layout_marginTop="@dimen/margin_10dp"
             android:id="@+id/txt_signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:onClick="onClickSignUp"
             android:text="Bạn chưa có tài khoản?"
-            android:textColor="@color/colorBlue" />
+            android:textColor="@color/colorWhite" />
 
         <TextView
+            android:layout_marginTop="@dimen/margin_10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Hoặc" />
 
         <com.google.android.gms.common.SignInButton
+            android:layout_marginTop="@dimen/margin_10dp"
             android:id="@+id/sign_in_button_gg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
-        <Button
-            android:id="@+id/btn_login_facebook"
-            android:text="@string/activity_login_with_facebook"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
     </LinearLayout>
 </LinearLayout>

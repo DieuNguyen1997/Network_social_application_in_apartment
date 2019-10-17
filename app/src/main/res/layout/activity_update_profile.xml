@@ -1,9 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activities.UpdateProfileActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_app_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/setting_infomation_label_phone"
+            android:text="@string/label_username"
+            android:textStyle="bold" />
+
+
+        <EditText
+            android:id="@+id/edt_username__update_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/setting_infomation_label_phone"
+            android:text="@string/label_des"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edt_des__update_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/setting_infomation_label_phone"
+            android:text="@string/label_phone_setting_information"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edt_phone_update_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_gender_setting_information"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/radio_group_gender_update_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/margin_5dp">
+
+            <RadioButton
+                android:id="@+id/radio_btn_male_update_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/radio_button_male" />
+
+            <RadioButton
+                android:id="@+id/radio_btn_female_update_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_20dp"
+                android:text="@string/radio_button_female" />
+
+            <RadioButton
+                android:id="@+id/radio_btn_other_update_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_20dp"
+                android:text="@string/radio_button_other_gender" />
+        </RadioGroup>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_birthday_setting_information"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_birthday_update_profile"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:text="07/09/1997" />
+
+            <ImageButton
+                android:id="@+id/btn_calender_update_profile"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_calendar_24" />
+        </LinearLayout>
+
+
+        <Button
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:id="@+id/btn_save_update_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_btn"
+            android:text="@string/setting_information_btn_save" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,45 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/colorPrimary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_Background"
     tools:context=".activities.MainActivity">
 
+
+    <ImageView
+        android:layout_margin="@dimen/size_30dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/color_Background"
+        android:layout_marginTop="@dimen/size_50dp"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/img_apartment"
+        android:layout_width="@dimen/margin_150dp"
+        android:layout_height="@dimen/margin_150dp"
+        android:src="@drawable/ic_apartment" />
+
     <TextView
+        android:layout_below="@+id/img_apartment"
+        android:id="@+id/txt_welcome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/size_50dp"
+        android:fontFamily="@font/aclonica"
+        android:text="@string/wellcome_app"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/txt_size_50sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:textStyle="italic"
+        android:id="@+id/des_app"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/wellcome_app"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.234" />
-
+        android:layout_below="@+id/txt_welcome"
+        android:layout_centerHorizontal="true"
+        android:text="@string/des_app"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/txt_size_20sp" />
     <Button
         android:id="@+id/btn_login_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginBottom="68dp"
-        android:text="Đăng nhập"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_below="@+id/txt_welcome"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_100dp"
+        android:background="@drawable/bg_btn"
+        android:text="Đăng nhập" />
 
     <Button
         android:id="@+id/btn_signup_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginBottom="68dp"
-        android:text="Đăng ký"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.873"
-        app:layout_constraintStart_toEndOf="@+id/btn_login_main" />
+        android:layout_below="@+id/btn_login_main"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/size_50dp"
+        android:background="@drawable/bg_btn"
+        android:text="Đăng ký" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

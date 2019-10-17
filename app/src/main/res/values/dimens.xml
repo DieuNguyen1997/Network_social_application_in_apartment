@@ -21,4 +21,18 @@
     <dimen name="margin_150dp">150dp</dimen>
     <dimen name="txt_size_18sp">18sp</dimen>
     <dimen name="margin_20dp">20dp</dimen>
+    <dimen name="size_image_avatar">150dp</dimen>
+    <dimen name="size_image_list">100dp</dimen>
+    <dimen name="size_70dp">70dp</dimen>
+    <dimen name="size_100dp">100dp</dimen>
+    <dimen name="size_50dp">50dp</dimen>
+    <dimen name="txt_size_20sp">20sp</dimen>
+    <dimen name="size_20dp">20dp</dimen>
+    <dimen name="size_30dp">30dp</dimen>
+    <dimen name="margin_8dp">8dp</dimen>
+    <dimen name="txt_size_15sp">15sp</dimen>
+    <dimen name="size_3dp">3dp</dimen>
+    <dimen name="size_40dp">40dp</dimen>
+    <dimen name="size_32dp">32dp</dimen>
+    <dimen name="txt_size_50sp">50sp</dimen>
 </resources>

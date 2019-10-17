@@ -4,12 +4,12 @@
 
     <item
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_search_black_24dp"
+        android:icon="@drawable/ic_search_white_24dp"
         android:id="@+id/item_search"
         android:title="Tim kiem"/>
     <item
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_reflection"
+        android:icon="@drawable/chatting"
         android:id="@+id/item_reflect"
         android:title="Phan anh"/>
 

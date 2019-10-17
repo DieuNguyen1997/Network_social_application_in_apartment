@@ -8,19 +8,19 @@
 
     <item
         android:id="@+id/nav_item_notification"
-        android:icon="@drawable/ic_notification"
+        android:icon="@drawable/ic_notification_black_24"
         android:title="Thông báo" />
     <item
         android:id="@+id/nav_item_event"
-        android:icon="@drawable/ic_event"
+        android:icon="@drawable/ic_event_black_24"
         android:title="Sự kiện" />
     <item
         android:id="@+id/nav_item_reflect"
-        android:icon="@drawable/ic_reflection"
+        android:icon="@drawable/ic_reflect_black"
         android:title="Phản ánh" />
     <item
         android:id="@+id/nav_item_service"
-        android:icon="@drawable/ic_service"
+        android:icon="@drawable/ic_service_black"
         android:title="Dịch vụ" />
     <item
         android:id="@+id/nav_item_apartment"
