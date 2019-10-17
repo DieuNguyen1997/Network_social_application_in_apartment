@@ -19,6 +19,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class RegisterActivity extends AppCompatActivity {
+    private Button mBtnSignUpGoogle;
     private EditText mEdtUsername;
     private EditText mEdtPassword;
     private EditText mEdtConfirmPassword;
@@ -39,7 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
         mEdtPassword = findViewById(R.id.edt_password_rs);
         mEdtConfirmPassword = findViewById(R.id.edt_repassword_rs);
         mBtnSignUp = findViewById(R.id.btn_signup);
-
+        mBtnSignUpGoogle = findViewById(R.id.btn_signup_google);
 
         mBtnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +49,14 @@ public class RegisterActivity extends AppCompatActivity {
                 mProgressDialog.setTitle("Đăng ký tài khoản");
                 mProgressDialog.setMessage("Vui lòng đợi trong giây lát");
                 mProgressDialog.show();
+            }
+        });
+        mBtnSignUpGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SettingImageProfileActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

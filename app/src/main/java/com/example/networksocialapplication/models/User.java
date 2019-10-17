@@ -1,17 +1,37 @@
 package com.example.networksocialapplication.models;
 
 public class User {
+    private String mUserID;
     private String mUserName;
     private String mDes;
-
+    private String mAvatarUrl;
     private String mPhoneNumber;
     private String mGender;
     private String mDateOfBirth;
     private String mNameRoom;
 
+    public User() {
+    }
+
+    public User(String userID, String userName, String des, String avatarUrl, String phoneNumber, String gender, String dateOfBirth) {
+        mUserID = userID;
+        mUserName = userName;
+        mDes = des;
+        mAvatarUrl = avatarUrl;
+        mPhoneNumber = phoneNumber;
+        mGender = gender;
+        mDateOfBirth = dateOfBirth;
+    }
+
     public User(String userName, String des) {
         mUserName = userName;
         mDes = des;
+    }
+
+    public User(String phoneNumber, String gender, String dateOfBirth) {
+        mPhoneNumber = phoneNumber;
+        mGender = gender;
+        mDateOfBirth = dateOfBirth;
     }
 
     public User(String phoneNumber, String gender, String dateOfBirth, String nameRoom) {
@@ -19,6 +39,22 @@ public class User {
         mGender = gender;
         mDateOfBirth = dateOfBirth;
         mNameRoom = nameRoom;
+    }
+
+    public String getAvatarUrl() {
+        return mAvatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        mAvatarUrl = avatarUrl;
+    }
+
+    public String getUserID() {
+        return mUserID;
+    }
+
+    public void setUserID(String userID) {
+        mUserID = userID;
     }
 
     public String getPhoneNumber() {

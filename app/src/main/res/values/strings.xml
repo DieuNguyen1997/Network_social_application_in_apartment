@@ -21,7 +21,7 @@
     <string name="label_gender_setting_information">Giới tính</string>
     <string name="radio_button_male">Nam</string>
     <string name="radio_button_female">Nữ</string>
-    <string name="radio_button_other_gender">Khác</string>
+    <string name="radio_button_other_gender">LGBT</string>
     <string name="label_date_setting_information">Ngày sinh</string>
     <string name="label_year_setting_information">Năm sinh</string>
     <string name="setting_information_btn_save">Save</string>
@@ -42,6 +42,37 @@
     <string name="label_room_setting_information">Số phòng</string>
     <string name="profile_txt_update">Chỉnh sửa thông tin cá nhân</string>
     <string name="profile_txt_change_password">Thay đổi mật khẩu</string>
+    <string name="text_btn_choose_image_add_post">Ảnh/Video</string>
+    <string name="text_btn_take_image_add_photo">Máy ảnh</string>
+    <string name="title_toolbar_add_post">Thêm bài viết</string>
+    <string name="table_name_post">Post</string>
+    <string name="table_name_user">Users</string>
+    <string name="avatarUrl_table_users">avatarUrl</string>
+    <string name="username_table_users">username</string>
+    <string name="des_table_users">des</string>
+    <string name="phoneNumber_table_users">phoneNumber</string>
+    <string name="gender_table_users">gender</string>
+    <string name="dateOfBirth_table_users">dateOfBirth</string>
+    <string name="userId_table_post">userId</string>
+    <string name="count_like_item_post">12</string>
+    <string name="txt_like_item_post">Yêu thích</string>
+    <string name="txt_comment_item_post">Bình luận</string>
+    <string name="txt_date">Date</string>
+    <string name="txt_time">Time</string>
+    <string name="txt_status">đã đăng bài lúc  </string>
+    <string name="txt_follow">Follow</string>
+    <string name="txt_des">Hello ^^</string>
+    <string name="des_app">Mạng xã hội cho cư dân</string>
+    <string name="txt_edit_profile">Chỉnh sửa thông tin cá nhân</string>
+    <string name="txt_change_password">Thay đổi mật khẩu</string>
+    <string name="txt_delete_post">Xóa bài đăng</string>
+    <string name="txt_edit_post">Sửa bài đăng</string>
+    <string name="txt_update_cover_photo">Cập nhật ảnh bìa</string>
+    <string name="txt_update_avatar_dialog">Cập nhật ảnh đại diện</string>
+    <string name="label_username">Tên người dùng</string>
+    <string name="label_des">Mô tả/Trích dẫn yêu thích</string>
+    <string name="title_toolbar_update_profile">Chỉnh sửa thông tin cá nhân</string>
+    <string name="btn_add_main">Bạn đang nghĩ gì?</string>
 
     <array name="name_room">
         <item>101</item>

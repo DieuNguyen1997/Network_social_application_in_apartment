@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:width="@dimen/size_50dp"
+        android:height="@dimen/size_50dp">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="rectangle">
+
+            <solid android:color="@color/color_btn_login" />
+            <corners
+                android:bottomLeftRadius="@dimen/size_3dp"
+                android:topLeftRadius="@dimen/size_3dp" />
+
+        </shape>
+    </item>
+    <item
+        android:width="@dimen/size_32dp"
+        android:height="@dimen/size_32dp"
+        android:drawable="@drawable/ic_person_white_24dp"
+        android:gravity="center"></item>
+</layer-list>

@@ -14,23 +14,27 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp">
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:src="@drawable/bg_avatar_home"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/margin_5dp"
+                android:id="@+id/img_avatar_fragment_home"
+                android:layout_marginStart="20dp"
+                android:layout_width="@dimen/size_50dp"
+                android:layout_height="@dimen/size_50dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
 
             <Button
+                android:textAllCaps="false"
+                android:background="@color/colorWhite"
                 android:id="@+id/btn_add_main"
                 android:layout_width="272dp"
                 android:layout_height="51dp"
                 android:layout_marginStart="20dp"
-                android:text="Thêm bài viết"
-                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                android:text="@string/btn_add_main"
+                app:layout_constraintStart_toEndOf="@+id/img_avatar_fragment_home"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

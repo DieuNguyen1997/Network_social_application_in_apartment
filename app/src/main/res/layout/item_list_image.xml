@@ -2,14 +2,16 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/margin_10dp"
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/img_post"
+        android:id="@+id/image_list_item_image"
         android:src="@drawable/ic_message"
-        android:layout_width="@dimen/item_list_image_size"
-        android:layout_height="@dimen/item_list_image_size" />
+        android:layout_width="@dimen/size_image_list"
+        android:layout_height="@dimen/size_image_list" />
     <ImageButton
+        android:id="@+id/btn_delete_list_item_post"
         android:background="@drawable/bg_btn_deletew"
         android:src="@drawable/ic_delete_white"
         android:layout_width="wrap_content"
