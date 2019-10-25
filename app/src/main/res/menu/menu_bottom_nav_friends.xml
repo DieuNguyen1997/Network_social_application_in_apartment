@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_list_request_friend"
+        android:icon="@drawable/ic_supervisor_account_black_24dp"
+        android:title="@string/title_list_request_friend" />
+    <item
+        android:id="@+id/item_list_friend"
+        android:icon="@drawable/ic_supervisor_account_black_24dp"
+        android:title="@string/title_list_friend" />
+</menu>

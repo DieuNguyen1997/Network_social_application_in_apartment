@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.networksocialapplication.R;
+import com.example.networksocialapplication.homeapp.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -126,14 +127,6 @@ public class SettingInformationProfileActivity extends AppCompatActivity {
         } else {
 
 //            User user = new User(phoneNumber,gender,dateOfBirth);
-//            HashMap<String, User> hashMap = new HashMap<>();
-//            hashMap.put("information",user);
-//            HashMap hashMap = new HashMap();
-//            hashMap.put("phoneNumber", phoneNumber);
-//            hashMap.put("gender", gender);
-//            hashMap.put("dateOfBirth", dateOfBirth);
-
-
             mUserRef.child("phoneNumber").setValue(phoneNumber);
             mUserRef.child("gender").setValue(gender);
             mUserRef.child("dateOfBirth").setValue(dateOfBirth).addOnCompleteListener(new OnCompleteListener<Void>() {

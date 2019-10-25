@@ -1,4 +1,4 @@
-package com.example.networksocialapplication.activities;
+package com.example.networksocialapplication.homeapp;
 
 import android.content.Intent;
 import android.graphics.PorterDuff;
@@ -21,8 +21,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.R;
-import com.example.networksocialapplication.SearchUserActivity;
+import com.example.networksocialapplication.activities.EventFragment;
+import com.example.networksocialapplication.activities.HomeFragment;
+import com.example.networksocialapplication.activities.NotificationFragment;
+import com.example.networksocialapplication.activities.RequestFriendFragment;
+import com.example.networksocialapplication.search.SearchUserActivity;
 import com.example.networksocialapplication.adapters.PagerAdapter;
+import com.example.networksocialapplication.login.LoginActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,7 +41,7 @@ import com.google.firebase.database.ValueEventListener;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener, RequestFriendFragment.OnFragmentInteractionListener, EventFragment.OnFragmentInteractionListener, NotificationFragment.OnFragmentInteractionListener {
+public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener,  EventFragment.OnFragmentInteractionListener, NotificationFragment.OnFragmentInteractionListener {
 
     private CircleImageView mAvatar;
     private TextView mTxtUsername;
@@ -130,10 +135,12 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
         mUserData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String username = dataSnapshot.child("username").getValue().toString();
-                String avatar = dataSnapshot.child("avatar").getValue().toString();
-                mTxtUsername.setText(username);
-                Glide.with(HomeActivity.this).load(avatar).into(mAvatar);
+                if (dataSnapshot.exists()){
+                    String username = dataSnapshot.child("username").getValue().toString();
+                    String avatar = dataSnapshot.child("avatar").getValue().toString();
+                    mTxtUsername.setText(username);
+                    Glide.with(HomeActivity.this).load(avatar).into(mAvatar);
+                }
             }
 
             @Override

@@ -1,6 +1,9 @@
 package com.example.networksocialapplication.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,13 +14,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.R;
+import com.example.networksocialapplication.comment.CommentActivity;
+import com.example.networksocialapplication.homeapp.HomeActivity;
 import com.example.networksocialapplication.models.Post;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -48,78 +57,72 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
-        final String postKey = holder.postDatabase.push().getKey();
-        Log.d("adapter", postKey);
         if (mListPost != null) {
-            Post post = mListPost.get(position);
-            Picasso.with(mContext).load(post.getAvatar()).fit().into(holder.mAvatar);
+            final Post post = mListPost.get(position);
             holder.mUserName.setText(post.getUsername());
             holder.mTimePosted.setText(post.getTimePosted());
             holder.mContentPost.setText(post.getContentPost());
             holder.mDatePosted.setText(post.getDatePosted());
             Glide.with(mContext).load(post.getImagePost()).into(holder.mImagePost);
-            holder.setLikeButtonStatus(postKey);
+            Glide.with(mContext).load(post.getAvatar()).into(holder.mAvatar);
+
+            final String postKey = post.getPostId();
+            holder.isLike(postKey);
+            holder.numberLike(postKey);
+            holder.displayNumberComment(postKey);
+
+//            holder.setLikeButtonStatus(postKey);
+
             holder.mLayoutLike.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    holder.checkLike = true;
-                    holder.likeDataRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                            if (holder.checkLike == true) {
-                                if (dataSnapshot.child(postKey).hasChild(holder.mCurrentUserID)) {
-                                    holder.likeDataRef.child(postKey).child(holder.mCurrentUserID).removeValue();
-                                    holder.checkLike = false;
-                                } else {
-                                    holder.likeDataRef.child(postKey).child(holder.mCurrentUserID).setValue(true);
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
+                    if (holder.mImgLike.getTag().equals("like")) {
+                        holder.likeDataRef.child(postKey).child(holder.mCurrentUserID).setValue("true");
+                    } else {
+                        holder.likeDataRef.child(postKey).child(holder.mCurrentUserID).removeValue();
+                    }
                 }
             });
             holder.mLayoutComment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent intent = new Intent(mContext, CommentActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("postId",postKey);
+                    intent.putExtra("currentUserId", holder.mCurrentUserID);
+                    mContext.startActivity(intent);
                 }
             });
-            holder.mTxtMenu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    PopupMenu popupMenu = new PopupMenu(mContext, holder.mTxtMenu);
-                    popupMenu.inflate(R.menu.menu_item_post);
-                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                        @Override
-                        public boolean onMenuItemClick(MenuItem item) {
-                            switch (item.getItemId()) {
-                                case R.id.item_delete_post:
-                                    deletePost();
-                                    break;
-                                case R.id.item_edit_post:
-                                    editPost();
-                                    break;
-                                default:
-                                    break;
+            if (post.getUserID().equals(holder.mCurrentUserID)) {
+                holder.mTxtMenu.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final PopupMenu popupMenu = new PopupMenu(mContext, holder.mTxtMenu);
+                        popupMenu.inflate(R.menu.menu_item_post);
+                        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                            @Override
+                            public boolean onMenuItemClick(MenuItem item) {
+                                switch (item.getItemId()) {
+                                    case R.id.item_delete_post:
+                                        holder.deletePost(mContext, post);
+                                        break;
+                                    case R.id.item_edit_post:
+                                        holder.editPost(post);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                return false;
                             }
-                            return false;
-                        }
-                    });
-                    popupMenu.show();
-                }
-            });
-        }
-    }
+                        });
+                        popupMenu.show();
+                    }
+                });
+            } else {
+                holder.mTxtMenu.setVisibility(View.INVISIBLE);
+            }
 
-    private void deletePost() {
-    }
-    private void editPost() {
+        }
     }
 
     @Override
@@ -132,8 +135,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         DatabaseReference likeDataRef;
         DatabaseReference postDatabase;
         FirebaseAuth mAuth;
-        int mCountLike;
-        private boolean checkLike = false;
         String mCurrentUserID;
         LinearLayout mLayoutLike;
         LinearLayout mLayoutComment;
@@ -179,38 +180,52 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             mAvatar.setImageURI(uri);
         }
 
-        public void setUserName(String userName) {
-            mUserName.setText(userName);
+        public void deletePost(final Context context, final Post post) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("Xóa bài đăng");
+            builder.setMessage("Bạn có chắc chắn muốn xóa bài đăng này?");
+            builder.setIcon(R.drawable.ic_delete_bin);
+            builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    postDatabase.child(post.getPostId()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Intent intent = new Intent(context, HomeActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                context.startActivity(intent);
+                            }
+                        }
+                    });
+
+                }
+            });
+            builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
         }
 
-        public void setTimePosted(String timePosted) {
-            mTimePosted.setText(timePosted);
+        public void editPost(Post post) {
         }
 
-        public void setDatePosted(String datePosted) {
-            mDatePosted.setText(datePosted);
-        }
-
-        public void setContentPost(String contentPost) {
-            mContentPost.setText(contentPost);
-        }
-
-        public void setImagePost(String imagePost) {
-            Uri uri = Uri.parse(imagePost);
-            mImagePost.setImageURI(uri);
-        }
-
-        public void setLikeButtonStatus(final String postKey) {
-            likeDataRef.addValueEventListener(new ValueEventListener() {
+        public void isLike(String postKey) {
+            likeDataRef.child(postKey).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.child(postKey).hasChild(mCurrentUserID)) {
-                        mCountLike = (int) dataSnapshot.child(postKey).getChildrenCount();
+                    if (dataSnapshot.child(mCurrentUserID).exists()) {
                         mImgLike.setImageResource(R.drawable.ic_love_red);
-                        mTxtCountLike.setText(Integer.toString(mCountLike));
+                        mImgLike.setTag("liked");
                     } else {
-                        mCountLike = (int) dataSnapshot.child(postKey).getChildrenCount();
                         mImgLike.setImageResource(R.drawable.ic_love_white);
+                        mImgLike.setTag("like");
                     }
                 }
 
@@ -220,5 +235,34 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 }
             });
         }
+
+        public void numberLike(String postKey) {
+            likeDataRef.child(postKey).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    mTxtCountLike.setText(String.valueOf(dataSnapshot.getChildrenCount()));
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+        public void displayNumberComment(String postKey){
+            DatabaseReference commentRef = FirebaseDatabase.getInstance().getReference().child("Comments").child(postKey);
+            commentRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    mTxtCountComment.setText(dataSnapshot.getChildrenCount()+" Bình luận");
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+
     }
 }

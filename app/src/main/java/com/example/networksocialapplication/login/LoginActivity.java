@@ -1,4 +1,4 @@
-package com.example.networksocialapplication.activities;
+package com.example.networksocialapplication.login;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -15,7 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.example.networksocialapplication.reset_password.ForgotPasswordActivity;
 import com.example.networksocialapplication.R;
+import com.example.networksocialapplication.homeapp.HomeActivity;
+import com.example.networksocialapplication.register.RegisterActivity;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -243,5 +246,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                     }
                 });
+    }
+
+    public void onCLickForgotPass(View view) {
+        Intent intent = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
+        startActivity(intent);
     }
 }

@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import com.example.networksocialapplication.activities.EventFragment;
 import com.example.networksocialapplication.activities.HomeFragment;
 import com.example.networksocialapplication.activities.NotificationFragment;
-import com.example.networksocialapplication.activities.ProfileFragment;
+import com.example.networksocialapplication.profile.ProfileFragment;
 import com.example.networksocialapplication.activities.RequestFriendFragment;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {

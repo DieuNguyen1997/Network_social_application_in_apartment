@@ -7,7 +7,7 @@
 
     <ImageView
         android:id="@+id/image_list_item_image"
-        android:src="@drawable/ic_message"
+        android:src="@drawable/ic_image_avatar"
         android:layout_width="@dimen/size_image_list"
         android:layout_height="@dimen/size_image_list" />
     <ImageButton
