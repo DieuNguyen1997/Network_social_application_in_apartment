@@ -1,10 +1,12 @@
 package com.example.networksocialapplication.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.models.User;
+import com.example.networksocialapplication.profile_other_user.ProfileOtherUserActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,7 +28,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
     private Context mContext;
     private List<User> mUserList;
@@ -54,8 +57,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             mCurrentUserID = mFirebaseUser.getUid();
             final User user = mUserList.get(position);
             holder.btnFollow.setVisibility(View.VISIBLE);
-            Glide.with(mContext).load(user.getAvatarUrl()).into(holder.imgAvatar);
-            holder.txtUsername.setText(user.getUserName());
+            Glide.with(mContext).load(user.getAvatar()).into(holder.imgAvatar);
+            holder.txtUsername.setText(user.getUsername());
+            holder.mLine.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String userId = user.getUserID();
+                    Intent intent = new Intent(mContext, ProfileOtherUserActivity.class);
+                    intent.putExtra("userID", userId);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                   mContext.startActivity(intent);
+                }
+            });
 //            holder.txtNameRoom.setText(user.getNameRoom());
 //            holder.isFollowing(user.getUserID(),holder.btnFollow);
 //            if (user.getUserID().equals(mCurrentUserID)){
@@ -95,14 +108,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         return mUserList.size();
     }
 
-    public class ViewHolder extends PostAdapter.ViewHolder {
+    public class ViewHolder extends PostAdapter.ViewHolder{
         public CircleImageView imgAvatar;
         public TextView txtUsername;
         public TextView txtNameRoom;
         public Button btnFollow;
+        public RelativeLayout mLine;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            mLine = itemView.findViewById(R.id.line_user);
             imgAvatar = itemView.findViewById(R.id.img_avatar_item_user_search);
             txtUsername = itemView.findViewById(R.id.txt_username_item_search);
             txtNameRoom = itemView.findViewById(R.id.txt_name_room_item_search);
@@ -127,5 +142,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 }
             });
         }
+
     }
 }

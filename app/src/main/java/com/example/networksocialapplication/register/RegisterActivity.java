@@ -1,4 +1,4 @@
-package com.example.networksocialapplication.activities;
+package com.example.networksocialapplication.register;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.networksocialapplication.R;
+import com.example.networksocialapplication.activities.SettingImageProfileActivity;
+import com.example.networksocialapplication.login.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

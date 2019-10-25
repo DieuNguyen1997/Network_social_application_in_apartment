@@ -1,7 +1,10 @@
-package com.example.networksocialapplication.activities;
+package com.example.networksocialapplication.profile;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -14,14 +17,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.R;
+import com.example.networksocialapplication.activities.UpdateProfileActivity;
 import com.example.networksocialapplication.adapters.PostAdapter;
 import com.example.networksocialapplication.models.Post;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -34,13 +40,20 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements View.OnClickListener{
+
+    private static final int GALLERY_PICK = 111;
 
     private RecyclerView mRecyclerView;
     private PostAdapter mPostAdapter;
@@ -62,13 +75,18 @@ public class ProfileFragment extends Fragment {
     private EditText edtRePass;
     private Button mBtnSave;
 
+    private Uri mImageUri;
+    private StorageReference mImageProfileDatabase;
+    private UploadTask mUploadTask;
+
+
     public ProfileFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)   {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         initView(view);
@@ -101,24 +119,13 @@ public class ProfileFragment extends Fragment {
     private void createDialogChooseEdit(View view) {
         Button mBtnEditProfile = view.findViewById(R.id.btn_edit_profile_dialog);
         Button mBtnChangePassword = view.findViewById(R.id.btn_change_password_dialog);
-        mBtnChangePassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builderChange = new AlertDialog.Builder(getContext());
-                View viewChange = getLayoutInflater().inflate(R.layout.dialog_change_password, null);
-                creatDialogChangePassword(viewChange);
-                builderChange.setView(viewChange);
-                AlertDialog dialog = builderChange.create();
-                dialog.show();
-            }
-        });
-        mBtnEditProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), UpdateProfileActivity.class);
-                startActivity(intent);
-            }
-        });
+        Button mBtnUpdateAvatar = view.findViewById(R.id.btn_update_avatar_dialog);
+        Button mBtnUpdateCoverPhoto = view.findViewById(R.id.btn_update_cover_photo);
+
+        mBtnChangePassword.setOnClickListener(this);
+        mBtnEditProfile.setOnClickListener(this);
+        mBtnUpdateAvatar.setOnClickListener(this);
+        mBtnUpdateCoverPhoto.setOnClickListener(this);
     }
 
     private void creatDialogChangePassword(View viewChange) {
@@ -212,7 +219,7 @@ public class ProfileFragment extends Fragment {
     }
 
     public boolean checkUserId(Post post) {
-        if (post.getUserID() == mCurrentUserId) {
+        if (post.getUserID().equals(mCurrentUserId)) {
             return true;
         }
         return false;
@@ -246,6 +253,7 @@ public class ProfileFragment extends Fragment {
         mCurrentUserId = mAuth.getCurrentUser().getUid();
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         mPostDatabase = FirebaseDatabase.getInstance().getReference().child("Post");
+        mImageProfileDatabase = FirebaseStorage.getInstance().getReference().child("Avatar").child(mCurrentUserId);
     }
 
 
@@ -256,4 +264,80 @@ public class ProfileFragment extends Fragment {
         mListPost = new ArrayList<>();
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_edit_profile_dialog:
+                Intent intent = new Intent(getContext(), UpdateProfileActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btn_change_password_dialog:
+                AlertDialog.Builder builderChange = new AlertDialog.Builder(getContext());
+                View viewChange = getLayoutInflater().inflate(R.layout.dialog_change_password, null);
+                creatDialogChangePassword(viewChange);
+                builderChange.setView(viewChange);
+                AlertDialog dialog = builderChange.create();
+                dialog.show();
+                break;
+            case R.id.btn_update_avatar_dialog:
+                choosePhotoFromGallery();
+
+                break;
+            case  R.id.btn_update_cover_photo:
+                choosePhotoFromGallery();
+                break;
+        }
+
+    }
+    private void choosePhotoFromGallery() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent, GALLERY_PICK);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GALLERY_PICK && resultCode == getActivity().RESULT_OK && data != null){
+            mImageUri = data.getData();
+            mAvatar.setImageURI(mImageUri);
+            updateImageProfileToFirebase();
+        }
+    }
+    private void updateImageProfileToFirebase() {
+        if (mImageUri != null) {
+            mImageProfileDatabase.child(mCurrentUserId).putFile(mImageUri);
+            mUploadTask = mImageProfileDatabase.child(mCurrentUserId).putFile(mImageUri);
+            mUploadTask.continueWithTask(new Continuation() {
+                @Override
+                public Object then(@NonNull Task task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    } else {
+                        return mImageProfileDatabase.getDownloadUrl();
+                    }
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    Uri downloadUri = task.getResult();
+                    String avatarUrl = downloadUri.toString();
+                    mUserDatabase.child(mCurrentUserId).child("avatar").setValue(avatarUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(getActivity(), "Lưu url anh vao user thanh cong", Toast.LENGTH_SHORT).show();
+                            } else {
+                                String message = task.getException().getMessage();
+                                Toast.makeText(getActivity(), "không thành công", Toast.LENGTH_SHORT).show();
+                                Log.d("error", message);
+                            }
+                        }
+                    });
+                }
+            });
+
+        }
+    }
 }

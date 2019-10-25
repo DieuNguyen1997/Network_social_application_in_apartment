@@ -48,6 +48,8 @@ public class HomeFragment extends Fragment {
     private StorageReference mAvatarDatabase;
     private DatabaseReference mPostData;
     private FirebaseAuth mAuth;
+    private DatabaseReference mFriendRef;
+
     private Context mContext;
 
     public HomeFragment() {
@@ -100,6 +102,7 @@ public class HomeFragment extends Fragment {
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         mAvatarDatabase = FirebaseStorage.getInstance().getReference().child("Avatar");
         mPostImageData = FirebaseStorage.getInstance().getReference();
+        mFriendRef = FirebaseDatabase.getInstance().getReference().child("Friends");
     }
 
     private void initRecyclerview(View view) {
@@ -115,12 +118,26 @@ public class HomeFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
-                    Post post = item.getValue(Post.class);
-                    mListPost.add(post);
+                    final Post post = item.getValue(Post.class);
+                    final String userID = post.getUserID();
+                    mFriendRef.child(mCurrentUserId).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.child(userID).exists()||userID.equals(mCurrentUserId)){
+                                mListPost.add(post);
+                                mPostAdapter = new PostAdapter(getContext(), mListPost);
+                                mPostAdapter.notifyDataSetChanged();
+                                mRecyclerView.setAdapter(mPostAdapter);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
                 }
-                mPostAdapter = new PostAdapter(getContext(), mListPost);
-                mPostAdapter.notifyDataSetChanged();
-                mRecyclerView.setAdapter(mPostAdapter);
+
             }
 
             @Override

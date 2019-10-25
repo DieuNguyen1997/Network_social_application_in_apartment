@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".chat.ChatActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_chat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_Background"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_avatar_toolbar_chat"
+                android:layout_width="@dimen/size_30dp"
+                android:layout_height="@dimen/size_30dp"
+                android:layout_marginLeft="@dimen/size_50dp"
+                android:src="@drawable/ic_avatar" />
+
+            <TextView
+                android:id="@+id/txt_username_toolbar_chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_25dp"
+                android:layout_marginLeft="@dimen/margin_20dp"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/txt_size_18sp"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/add_chat"
+        android:layout_below="@+id/appbar_chat">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_list_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/appbar_chat">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/add_chat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:minHeight="?attr/actionBarSize"
+        android:padding="@dimen/margin_5dp">
+
+        <ImageView
+            android:id="@+id/img_choose_photo_chat_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:src="@drawable/ic_camera_alt_background_24dp" />
+
+        <ImageView
+            android:id="@+id/img_take_photo_chat_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_toRightOf="@+id/img_choose_photo_chat_activity"
+            android:src="@drawable/ic_choose_image" />
+
+        <RelativeLayout
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:background="@drawable/background_content_comment"
+            android:layout_toLeftOf="@id/img_send_chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/img_take_photo_chat_activity">
+
+            <EditText
+                android:layout_margin="@dimen/margin_5dp"
+                android:id="@+id/edt_content_chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:layout_marginEnd="@dimen/margin_10dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/txt_add_message"
+                android:textColor="@color/color_Background"
+                android:textColorHint="@color/color_Background" />
+
+            <ImageView
+                android:layout_margin="@dimen/margin_5dp"
+                android:layout_alignParentRight="true"
+                android:id="@+id/img_choose_sticker_chat_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_sticker_background" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/img_send_chat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_send_black_24dp" />
+    </RelativeLayout>
+</RelativeLayout>

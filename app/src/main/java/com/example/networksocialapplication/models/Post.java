@@ -13,6 +13,7 @@ public class Post {
     private String mImagePost;
     private ArrayList<String> mListImagePost;
 
+
     public Post(String postId, String userID, String avatar, String username, String datePosted, String timePosted, String contentPost) {
         mPostId = postId;
         mUserID = userID;
@@ -97,6 +98,14 @@ public class Post {
 
     public void setImagePost(String imagePost) {
         mImagePost = imagePost;
+    }
+
+    public String getPostId() {
+        return mPostId;
+    }
+
+    public void setPostId(String postId) {
+        mPostId = postId;
     }
 
     @Override

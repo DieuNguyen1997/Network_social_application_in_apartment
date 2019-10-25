@@ -13,7 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SearchUserActivity" />
+        <activity android:name=".chat.ChatActivity"></activity>
+        <activity android:name=".comment.CommentActivity" />
+        <activity android:name=".profile_other_user.ProfileOtherUserActivity" />
+        <activity android:name=".reset_password.ForgotPasswordActivity" />
+        <activity android:name=".search.SearchUserActivity" />
         <activity android:name=".activities.UpdateProfileActivity" />
         <activity android:name=".activities.SettingInformationProfileActivity" />
         <activity android:name=".activities.SettingImageProfileActivity" />
@@ -21,9 +25,9 @@
             android:name=".activities.AddPostActivity"
             android:label="@string/title_activity_add_post"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.HomeActivity" />
-        <activity android:name=".activities.RegisterActivity" />
-        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".homeapp.HomeActivity" />
+        <activity android:name=".register.RegisterActivity" />
+        <activity android:name=".login.LoginActivity" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

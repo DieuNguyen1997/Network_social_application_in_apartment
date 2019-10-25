@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.networksocialapplication.R;
+import com.example.networksocialapplication.models.User;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,7 +33,6 @@ import com.google.firebase.storage.StorageTask;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -210,16 +210,15 @@ public class SettingImageProfileActivity extends AppCompatActivity implements Vi
             mProgessBar.show();
             mProgessBar.setCanceledOnTouchOutside(true);
 
-//            User user = new User(userName,des);
-//            Map<String, User> hashMap = new HashMap<>();
-//            hashMap.put("image",user);
+//
+//
+//            HashMap hashMap = new HashMap();
+//            hashMap.put("userID", currentUserID);
+//            hashMap.put("username", userName);
+//            hashMap.put("des", des);
 
-            HashMap hashMap = new HashMap();
-            hashMap.put("userID", currentUserID);
-            hashMap.put("username", userName);
-            hashMap.put("des", des);
-
-            mUserDatabase.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            User user = new User(currentUserID,userName,des);
+            mUserDatabase.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {

@@ -8,6 +8,8 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.networksocialapplication.R;
+import com.example.networksocialapplication.login.LoginActivity;
+import com.example.networksocialapplication.register.RegisterActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button mBtnLogin;

@@ -9,6 +9,7 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:textAllCaps="false"
             android:id="@+id/btn_edit_profile_dialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:textAllCaps="false"
             android:id="@+id/btn_change_password_dialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,6 +35,7 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:textAllCaps="false"
             android:id="@+id/btn_update_avatar_dialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,6 +48,7 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:textAllCaps="false"
             android:id="@+id/btn_update_cover_photo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp">
+    android:layout_margin="@dimen/margin_10dp">
 
     <LinearLayout
         android:layout_margin="@dimen/margin_10dp"
@@ -15,6 +15,7 @@
             android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:src="@drawable/ic_image_avatar"
                 android:layout_centerInParent="true"
                 android:id="@+id/avatar_item_post_frag_home"
                 android:layout_width="@dimen/size_50dp"
@@ -83,11 +84,10 @@
             <ImageView
                 android:scaleType="centerCrop"
                 android:layout_marginTop="@dimen/margin_10dp"
-                android:src="@drawable/ic_avatar"
                 android:id="@+id/img_post_item_post"
                 android:layout_below="@+id/txt_content_post_list"
-                android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
             <!--<GridView-->
                 <!--android:layout_below="@+id/img_post_item_post"-->
                 <!--android:id="@+id/gridView_list_image_post"-->
@@ -121,7 +121,6 @@
                     android:layout_marginLeft="@dimen/margin_5dp"
                     android:layout_gravity="center"
                     android:textSize="@dimen/txt_size_20sp"
-                    android:text="@string/count_like_item_post"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -137,15 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/count_like_item_post"
                     android:textSize="@dimen/txt_size_20sp" />
-                <TextView
-                    android:layout_marginLeft="@dimen/margin_5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/txt_comment_item_post"
-                    android:textSize="@dimen/txt_size_18sp" />
 
             </LinearLayout>
         </RelativeLayout>

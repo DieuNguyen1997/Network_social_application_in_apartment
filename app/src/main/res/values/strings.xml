@@ -55,7 +55,7 @@
     <string name="dateOfBirth_table_users">dateOfBirth</string>
     <string name="userId_table_post">userId</string>
     <string name="count_like_item_post">12</string>
-    <string name="txt_like_item_post">Yêu thích</string>
+    <string name="txt_like_item_post">Thích</string>
     <string name="txt_comment_item_post">Bình luận</string>
     <string name="txt_date">Date</string>
     <string name="txt_time">Time</string>
@@ -73,6 +73,24 @@
     <string name="label_des">Mô tả/Trích dẫn yêu thích</string>
     <string name="title_toolbar_update_profile">Chỉnh sửa thông tin cá nhân</string>
     <string name="btn_add_main">Bạn đang nghĩ gì?</string>
+    <string name="txt_forgot_password">Quên mật khẩu?</string>
+    <string name="txt_reset_password">Hãy nhập email của bạn.</string>
+    <string name="txt_email">dieu@gmail.com</string>
+    <string name="txt_btn_send_email">Send email</string>
+    <string name="title_chat_profile_other">Nhắn tin</string>
+    <string name="title_requestfriend_profile_other">Kết bạn</string>
+    <string name="txt_nameroom">Phòng </string>
+    <string name="txt_numberoom">201</string>
+    <string name="title_cancel_requestfriend_profile_other">Hủy kết bạn</string>
+    <string name="title_list_request_friend">Lời mới kết bạn</string>
+    <string name="title_list_friend">Bạn bè</string>
+    <string name="txt_unfriend">Hủy kết bạn</string>
+    <string name="txt_add_comment">Thêm bình luận ...</string>
+    <string name="txt_reply_item_post">Trả lời</string>
+    <string name="txt_time_item_post">1 giờ</string>
+    <string name="txt_delete_item_post">Xóa</string>
+    <string name="txt_add_message">Nhập ...</string>
+
 
     <array name="name_room">
         <item>101</item>

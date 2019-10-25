@@ -5,12 +5,14 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorWhite">#ffff</color>
     <color name="colorBlue">#3F51B5</color>
+    <color name="colorBlueTxt">#0000FF</color>
     <color name="colorBlack">#000000</color>
     <color name="colorPray">#83837D</color>
     <color name="color_Background">#344955</color>
     <color name="color_bg_toolbar">#4A6572</color>
     <color name="color_yellow">#F9AA33</color>
     <color name="color_btn_login">#232F34</color>
+    <color name="color_red">#FF003B</color>
 
     <color name="tabSelectedIconColor">#F9AA33</color>
     <color name="tabUnselectedIconColor">#344955</color>

@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="@dimen/margin_5dp"
     android:background="@color/color_bg_toolbar"
-    tools:context=".activities.LoginActivity">
+    tools:context=".login.LoginActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -64,13 +64,26 @@
             android:hint="Nhập lại mật khẩu"
             android:inputType="textPassword" />
 
-        <CheckBox
-            android:textColor="@color/colorWhite"
-            android:id="@+id/cbx_nho_pass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nhớ mật khẩu" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <CheckBox
+                android:layout_alignParentLeft="true"
+                android:textColor="@color/colorWhite"
+                android:id="@+id/cbx_nho_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nhớ mật khẩu" />
+            <TextView
+                android:onClick="onCLickForgotPass"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorWhite"
+                android:text="@string/txt_forgot_password"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
+        </RelativeLayout>
 
     </LinearLayout>
 

@@ -73,10 +73,10 @@
 
         <ImageButton
             android:id="@+id/btn_calender_setting_information"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/ic_calendar" />
+            android:src="@drawable/ic_calendar_24" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -97,8 +97,10 @@
     </LinearLayout>
 
     <Button
+        android:layout_gravity="center"
+        android:background="@drawable/bg_btn"
         android:id="@+id/btn_save_setting_information"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/setting_information_btn_save" />
 </LinearLayout>
