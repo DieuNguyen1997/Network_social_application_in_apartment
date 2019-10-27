@@ -105,17 +105,16 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
 
     private void initToobar() {
         Toolbar toolbar = findViewById(R.id.toolbar_layout);
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
-        toolbar.setTitle(R.string.title_toolbar_add_post);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(R.string.title_toolbar_add_post);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddPostActivity.this, HomeActivity.class);
-                startActivity(intent);
                 finish();
             }
         });
-        setSupportActionBar(toolbar);
     }
 
     private void initRecyclerview() {

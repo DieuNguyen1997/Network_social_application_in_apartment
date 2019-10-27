@@ -14,8 +14,8 @@
         </shape>
     </item>
     <item
-        android:width="@dimen/size_32dp"
-        android:height="@dimen/size_32dp"
+        android:width="@dimen/size_25dp"
+        android:height="@dimen/size_25dp"
         android:drawable="@drawable/ic_person_white_24dp"
         android:gravity="center"></item>
 </layer-list>

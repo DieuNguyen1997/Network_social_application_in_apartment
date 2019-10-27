@@ -5,7 +5,7 @@
     android:id="@+id/coordinator"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffff"
+
     app:layout_behavior="android.support.design.widget.Ap"
     tools:context=".profile.ProfileFragment">
 
@@ -64,6 +64,7 @@
                app:layout_constraintTop_toBottomOf="@+id/txt_username_profile" />
 
            <androidx.recyclerview.widget.RecyclerView
+               android:background="#CDCED3"
                android:id="@+id/profile_list_post"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"

@@ -5,8 +5,24 @@ public class Message {
     private String mSenderId;
     private String mReceivedId;
     private String mContentChat;
+    private String mTimeChat;
 
     public Message() {
+    }
+    public Message(String chatId, String senderId, String receivedId, String contentChat, String timeChat) {
+        mChatId = chatId;
+        mSenderId = senderId;
+        mReceivedId = receivedId;
+        mContentChat = contentChat;
+        mTimeChat = timeChat;
+    }
+
+    public String getTimeChat() {
+        return mTimeChat;
+    }
+
+    public void setTimeChat(String timeChat) {
+        mTimeChat = timeChat;
     }
 
     public String getChatId() {

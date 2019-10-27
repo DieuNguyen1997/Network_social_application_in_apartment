@@ -40,7 +40,7 @@
         android:layout_centerHorizontal="true"
         android:text="@string/des_app"
         android:textColor="@color/colorWhite"
-        android:textSize="@dimen/txt_size_20sp" />
+        android:textSize="@dimen/txt_size_18sp" />
     <Button
         android:id="@+id/btn_login_main"
         android:layout_width="wrap_content"
