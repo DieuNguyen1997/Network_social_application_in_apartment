@@ -341,6 +341,7 @@ public class ProfileOtherUserActivity extends AppCompatActivity {
     public void onClickRootChatprofileOther(View view) {
         Intent intent = new Intent(ProfileOtherUserActivity.this, ChatActivity.class);
         intent.putExtra("otherUserId", mReceiverUserID);
+        intent.putExtra("currentUserId", mSenderUserID);
         startActivity(intent);
         finish();
     }

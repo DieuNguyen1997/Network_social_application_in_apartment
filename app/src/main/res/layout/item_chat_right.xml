@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="@dimen/margin_5dp"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_marginRight="@dimen/margin_5dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="@dimen/size_300dp"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:visibility="gone"
+            android:id="@+id/img_avatar_item_chat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_alignParentEnd="true"
+            android:padding="@dimen/margin_8dp"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/background_chat_right"
+            android:textSize="@dimen/txt_size_18sp"
+            android:id="@+id/txt_content_chat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="@string/txt_time"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:textColor="@color/color_Background"
+            android:layout_below="@+id/txt_content_chat"
+            android:textSize="@dimen/txt_size_12sp"
+            android:id="@+id/txt_time_item_chat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</RelativeLayout>

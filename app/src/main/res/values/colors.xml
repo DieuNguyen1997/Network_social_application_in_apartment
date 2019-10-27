@@ -15,5 +15,5 @@
     <color name="color_red">#FF003B</color>
 
     <color name="tabSelectedIconColor">#F9AA33</color>
-    <color name="tabUnselectedIconColor">#344955</color>
+    <color name="tabUnselectedIconColor">#000000</color>
 </resources>

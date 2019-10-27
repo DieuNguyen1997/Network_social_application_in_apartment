@@ -152,23 +152,24 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
 
     private void initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar_home);
-        toolbar.setTitle(R.string.home_toolbar_title);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.home_toolbar_title);
         toolbar.setNavigationIcon(R.drawable.ic_menu_black_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mNavigationView.setVisibility(View.VISIBLE);
+                finish();
             }
         });
-        setSupportActionBar(toolbar);
     }
 
     private void initViewPager() {
         TabLayout tabLayout = findViewById(R.id.taplayout);
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_home_black_24dp));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_supervisor_account_black_24dp));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_event_black_24));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_notification_black_24));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_event_background_24dp));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_notifications_black_24dp));
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_person_black_24dp));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 

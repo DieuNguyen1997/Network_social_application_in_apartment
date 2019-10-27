@@ -24,7 +24,6 @@
                 android:id="@+id/img_avatar_toolbar_chat"
                 android:layout_width="@dimen/size_30dp"
                 android:layout_height="@dimen/size_30dp"
-                android:layout_marginLeft="@dimen/size_50dp"
                 android:src="@drawable/ic_avatar" />
 
             <TextView
