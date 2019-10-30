@@ -90,6 +90,12 @@
     <string name="txt_time_item_post">1 giờ</string>
     <string name="txt_delete_item_post">Xóa</string>
     <string name="txt_add_message">Nhập ...</string>
+    <string name="txt_accept">Chấp nhận</string>
+    <string name="txt_delete">Xóa</string>
+    <string name="txt_result_friend">Hai bạn đã trở thành bạn bè.</string>
+    <string name="txt_list_chat">Danh sách chat</string>
+    <string name="txt_operating_status">Danh sách trò chuyện</string>
+    <string name="txt_seen">Đã xem</string>
 
 
     <array name="name_room">

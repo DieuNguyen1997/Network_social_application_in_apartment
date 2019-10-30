@@ -46,7 +46,6 @@
         app:layout_anchorGravity="bottom|center">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:src="@drawable/ic_image_avatar"
             android:id="@+id/img_avatar_profile"
             android:layout_width="@dimen/size_image_avatar"
             android:layout_height="@dimen/size_image_avatar"

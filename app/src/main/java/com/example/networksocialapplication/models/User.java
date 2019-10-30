@@ -8,15 +8,29 @@ public class User {
     private String mPhoneNumber;
     private String mGender;
     private String mDateOfBirth;
+    private String mStatus;
 
 
     public User() {
+    }
+
+    public User(String username, String avatar) {
+        mUsername = username;
+        mAvatar = avatar;
     }
 
     public User(String userID, String username, String des) {
         mUserID = userID;
         mUsername = username;
         mDes = des;
+    }
+
+    public String getStatus() {
+        return mStatus;
+    }
+
+    public void setStatus(String status) {
+        mStatus = status;
     }
 
     public String getUserID() {

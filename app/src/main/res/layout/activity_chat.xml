@@ -9,7 +9,8 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_chat"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_chat"
@@ -20,21 +21,40 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/img_avatar_toolbar_chat"
-                android:layout_width="@dimen/size_30dp"
-                android:layout_height="@dimen/size_30dp"
-                android:src="@drawable/ic_avatar" />
-
-            <TextView
-                android:id="@+id/txt_username_toolbar_chat"
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_25dp"
-                android:layout_marginLeft="@dimen/margin_20dp"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/txt_size_18sp"
-                android:textStyle="bold" />
+                android:layout_height="wrap_content">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:src="@mipmap/ic_launcher"
+                    android:id="@+id/img_avatar_toolbar_chat"
+                    android:layout_width="@dimen/size_40dp"
+                    android:layout_height="@dimen/size_40dp" />
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/img_avatar_toolbar_chat"
+                    android:layout_toRightOf="@id/img_avatar_toolbar_chat"
+                    android:id="@+id/txt_username_toolbar_chat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_25dp"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/txt_size_18sp"
+                    android:textStyle="bold" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/margin_8dp"
+                    android:layout_marginLeft="@dimen/size_25dp"
+                    android:layout_below="@+id/txt_username_toolbar_chat"
+                    android:id="@+id/img_status_chat_activity"
+                    android:src="@mipmap/ic_launcher"
+                    app:civ_border_width="@dimen/margin_5dp"
+                    app:civ_border_color="@color/color_green"
+                    android:layout_width="@dimen/margin_10dp"
+                    android:layout_height="@dimen/margin_10dp" />
+            </RelativeLayout>
+
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -80,19 +100,19 @@
             android:src="@drawable/ic_choose_image" />
 
         <RelativeLayout
-            android:layout_marginRight="@dimen/margin_10dp"
-            android:background="@drawable/background_content_comment"
-            android:layout_toLeftOf="@id/img_send_chat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/img_take_photo_chat_activity">
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:layout_toLeftOf="@id/img_send_chat"
+            android:layout_toRightOf="@+id/img_take_photo_chat_activity"
+            android:background="@drawable/background_content_comment">
 
             <EditText
-                android:layout_margin="@dimen/margin_5dp"
                 android:id="@+id/edt_content_chat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5dp"
                 android:layout_marginStart="@dimen/margin_10dp"
                 android:layout_marginEnd="@dimen/margin_10dp"
                 android:background="@android:color/transparent"
@@ -101,11 +121,11 @@
                 android:textColorHint="@color/color_Background" />
 
             <ImageView
-                android:layout_margin="@dimen/margin_5dp"
-                android:layout_alignParentRight="true"
                 android:id="@+id/img_choose_sticker_chat_activity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/margin_5dp"
                 android:src="@drawable/ic_sticker_background" />
         </RelativeLayout>
 

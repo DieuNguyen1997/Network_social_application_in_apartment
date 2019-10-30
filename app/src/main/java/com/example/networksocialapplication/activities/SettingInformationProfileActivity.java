@@ -129,6 +129,7 @@ public class SettingInformationProfileActivity extends AppCompatActivity {
 //            User user = new User(phoneNumber,gender,dateOfBirth);
             mUserRef.child("phoneNumber").setValue(phoneNumber);
             mUserRef.child("gender").setValue(gender);
+            mUserRef.child("status").setValue("offline");
             mUserRef.child("dateOfBirth").setValue(dateOfBirth).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
