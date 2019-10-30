@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.networksocialapplication.ListChatActivity;
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.StickerIndexingService;
 import com.example.networksocialapplication.activities.MainActivity;
@@ -31,6 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -49,7 +51,6 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView mSendChat;
     private RecyclerView mRecyclerView;
 
-    private FirebaseAuth mAuth;
     private DatabaseReference mUserRef;
     private DatabaseReference mChatRef;
 
@@ -59,20 +60,43 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
     private MessageAdapter mMessageAdapter;
     private List<Message> mMessages;
+    private ValueEventListener mSeenListenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StickerIndexingService.enqueueWork(ChatActivity.this);
         setContentView(R.layout.activity_chat);
 
         initFirebase();
         initView();
         initToolbar();
         initRecyclerview();
+
+    }
+
+    private void seenMessage(final String userId){
+        mSeenListenter = mChatRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()){
+                    Message message = data.getValue(Message.class);
+                    if (message.getReceivedId().equals(mCurrentUserId) && message.getSenderId().equals(userId)){
+                        HashMap<String, Object> hashMap = new HashMap<>();
+                        hashMap.put("seen", true);
+                        data.getRef().updateChildren(hashMap);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void displayMessage(final String imageUrl) {
+
         mChatRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -93,6 +117,8 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
+        seenMessage(mUserReceiveid);
+
     }
 
     private void initRecyclerview() {
@@ -136,7 +162,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                startActivity(new Intent(ChatActivity.this, ListChatActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
         displayUserReceiveInfor();
@@ -182,7 +208,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         String chatId = mChatRef.push().getKey();
         String timeCurrent = mTimeCurrent.getTimeCurrent();
 
-        Message message = new Message(chatId, mCurrentUserId, mUserReceiveid, content, timeCurrent);
+        Message message = new Message(chatId, mCurrentUserId, mUserReceiveid, content, timeCurrent, false);
         if (TextUtils.isEmpty(content)) {
             mContentChat.setError("Hãy nhập nội dung chát");
         } else {
@@ -193,5 +219,22 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 }
             });
         }
+    }
+
+    private void status(String status){
+        mUserRef.child(mCurrentUserId).child("status").setValue(status);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        status("online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mChatRef.removeEventListener(mSeenListenter);
+        status("offline");
     }
 }

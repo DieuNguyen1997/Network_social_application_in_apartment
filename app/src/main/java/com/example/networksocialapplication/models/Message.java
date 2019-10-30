@@ -6,15 +6,18 @@ public class Message {
     private String mReceivedId;
     private String mContentChat;
     private String mTimeChat;
+    private boolean mIsSeen;
 
     public Message() {
     }
-    public Message(String chatId, String senderId, String receivedId, String contentChat, String timeChat) {
+    public Message(String chatId, String senderId, String receivedId, String contentChat, String timeChat, boolean isSeen) {
         mChatId = chatId;
         mSenderId = senderId;
         mReceivedId = receivedId;
         mContentChat = contentChat;
         mTimeChat = timeChat;
+        mIsSeen = isSeen;
+
     }
 
     public String getTimeChat() {
@@ -55,5 +58,13 @@ public class Message {
 
     public void setContentChat(String contentChat) {
         mContentChat = contentChat;
+    }
+
+    public boolean isSeen() {
+        return mIsSeen;
+    }
+
+    public void setSeen(boolean seen) {
+        mIsSeen = seen;
     }
 }

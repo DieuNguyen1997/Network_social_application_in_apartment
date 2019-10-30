@@ -62,6 +62,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             holder.mContentChat.setText(message.getContentChat());
             Glide.with(mContext).load(mImgUrl).into(holder.mImgAvatar);
             holder.mTimeChat.setText(message.getTimeChat());
+
+            if (position == mMessages.size() - 1){
+                if (message.isSeen()){
+                    holder.mSeen.setText("Đã xem");
+                }else
+                    holder.mSeen.setText("Đã gửi");
+            }else holder.mSeen.setVisibility(View.GONE);
         }
 
     }
@@ -76,6 +83,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         public CircleImageView mImgAvatar;
         public TextView mContentChat;
         public TextView mTimeChat;
+        public TextView mSeen;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -83,6 +91,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             mImgAvatar = itemView.findViewById(R.id.img_avatar_item_chat);
             mContentChat = itemView.findViewById(R.id.txt_content_chat);
             mTimeChat = itemView.findViewById(R.id.txt_time_item_chat);
+            mSeen = itemView.findViewById(R.id.txt_seen);
         }
     }
 

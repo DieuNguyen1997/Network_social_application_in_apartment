@@ -13,7 +13,10 @@
     <color name="color_yellow">#F9AA33</color>
     <color name="color_btn_login">#232F34</color>
     <color name="color_red">#FF003B</color>
+    <color name="color_green">#05df29</color>
 
     <color name="tabSelectedIconColor">#F9AA33</color>
     <color name="tabUnselectedIconColor">#000000</color>
+    <color name="color_gray">#CACABD</color>
+    <color name="color_off_gray">#bfbfbf</color>
 </resources>

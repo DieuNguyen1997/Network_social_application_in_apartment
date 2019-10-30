@@ -39,9 +39,7 @@
                 android:id="@+id/image_comment"
                 android:layout_width="@dimen/size_image_list"
                 android:layout_height="@dimen/size_image_list"
-                android:layout_marginLeft="@dimen/margin_20dp"
-                android:src="@drawable/ic_avatar"
-                />
+                android:layout_marginLeft="@dimen/margin_20dp" />
 
             <ImageButton
                 android:id="@+id/btn_delete_image_comment"
@@ -64,8 +62,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_avatar_comment_activity"
                 android:layout_width="@dimen/size_40dp"
-                android:layout_height="@dimen/size_40dp"
-                android:src="@drawable/ic_image_avatar" />
+                android:layout_height="@dimen/size_40dp" />
 
             <EditText
                 android:id="@+id/edt_content_comment"

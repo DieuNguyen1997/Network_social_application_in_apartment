@@ -55,13 +55,4 @@
 
     </LinearLayout>
 
-    <Button
-        android:text="@string/txt_follow"
-        android:textColor="@color/colorPrimary"
-        android:layout_centerVertical="true"
-        android:layout_alignParentEnd="true"
-        android:background="@drawable/background_button"
-        android:id="@+id/btn_follow_item_search_user"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/size_30dp" />
 </RelativeLayout>

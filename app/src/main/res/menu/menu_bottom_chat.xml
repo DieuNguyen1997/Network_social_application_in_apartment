@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:icon="@drawable/ic_chat_bubble_black_24dp"
+        android:id="@+id/item_bottom_chat"
+        android:title="@string/txt_list_chat" />
+
+    <item android:icon="@drawable/ic_supervisor_account_black_24dp"
+        android:id="@+id/item_bottom_operating_status"
+        android:title="@string/txt_operating_status" />
+
+
+</menu>

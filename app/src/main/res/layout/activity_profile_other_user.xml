@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffff"
     tools:context=".profile_other_user.ProfileOtherUserActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-
+        android:background="#ffff"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +20,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/profile_cover_image_height"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_avatar"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 tools:ignore="MissingConstraints" />
@@ -33,7 +31,6 @@
                 android:layout_marginTop="@dimen/margin_100dp"
                 android:layout_marginBottom="10dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_image_avatar"
                 app:layout_constraintBottom_toTopOf="@+id/txt_username_profile_other"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"

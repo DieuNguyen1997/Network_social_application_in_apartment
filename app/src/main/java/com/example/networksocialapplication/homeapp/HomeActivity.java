@@ -20,6 +20,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.example.networksocialapplication.ListChatActivity;
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.activities.EventFragment;
 import com.example.networksocialapplication.activities.HomeFragment;
@@ -76,6 +77,7 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
             Toast.makeText(getApplicationContext(), "Đã đăng nhập", Toast.LENGTH_SHORT).show();
         } else {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
     }
@@ -239,11 +241,28 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
                 startActivity(intent);
                 return true;
             case R.id.item_reflect:
-                Toast.makeText(getApplicationContext(), "Phản ánh", Toast.LENGTH_LONG).show();
+                Intent intentChat = new Intent(HomeActivity.this, ListChatActivity.class);
+                startActivity(intentChat);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
 
+    }
+
+    private void status(String status){
+        mUserData.child("status").setValue(status);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        status("online");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        status("offline");
     }
 }

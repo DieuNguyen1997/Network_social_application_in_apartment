@@ -37,5 +37,13 @@
             android:id="@+id/txt_time_item_chat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="@color/color_bg_toolbar"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/txt_time_item_chat"
+            android:text="@string/txt_seen"
+            android:id="@+id/txt_seen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
 </RelativeLayout>
