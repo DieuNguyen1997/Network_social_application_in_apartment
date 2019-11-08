@@ -14,10 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.R;
-import com.example.networksocialapplication.chat.ChatActivity;
+import com.example.networksocialapplication.user.chat.ChatActivity;
 import com.example.networksocialapplication.models.Message;
 import com.example.networksocialapplication.models.User;
-import com.example.networksocialapplication.profile_other_user.ProfileOtherUserActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -151,8 +150,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             mAvatarChat = itemView.findViewById(R.id.img_avatar_item_list_chat);
             mUsername = itemView.findViewById(R.id.txt_username_item_list_chat);
             mTxtLastMessage = itemView.findViewById(R.id.txt_last_message_item_list_chat);
-            mImgOn = itemView.findViewById(R.id.img_status_on_chat_activity);
-            mImgOff = itemView.findViewById(R.id.img_status_off_chat_activity);
+            mImgOn = itemView.findViewById(R.id.img_status_on_item_list_chat);
+            mImgOff = itemView.findViewById(R.id.img_status_off_item_list_chat);
             mLineChat = itemView.findViewById(R.id.line_item_list_chat);
         }
     }

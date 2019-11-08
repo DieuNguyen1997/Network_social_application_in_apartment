@@ -43,13 +43,14 @@
     </LinearLayout>
 
     <ImageView
-        android:layout_marginLeft="@dimen/margin_15dp"
         android:id="@+id/img_item_comment"
         android:layout_width="@dimen/size_image_list"
         android:layout_height="@dimen/size_image_list"
         android:layout_below="@+id/layout_content_comment"
+        android:layout_marginLeft="@dimen/margin_15dp"
         android:layout_toRightOf="@+id/img_avatar_item_comment"
-        android:src="@drawable/ic_avatar" />
+        android:scaleType="centerCrop"
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/layout_like"
@@ -127,12 +128,12 @@
     </LinearLayout>
 
     <!--<androidx.recyclerview.widget.RecyclerView-->
-        <!--android:layout_marginTop="@dimen/margin_10dp"-->
-        <!--android:layout_marginRight="@dimen/margin_10dp"-->
-        <!--android:id="@+id/recycler_view_list_reply_comment"-->
-        <!--android:layout_marginLeft="@dimen/size_100dp"-->
-        <!--android:layout_below="@+id/layout_like"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>-->
+    <!--android:layout_marginTop="@dimen/margin_10dp"-->
+    <!--android:layout_marginRight="@dimen/margin_10dp"-->
+    <!--android:id="@+id/recycler_view_list_reply_comment"-->
+    <!--android:layout_marginLeft="@dimen/size_100dp"-->
+    <!--android:layout_below="@+id/layout_like"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>-->
 
 </RelativeLayout>

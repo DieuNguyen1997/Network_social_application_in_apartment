@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.AddPostActivity">
+    tools:context=".resident.homeapp.add_post.AddPostActivity">
 
     <include layout="@layout/layout_app_bar"
         android:id="@+id/toolbar_add_post"/>
@@ -48,6 +48,7 @@
             android:orientation="vertical">
 
             <EditText
+                android:background="@android:color/transparent"
                 android:id="@+id/activity_add_post_edt_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

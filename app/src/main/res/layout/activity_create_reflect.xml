@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/color_off_gray"
+    android:layout_height="match_parent"
+    tools:context=".CreateReflectActivity">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/layout_app_bar" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_150dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/color_Background"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/include"
+        app:layout_constraintVertical_bias="0.077"
+        tools:layout_editor_absoluteX="0dp"></LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/margin_20dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginRight="@dimen/margin_20dp"
+        android:layout_marginBottom="@dimen/size_30dp"
+        android:background="@color/colorWhite"
+        android:padding="@dimen/margin_15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.054"
+        tools:layout_editor_absoluteX="0dp">
+
+        <RelativeLayout
+            android:id="@+id/layour_add_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_15dp">
+
+            <LinearLayout
+                android:id="@+id/root_add_image_create_reflect"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/size_100dp"
+                android:background="@color/color_gray"
+                android:orientation="vertical"
+                android:padding="@dimen/margin_8dp">
+
+                <ImageView
+                    android:layout_width="@dimen/size_50dp"
+                    android:layout_height="@dimen/size_50dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_add_yellow_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_add_image"
+                    android:textSize="@dimen/txt_size_18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/img_create_reflect"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_100dp"
+                android:layout_marginStart="@dimen/margin_15dp"
+                android:layout_toRightOf="@+id/root_add_image_create_reflect"
+                android:scaleType="centerCrop"
+                 />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/label_field_reflect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layour_add_image"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:text="@string/label_field_reflect"
+            android:textSize="@dimen/txt_size_18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/layout_field_reflect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/label_field_reflect"
+            android:layout_marginTop="@dimen/margin_8dp"
+            android:orientation="horizontal"
+           >
+
+            <Button
+                android:gravity="center"
+                android:id="@+id/btn_field_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_btn_reflect"
+                android:text="@string/txt_all"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btn_field_protect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_5dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_btn_reflect"
+                android:text="@string/txt_protect"
+                android:textAllCaps="false" />
+
+            <Button
+
+                android:id="@+id/btn_field_techno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_5dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_btn_reflect"
+                android:text="@string/txt_technology"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btn_field_toire"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_5dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_btn_reflect"
+                android:text="@string/txt_toire"
+                android:textAllCaps="false" />
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+
+            app:counterEnabled="true"
+            app:counterMaxLength="100"
+            app:errorEnabled="true"
+            android:textColorHint="@color/color_Background"
+            android:id="@+id/layour_enter_title_reflect"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_field_reflect"
+            android:layout_marginTop="@dimen/margin_15dp"
+            android:hint="Tiêu đề"
+            app:boxStrokeColor="@color/color_yellow">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_title_create_reflect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            app:counterEnabled="true"
+            app:counterMaxLength="500"
+            app:errorEnabled="true"
+            android:layout_marginTop="@dimen/margin_5dp"
+            android:textColorHint="@color/color_Background"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btn_send_reflect"
+            android:layout_below="@+id/layour_enter_title_reflect"
+            android:hint="@string/txt_content"
+            app:boxStrokeColor="@color/color_yellow">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_content_reflect"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_100dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_send_reflect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:background="@drawable/bg_btn"
+            android:text="Gửi phản ánh" />
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

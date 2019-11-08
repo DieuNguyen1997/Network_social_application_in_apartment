@@ -1,9 +1,6 @@
 package com.example.networksocialapplication.adapters;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
@@ -14,21 +11,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
-import android.app.AlertDialog;
+
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.R;
-import com.example.networksocialapplication.activities.HomeFragment;
-import com.example.networksocialapplication.comment.CommentActivity;
-import com.example.networksocialapplication.homeapp.HomeActivity;
+import com.example.networksocialapplication.user.comment.CommentActivity;
 import com.example.networksocialapplication.models.Comment;
-import com.example.networksocialapplication.models.Post;
-import com.example.networksocialapplication.profile.ProfileFragment;
-import com.example.networksocialapplication.profile_other_user.ProfileOtherUserActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.example.networksocialapplication.resident.homeapp.profile_other_user.ProfileOtherUserActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -80,7 +70,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             displayInforUser(holder.mAvatar, holder.mUsername, userIdComment);
             holder.mTime.setText(comment.getTimeComment());
             holder.mContentComment.setText(comment.getContent());
-            Glide.with(mContext).load(comment.getImageComment()).into(holder.mImage);
+            if (comment.getImageComment() != null){
+                holder.mImage.setVisibility(View.VISIBLE);
+                Glide.with(mContext).load(comment.getImageComment()).into(holder.mImage);
+
+            }
 
             final String commentId = comment.getCommentID();
             final String postId = comment.getPostID();

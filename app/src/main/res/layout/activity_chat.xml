@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".chat.ChatActivity">
+    tools:context=".user.chat.ChatActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_chat"
@@ -43,16 +43,26 @@
                     android:textStyle="bold" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:visibility="gone"
                     android:layout_marginTop="@dimen/margin_8dp"
                     android:layout_marginLeft="@dimen/size_25dp"
                     android:layout_below="@+id/txt_username_toolbar_chat"
-                    android:id="@+id/img_status_chat_activity"
+                    android:id="@+id/img_status_on_chat_activity"
                     android:src="@mipmap/ic_launcher"
                     app:civ_border_width="@dimen/margin_5dp"
                     app:civ_border_color="@color/color_green"
                     android:layout_width="@dimen/margin_10dp"
                     android:layout_height="@dimen/margin_10dp" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_marginTop="@dimen/margin_8dp"
+                    android:layout_marginLeft="@dimen/size_25dp"
+                    android:layout_below="@+id/txt_username_toolbar_chat"
+                    android:id="@+id/img_status_off_chat_activity"
+                    android:src="@mipmap/ic_launcher"
+                    app:civ_border_width="@dimen/margin_5dp"
+                    app:civ_border_color="@color/color_off_gray"
+                    android:layout_width="@dimen/margin_10dp"
+                    android:layout_height="@dimen/margin_10dp" />
+
             </RelativeLayout>
 
         </androidx.appcompat.widget.Toolbar>
@@ -136,5 +146,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_send_black_24dp" />
+
+
+
     </RelativeLayout>
 </RelativeLayout>

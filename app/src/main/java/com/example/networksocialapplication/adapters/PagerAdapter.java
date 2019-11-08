@@ -4,11 +4,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.networksocialapplication.activities.EventFragment;
-import com.example.networksocialapplication.activities.HomeFragment;
-import com.example.networksocialapplication.activities.NotificationFragment;
-import com.example.networksocialapplication.profile.ProfileFragment;
-import com.example.networksocialapplication.activities.RequestFriendFragment;
+import com.example.networksocialapplication.resident.homeapp.event.EventFragment;
+import com.example.networksocialapplication.resident.homeapp.home.HomeFragment;
+import com.example.networksocialapplication.resident.homeapp.notifications.NotificationFragment;
+import com.example.networksocialapplication.resident.homeapp.profile.ProfileFragment;
+import com.example.networksocialapplication.resident.homeapp.request_friend_home.RequestFriendFragment;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
 

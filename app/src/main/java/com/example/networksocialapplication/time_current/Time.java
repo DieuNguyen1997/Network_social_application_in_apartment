@@ -16,6 +16,18 @@ public class Time {
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
         String mSaveCurrentTime = currentTime.format(calForTime.getTime());
 
-        return mSaveCurrentTime+ " - "+ mSaveCurrentDate;
+        return mSaveCurrentTime + " - " + mSaveCurrentDate;
+    }
+
+    public String getDateCurrent() {
+        Calendar calForDate = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd-MM-yyyy");
+        return currentDate.format(calForDate.getTime());
+    }
+
+    public String getTimeHourCurrent() {
+        Calendar calForTime = Calendar.getInstance();
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
+        return currentTime.format(calForTime.getTime());
     }
 }

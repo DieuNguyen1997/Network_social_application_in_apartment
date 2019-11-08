@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.SettingImageProfileActivity">
+    tools:context=".resident.homeapp.setting_image_profile.SettingImageProfileActivity">
 
 
     <RelativeLayout
@@ -18,7 +18,8 @@
             android:id="@+id/img_cover_photo_setting_profile"
             android:layout_width="match_parent"
             android:layout_height="@dimen/profile_cover_image_height"
-            android:background="@color/colorPrimary" />
+            android:background="@color/colorPrimary"
+            android:scaleType="centerCrop" />
 
         <ImageView
             android:id="@+id/btn_back_setting_profile"
@@ -47,9 +48,11 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_avatar_profile"
-            android:layout_width="@dimen/size_image_avatar"
-            android:layout_height="@dimen/size_image_avatar"
-            />
+            android:layout_width="@dimen/margin_150dp"
+            android:layout_height="@dimen/margin_150dp"
+            android:layout_marginBottom="10dp"
+            android:scaleType="centerCrop"
+            android:src="@color/color_Background" />
 
         <ImageButton
             android:id="@+id/btn_camera_avatar"

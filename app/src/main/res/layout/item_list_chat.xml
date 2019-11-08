@@ -28,7 +28,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:text="@string/txt_username"
             android:textColor="@color/color_Background"
             android:textSize="@dimen/txt_size_20sp"
             android:textStyle="bold" />
@@ -44,7 +43,7 @@
     </LinearLayout>
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_status_on_chat_activity"
+        android:id="@+id/img_status_on_item_list_chat"
         android:layout_width="@dimen/margin_20dp"
         android:layout_height="@dimen/margin_20dp"
         android:layout_below="@+id/layout_txt"
@@ -55,7 +54,7 @@
         app:civ_border_width="@dimen/margin_10dp" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_status_off_chat_activity"
+        android:id="@+id/img_status_off_item_list_chat"
         android:layout_width="@dimen/margin_20dp"
         android:layout_height="@dimen/margin_20dp"
         android:layout_below="@+id/layout_txt"

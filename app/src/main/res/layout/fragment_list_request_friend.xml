@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".list_request_friend.ListRequestFriendFragment">
+    tools:context=".resident.homeapp.list_request_friend.ListRequestFriendFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

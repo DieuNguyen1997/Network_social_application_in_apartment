@@ -5,6 +5,7 @@ public class User {
     private String mUsername;
     private String mDes;
     private String mAvatar;
+    private String mCoverPhoto;
     private String mPhoneNumber;
     private String mGender;
     private String mDateOfBirth;
@@ -23,6 +24,14 @@ public class User {
         mUserID = userID;
         mUsername = username;
         mDes = des;
+    }
+
+    public String getCoverPhoto() {
+        return mCoverPhoto;
+    }
+
+    public void setCoverPhoto(String coverPhoto) {
+        mCoverPhoto = coverPhoto;
     }
 
     public String getStatus() {

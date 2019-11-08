@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Post {
     private String mPostId;
     private String mUserID;
-    private String mAvatar;
-    private String mUsername;
+//    private String mAvatar;
+//    private String mUsername;
     private String mDatePosted;
     private String mTimePosted;
     private String mContentPost;
@@ -14,20 +14,20 @@ public class Post {
     private ArrayList<String> mListImagePost;
 
 
-    public Post(String postId, String userID, String avatar, String username, String datePosted, String timePosted, String contentPost) {
+    public Post(String postId, String userID, String datePosted, String timePosted, String contentPost) {
         mPostId = postId;
         mUserID = userID;
-        mAvatar = avatar;
-        mUsername = username;
+//        mAvatar = avatar;
+//        mUsername = username;
         mDatePosted = datePosted;
         mTimePosted = timePosted;
         mContentPost = contentPost;
     }
 
-    public Post(String userID, String avatar, String username, String datePosted, String timePosted, String contentPost) {
+    public Post(String userID,String datePosted, String timePosted, String contentPost) {
         mUserID = userID;
-        mAvatar = avatar;
-        mUsername = username;
+//        mAvatar = avatar;
+//        mUsername = username;
         mDatePosted = datePosted;
         mTimePosted = timePosted;
         mContentPost = contentPost;
@@ -52,13 +52,13 @@ public class Post {
         mDatePosted = datePosted;
     }
 
-    public String getAvatar() {
-        return mAvatar;
-    }
-
-    public void setAvatar(String avatar) {
-        mAvatar = avatar;
-    }
+//    public String getAvatar() {
+//        return mAvatar;
+//    }
+//
+//    public void setAvatar(String avatar) {
+//        mAvatar = avatar;
+//    }
 
     public ArrayList<String> getListImagePost() {
         return mListImagePost;
@@ -68,13 +68,13 @@ public class Post {
         mListImagePost = listImagePost;
     }
 
-    public String getUsername() {
-        return mUsername;
-    }
-
-    public void setUsername(String username) {
-        mUsername = username;
-    }
+//    public String getUsername() {
+//        return mUsername;
+//    }
+//
+//    public void setUsername(String username) {
+//        mUsername = username;
+//    }
 
     public String getTimePosted() {
         return mTimePosted;
@@ -112,8 +112,8 @@ public class Post {
     public String toString() {
         return "Post{" +
                 "mUserID='" + mUserID + '\'' +
-                ", mAvatar='" + mAvatar + '\'' +
-                ", mUsername='" + mUsername + '\'' +
+//                ", mAvatar='" + mAvatar + '\'' +
+//                ", mUsername='" + mUsername + '\'' +
                 ", mDatePosted='" + mDatePosted + '\'' +
                 ", mTimePosted='" + mTimePosted + '\'' +
                 ", mContentPost='" + mContentPost + '\'' +
