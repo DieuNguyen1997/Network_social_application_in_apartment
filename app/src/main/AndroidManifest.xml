@@ -16,8 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ListChatActivity"></activity>
-        <activity android:name=".chat.ChatActivity">
+        <activity android:name=".CreateReflectActivity"></activity>
+        <activity android:name=".admin.HomeManagerActivity" />
+        <activity android:name=".resident.homeapp.view_profile_manager.ProfileManagerFromUserActivity" />
+        <activity android:name=".admin.setting_infor_manager.SettingInforManagerActivity" />
+        <activity android:name=".ProfileDetailActivity" />
+        <activity android:name=".user.list_chat_activity.ListChatActivity" />
+        <activity android:name=".user.chat.ChatActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -28,21 +33,21 @@
                 <data android:host="sticker" />
             </intent-filter>
         </activity>
-        <activity android:name=".comment.CommentActivity" />
-        <activity android:name=".profile_other_user.ProfileOtherUserActivity" />
-        <activity android:name=".reset_password.ForgotPasswordActivity" />
-        <activity android:name=".search.SearchUserActivity" />
-        <activity android:name=".activities.UpdateProfileActivity" />
-        <activity android:name=".activities.SettingInformationProfileActivity" />
-        <activity android:name=".activities.SettingImageProfileActivity" />
+        <activity android:name=".user.comment.CommentActivity" />
+        <activity android:name=".resident.homeapp.profile_other_user.ProfileOtherUserActivity" />
+        <activity android:name=".user.reset_password.ForgotPasswordActivity" />
+        <activity android:name=".resident.homeapp.search.SearchUserActivity" />
+        <activity android:name=".resident.homeapp.update_profile.UpdateProfileActivity" />
+        <activity android:name=".resident.homeapp.setting_info_profile.SettingInformationProfileActivity" />
+        <activity android:name=".resident.homeapp.setting_image_profile.SettingImageProfileActivity" />
         <activity
-            android:name=".activities.AddPostActivity"
+            android:name=".resident.homeapp.add_post.AddPostActivity"
             android:label="@string/title_activity_add_post"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".homeapp.HomeActivity" />
-        <activity android:name=".register.RegisterActivity" />
-        <activity android:name=".login.LoginActivity" />
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".resident.homeapp.HomeActivity" />
+        <activity android:name=".user.register.RegisterActivity" />
+        <activity android:name=".user.login.LoginActivity" />
+        <activity android:name=".user.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -50,6 +55,22 @@
             </intent-filter>
         </activity>
 
+        <service
+            android:name=".user.notifications.MyFirebaseIdService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".user.notifications.MyFirebaseMessaging"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
         <service
             android:name=".StickerIndexingService"
             android:permission="android.permission.BIND_JOB_SERVICE" />

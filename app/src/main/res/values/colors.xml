@@ -17,6 +17,6 @@
 
     <color name="tabSelectedIconColor">#F9AA33</color>
     <color name="tabUnselectedIconColor">#000000</color>
-    <color name="color_gray">#CACABD</color>
+    <color name="color_gray">#EEEEEE</color>
     <color name="color_off_gray">#bfbfbf</color>
 </resources>

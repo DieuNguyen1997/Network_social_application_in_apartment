@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contrainlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffff"
+    tools:context=".admin.setting_infor_manager.SettingInforManagerActivity">
+
+
+    <ImageView
+        android:background="@color/color_gray"
+        android:id="@+id/img_cover_photo_setting_profile_manager"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/profile_cover_image_height"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_avatar_setting_profile_manager"
+        android:layout_width="@dimen/margin_150dp"
+        android:layout_height="@dimen/margin_150dp"
+        android:layout_marginTop="@dimen/margin_100dp"
+        android:layout_marginBottom="10dp"
+        android:scaleType="centerCrop"
+        android:src="@color/color_Background"
+        app:layout_constraintBottom_toTopOf="@+id/txt_username_setting_profile_manager"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_camera_avatar_setting_profile_manager"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/img_avatar_setting_profile_manager"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="140dp"
+        android:src="@drawable/ic_photo_camera_black_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/img_avatar_setting_profile_manager" />
+
+    <ImageButton
+        android:id="@+id/btn_camera_cover_photo_setting_profile_manager"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/img_avatar_setting_profile_manager"
+        android:layout_marginStart="368dp"
+        android:layout_marginTop="164dp"
+        android:src="@drawable/ic_photo_camera_black_24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_username_setting_profile_manager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:text="@string/txt_manager"
+        android:textSize="@dimen/txt_size_20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_avatar_setting_profile_manager" />
+
+    <EditText
+        android:background="@android:color/transparent"
+        android:id="@+id/edt_des_setting_profile_manager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:text="@string/txt_des"
+        android:textSize="@dimen/txt_size_15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_username_setting_profile_manager" />
+
+    <LinearLayout
+        android:layout_marginEnd="@dimen/margin_20dp"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_50dp"
+        android:layout_marginStart="@dimen/size_20dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_des_setting_profile_manager"
+        app:layout_constraintVertical_bias="0.053"
+        tools:layout_editor_absoluteX="16dp">
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/label_hotline_setting_profile_manager"
+            android:textSize="@dimen/txt_size_18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:id="@+id/edt_hotline_setting_infor_manager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:hint="@string/txt_phone_number_demo" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_50dp"
+        android:layout_marginStart="@dimen/size_20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/size_20dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.045"
+        tools:layout_editor_absoluteX="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/label_location_setting_profile_manager"
+            android:textSize="@dimen/txt_size_18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:background="@android:color/transparent"
+            android:id="@+id/edt_location_setting_infor_manager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:hint="@string/txt_location_manager" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_save_setting_profile_manaager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/bg_btn"
+        android:text="@string/setting_information_btn_save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.165" />
+</androidx.constraintlayout.widget.ConstraintLayout>

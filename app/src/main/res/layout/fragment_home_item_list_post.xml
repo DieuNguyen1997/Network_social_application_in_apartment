@@ -27,6 +27,8 @@
                     android:layout_height="@dimen/size_50dp" />
 
                 <RelativeLayout
+                    android:layout_marginStart="@dimen/margin_15dp"
+                    android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp">
@@ -167,12 +169,13 @@
                     android:layout_height="wrap_content">
 
                     <LinearLayout
+                        android:padding="@dimen/margin_5dp"
+                        android:layout_marginStart="@dimen/size_50dp"
                         android:id="@+id/layout_like_item_post"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_gravity="center"
-                        android:layout_margin="@dimen/margin_5dp"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -191,13 +194,14 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:padding="@dimen/margin_5dp"
+                        android:layout_marginEnd="@dimen/size_50dp"
                         android:id="@+id/layout_comment_item_post"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
-                        android:layout_margin="@dimen/margin_5dp"
                         android:orientation="horizontal">
 
                         <ImageView

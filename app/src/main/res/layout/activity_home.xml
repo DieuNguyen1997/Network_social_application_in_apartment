@@ -5,24 +5,24 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".homeapp.HomeActivity"
+    tools:context=".resident.homeapp.HomeActivity"
     tools:openDrawer="start">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
 
-        <include layout="@layout/activity_home_app_bar" />
+      <include layout="@layout/activity_home_app_bar" />
 
-        <!--<include layout="@layout/bottom_nav_layout" />-->
-    </RelativeLayout>
+      <!--<include layout="@layout/bottom_nav_layout" />-->
+   </RelativeLayout>
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigationview"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/activity_home_nav_header"
-        app:menu="@menu/nav_menu"></com.google.android.material.navigation.NavigationView>
+   <com.google.android.material.navigation.NavigationView
+       android:id="@+id/navigationview"
+       android:layout_width="wrap_content"
+       android:layout_height="match_parent"
+       android:layout_gravity="start"
+       app:headerLayout="@layout/activity_home_nav_header"
+       app:menu="@menu/nav_menu"></com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

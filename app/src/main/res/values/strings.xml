@@ -96,6 +96,27 @@
     <string name="txt_list_chat">Danh sách chat</string>
     <string name="txt_operating_status">Danh sách trò chuyện</string>
     <string name="txt_seen">Đã xem</string>
+    <string name="username_admin">admin@gmail.com</string>
+    <string name="password_admin">admin123</string>
+    <string name="txt_information_user">Thông tin cơ bản</string>
+    <string name="txt_phone_number_demo">087834232</string>
+    <string name="txt_notify_from_manager">Thông báo từ ban quản lý</string>
+    <string name="txt_notify_from_friend">Thông báo từ bạn bè</string>
+    <string name="txt_manager">Ban quản lý</string>
+    <string name="label_hotline_setting_profile_manager">Hotline:</string>
+    <string name="label_location_setting_profile_manager">Phòng BQL:</string>
+    <string name="txt_location_manager">Phòng 503, Tầng 5, Khu chung cư ABC</string>
+    <string name="txt_create_notification">Tạo thông báo</string>
+    <string name="txt_create_event">Tạo sự kiện</string>
+    <string name="txt_information_manager">Thông tin ban quản lý</string>
+    <string name="txt_create_phan_anh">Tạo phản ánh</string>
+    <string name="label_field_reflect">Lĩnh vực phản ánh</string>
+    <string name="txt_all">Tất cả</string>
+    <string name="txt_protect">Bảo vệ</string>
+    <string name="txt_technology">Kỹ thuật</string>
+    <string name="txt_toire">Vệ sinh</string>
+    <string name="txt_add_image">Thêm ảnh</string>
+    <string name="txt_content">Nội dung</string>
 
 
     <array name="name_room">

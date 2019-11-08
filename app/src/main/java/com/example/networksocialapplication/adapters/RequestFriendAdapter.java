@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.models.User;
-import com.example.networksocialapplication.profile_other_user.ProfileOtherUserActivity;
+import com.example.networksocialapplication.resident.homeapp.profile_other_user.ProfileOtherUserActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;

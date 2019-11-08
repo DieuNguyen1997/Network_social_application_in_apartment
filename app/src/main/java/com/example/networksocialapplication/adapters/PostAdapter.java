@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,18 +13,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.R;
-import com.example.networksocialapplication.comment.CommentActivity;
-import com.example.networksocialapplication.homeapp.HomeActivity;
+import com.example.networksocialapplication.user.comment.CommentActivity;
+import com.example.networksocialapplication.resident.homeapp.HomeActivity;
 import com.example.networksocialapplication.models.Post;
+import com.example.networksocialapplication.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -33,9 +31,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public Context mContext;
@@ -59,18 +57,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         if (mListPost != null) {
             final Post post = mListPost.get(position);
-            holder.mUserName.setText(post.getUsername());
+            holder.displayInforUser(mContext);
+//            holder.mUserName.setText(post.getUsername());
             holder.mTimePosted.setText(post.getTimePosted());
             holder.mContentPost.setText(post.getContentPost());
             holder.mDatePosted.setText(post.getDatePosted());
             Glide.with(mContext).load(post.getImagePost()).into(holder.mImagePost);
-            Glide.with(mContext).load(post.getAvatar()).into(holder.mAvatar);
-
+//            Glide.with(mContext).load(post.getAvatar()).into(holder.mAvatar);
             final String postKey = post.getPostId();
             holder.isLike(postKey);
             holder.numberLike(postKey);
             holder.displayNumberComment(postKey);
-
 //            holder.setLikeButtonStatus(postKey);
 
             holder.mLayoutLike.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +75,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 public void onClick(View v) {
                     if (holder.mImgLike.getTag().equals("like")) {
                         holder.likeDataRef.child(postKey).child(holder.mCurrentUserID).setValue("true");
+                        holder.addNotification(post.getUserID(),postKey);
                     } else {
                         holder.likeDataRef.child(postKey).child(holder.mCurrentUserID).removeValue();
                     }
@@ -134,6 +132,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         View mView;
         DatabaseReference likeDataRef;
         DatabaseReference postDatabase;
+        DatabaseReference userRef;
         FirebaseAuth mAuth;
         String mCurrentUserID;
         LinearLayout mLayoutLike;
@@ -172,6 +171,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             mAuth = FirebaseAuth.getInstance();
             mCurrentUserID = mAuth.getCurrentUser().getUid();
             likeDataRef = FirebaseDatabase.getInstance().getReference().child("Likes");
+            userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mCurrentUserID);
 
         }
 
@@ -249,6 +249,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 }
             });
         }
+
         public void displayNumberComment(String postKey){
             DatabaseReference commentRef = FirebaseDatabase.getInstance().getReference().child("Comments").child(postKey);
             commentRef.addValueEventListener(new ValueEventListener() {
@@ -264,5 +265,34 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             });
         }
 
+        public void displayInforUser(final Context context){
+            userRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()){
+                        User user = dataSnapshot.getValue(User.class);
+                        mUserName.setText(user.getUsername());
+                        Glide.with(context).load(user.getAvatar()).into(mAvatar);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+
+        public void addNotification(String userID, String postID){
+            DatabaseReference notiRef = FirebaseDatabase.getInstance().getReference().child("Notifications").child(userID);
+            HashMap<String, Object> hashMap = new HashMap<>();
+            hashMap.put("userID", userID);
+            hashMap.put("text", "Đã like bài viết của bạn");
+            hashMap.put("postID", postID);
+            hashMap.put("isPost", true);
+            notiRef.push().setValue(hashMap);
+        }
+
     }
+
 }

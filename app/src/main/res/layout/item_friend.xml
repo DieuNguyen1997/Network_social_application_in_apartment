@@ -13,11 +13,10 @@
         android:src="@mipmap/ic_launcher" />
 
     <LinearLayout
-        android:layout_marginLeft="@dimen/margin_10dp"
         android:layout_centerVertical="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_5dp"
+        android:layout_marginStart="@dimen/margin_15dp"
         android:layout_toEndOf="@id/img_avatar_item_friend"
         android:orientation="vertical">
 

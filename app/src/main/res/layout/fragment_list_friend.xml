@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".list_friend.ListFriendFragment">
+    tools:context=".resident.homeapp.list_friend.ListFriendFragment">
 
    <androidx.recyclerview.widget.RecyclerView
        android:layout_margin="@dimen/margin_20dp"

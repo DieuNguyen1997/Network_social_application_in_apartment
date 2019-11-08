@@ -1,6 +1,7 @@
 package com.example.networksocialapplication.database;
 
 import android.content.Context;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -29,16 +30,15 @@ public class UserDatabase {
         mUserRef = FirebaseDatabase.getInstance().getReference().child("Users");
     }
 
-    public User getAvatarAndUsernameUser(String mUserId) {
-        final User user = new User();
+    public void getAvatarAndUsernameUser(String mUserId, final TextView username, final CircleImageView avatar) {
         mUserRef.child(mUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    String avatar = dataSnapshot.child("avatar").getValue().toString();
-                    String username = dataSnapshot.child("username").getValue().toString();
-                    user.setUsername(username);
-                    user.setAvatar(avatar);
+                  User user = dataSnapshot.getValue(User.class);
+                  username.setText(user.getUsername());
+                  Glide.with(mContext).load(user.getAvatar()).into(avatar);
+
                 }
             }
 
@@ -47,8 +47,6 @@ public class UserDatabase {
 
             }
         });
-        return user;
-
     }
 
     public void getAvatarUser(String mUserId, final CircleImageView imgAvatar) {
