@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.admin.HomeManagerActivity;
+import com.example.networksocialapplication.models.Manager;
 import com.example.networksocialapplication.resident.homeapp.setting_info_profile.SettingInformationProfileActivity;
 import com.example.networksocialapplication.resident.homeapp.HomeActivity;
 import com.google.android.gms.tasks.Continuation;
@@ -189,8 +190,9 @@ public class SettingInforManagerActivity extends AppCompatActivity implements Vi
             hashMap.put("des", des);
             hashMap.put("hotline", hotline);
             hashMap.put("location", location);
-            hashMap.put("managerID", currentUserID);
+            hashMap.put("userId", currentUserID);
 
+//            Manager manager = new Manager(userName,des,currentUserID,hotline,location);
             mUserDatabase.updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {

@@ -182,7 +182,7 @@ public class SettingImageProfileActivity extends AppCompatActivity implements Vi
                 HashMap<String , Object> hashMap = new HashMap<>();
                 hashMap.put("username", userName);
                 hashMap.put("des", des);
-                hashMap.put("userID", currentUserID);
+                hashMap.put("residentID", currentUserID);
 
                 mUserDatabase.updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

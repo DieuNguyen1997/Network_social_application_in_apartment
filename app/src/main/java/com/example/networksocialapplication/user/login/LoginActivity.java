@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.example.networksocialapplication.admin.HomeManagerActivity;
 import com.example.networksocialapplication.user.reset_password.ForgotPasswordActivity;
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.resident.homeapp.HomeActivity;
@@ -139,23 +140,44 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         mProgressDialog.show();
                         mProgressDialog.setCanceledOnTouchOutside(true);
 
-                        mAuth.signInWithEmailAndPassword(email, password)
-                                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (task.isSuccessful()) {
-                                            mProgressDialog.dismiss();
-                                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                            startActivity(intent);
-                                            finish();
-                                        } else {
-                                            mProgressDialog.dismiss();
-                                            String message = task.getException().getMessage();
-                                            Toast.makeText(LoginActivity.this, "Đăng nhập thất bại. Lỗi:" + message, Toast.LENGTH_SHORT).show();
-                                            resetData();
+                        if (email.equals("admin@gmail.com")&&password.equals("admin123")){
+                            mAuth.signInWithEmailAndPassword(email, password)
+                                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            if (task.isSuccessful()) {
+                                                mProgressDialog.dismiss();
+                                                Intent intent = new Intent(LoginActivity.this, HomeManagerActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            } else {
+                                                mProgressDialog.dismiss();
+                                                String message = task.getException().getMessage();
+                                                Toast.makeText(LoginActivity.this, "Đăng nhập thất bại. Lỗi:" + message, Toast.LENGTH_SHORT).show();
+                                                resetData();
+                                            }
                                         }
-                                    }
-                                });
+                                    });
+                        }else {
+                            mAuth.signInWithEmailAndPassword(email, password)
+                                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            if (task.isSuccessful()) {
+                                                mProgressDialog.dismiss();
+                                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            } else {
+                                                mProgressDialog.dismiss();
+                                                String message = task.getException().getMessage();
+                                                Toast.makeText(LoginActivity.this, "Đăng nhập thất bại. Lỗi:" + message, Toast.LENGTH_SHORT).show();
+                                                resetData();
+                                            }
+                                        }
+                                    });
+                        }
+
 
                         if (mCheckBox.isChecked()) {
                             mEditor.putString("email", email);

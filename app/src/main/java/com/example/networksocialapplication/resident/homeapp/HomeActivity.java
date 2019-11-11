@@ -21,6 +21,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.CreateReflectActivity;
+import com.example.networksocialapplication.ReflectActivity;
+import com.example.networksocialapplication.admin.profile_manager.ProfileManagerFragment;
+import com.example.networksocialapplication.resident.homeapp.view_profile_manager.ProfileManagerFromUserActivity;
 import com.example.networksocialapplication.user.list_chat_activity.ListChatActivity;
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.resident.homeapp.event.EventFragment;
@@ -113,6 +116,8 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
                         updateUI(null);
                         break;
                     case R.id.nav_item_manager:
+                        Intent intent = new Intent(getApplicationContext(), ProfileManagerFromUserActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.nav_item_notification:
                         NotificationFragment notificationFragment= new NotificationFragment();
@@ -121,7 +126,7 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
                         notifyFragment.commit();
                         break;
                     case R.id.nav_item_reflect:
-                        startActivity(new Intent(getApplicationContext(), CreateReflectActivity.class));
+                        startActivity(new Intent(getApplicationContext(), ReflectActivity.class));
                         break;
                     case R.id.nav_item_service:
 

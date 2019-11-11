@@ -7,6 +7,9 @@ public class User {
     private String mAvatar;
     private String mCoverPhoto;
     private String mPhoneNumber;
+
+
+
     private String mGender;
     private String mDateOfBirth;
     private String mStatus;
@@ -15,15 +18,32 @@ public class User {
     public User() {
     }
 
+
+
     public User(String username, String avatar) {
         mUsername = username;
         mAvatar = avatar;
+    }
+
+    public User(String username, String des, String avatar, String coverPhoto) {
+        mUsername = username;
+        mDes = des;
+        mAvatar = avatar;
+        mCoverPhoto = coverPhoto;
     }
 
     public User(String userID, String username, String des) {
         mUserID = userID;
         mUsername = username;
         mDes = des;
+    }
+
+    public String getPhoneNumber() {
+        return mPhoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        mPhoneNumber = phoneNumber;
     }
 
     public String getCoverPhoto() {
@@ -74,13 +94,6 @@ public class User {
         mAvatar = avatar;
     }
 
-    public String getPhoneNumber() {
-        return mPhoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        mPhoneNumber = phoneNumber;
-    }
 
     public String getGender() {
         return mGender;
@@ -105,9 +118,6 @@ public class User {
                 ", mUsername='" + mUsername + '\'' +
                 ", mDes='" + mDes + '\'' +
                 ", mAvatar='" + mAvatar + '\'' +
-                ", mPhoneNumber='" + mPhoneNumber + '\'' +
-                ", mGender='" + mGender + '\'' +
-                ", mDateOfBirth='" + mDateOfBirth + '\'' +
                 '}';
     }
 }
