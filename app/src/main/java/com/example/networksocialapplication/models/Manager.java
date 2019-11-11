@@ -1,15 +1,20 @@
 package com.example.networksocialapplication.models;
 
 public class Manager extends User{
-    private String mHotline;
+    private String mManagerId;
     private String mLocation;
 
-    public String getHotline() {
-        return mHotline;
+    public Manager() {
     }
 
-    public void setHotline(String hotline) {
-        mHotline = hotline;
+    public String getManagerId() {
+        return mManagerId;
+    }
+
+
+
+    public void setManagerId(String managerId) {
+        mManagerId = managerId;
     }
 
     public String getLocation() {

@@ -76,13 +76,14 @@ public class ProfileManagerFragment extends Fragment implements View.OnClickList
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    Manager user = dataSnapshot.getValue(Manager.class);
-                    mTxtUsername.setText(user.getUsername());
-                    mDes.setText(user.getDes());
-                    mTxtHotline.setText(user.getHotline());
-                    mTxtLocation.setText(user.getLocation());
-                    Glide.with(getContext()).load(user.getAvatar()).error(R.drawable.ic_load_image_erroe).into(mAvatar);
-                    Glide.with(getContext()).load(user.getCoverPhoto()).error(R.drawable.ic_load_image_erroe).into(mCoverPhoto);
+                    Manager manager = dataSnapshot.getValue(Manager.class);
+                    String manaderId = manager.getUserID();
+                    mTxtUsername.setText(manager.getUsername());
+                    mDes.setText(manager.getDes());
+                    mTxtHotline.setText(manager.getPhoneNumber());
+                    mTxtLocation.setText(manager.getLocation());
+                    Glide.with(getContext()).load(manager.getAvatar()).error(R.drawable.ic_load_image_erroe).into(mAvatar);
+                    Glide.with(getContext()).load(manager.getCoverPhoto()).error(R.drawable.ic_load_image_erroe).into(mCoverPhoto);
                 }
 
             }

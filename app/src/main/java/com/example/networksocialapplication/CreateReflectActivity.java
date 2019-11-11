@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.models.Manager;
 import com.example.networksocialapplication.time_current.Time;
 import com.google.android.gms.tasks.Continuation;
@@ -121,19 +122,19 @@ public class CreateReflectActivity extends AppCompatActivity implements View.OnC
         switch (v.getId()) {
             case R.id.btn_field_all:
                 mFieldReflect = mBtnAll.getText().toString();
-                mBtnAll.setBackgroundColor(Color.rgb(249,170,51));
+                mBtnAll.setBackgroundColor(Color.rgb(249, 170, 51));
                 break;
             case R.id.btn_field_protect:
                 mFieldReflect = mBtnProtect.getText().toString();
-                mBtnProtect.setBackgroundColor(Color.rgb(249,170,51));
+                mBtnProtect.setBackgroundColor(Color.rgb(249, 170, 51));
                 break;
             case R.id.btn_field_techno:
                 mFieldReflect = mBtnTechnology.getText().toString();
-                mBtnTechnology.setBackgroundColor(Color.rgb(249,170,51));
+                mBtnTechnology.setBackgroundColor(Color.rgb(249, 170, 51));
                 break;
             case R.id.btn_field_toire:
                 mFieldReflect = mBtnToire.getText().toString();
-                mBtnToire.setBackgroundColor(Color.rgb(249,170,51));
+                mBtnToire.setBackgroundColor(Color.rgb(249, 170, 51));
                 break;
             case R.id.btn_send_reflect:
                 sendReflect();
@@ -145,24 +146,10 @@ public class CreateReflectActivity extends AppCompatActivity implements View.OnC
     }
 
     private void sendReflect() {
-        String title = mEdtTitle.getText().toString();
-        String content = mEdtContent.getText().toString();
-        String idReflect = mReflectRef.push().getKey();
-
+        final String title = mEdtTitle.getText().toString();
+        final String content = mEdtContent.getText().toString();
+        final String idReflect = mReflectRef.push().getKey();
         saveImageToFirebase(idReflect);
-
-        mManagerRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Manager manager = dataSnapshot.getValue(Manager.class);
-                mManagerId = manager.getUserID();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
         if (TextUtils.isEmpty(title)) {
             mEdtTitle.setError("Tiêu đề không được bỏ trống");
@@ -176,21 +163,22 @@ public class CreateReflectActivity extends AppCompatActivity implements View.OnC
             HashMap<String, Object> hashMap = new HashMap<>();
             hashMap.put("reflectId", idReflect);
             hashMap.put("userId", mCurrentUserId);
-            hashMap.put("managerId", mManagerId);
-            hashMap.put("title", title);
+            hashMap.put("date", mTime.getDateCurrent());
+            hashMap.put("time", mTime.getTimeHourCurrent());
             hashMap.put("content", content);
+            hashMap.put("title", title);
             hashMap.put("field", mFieldReflect);
-            hashMap.put("time", mTime.getTimeCurrent());
 
             mReflectRef.child(idReflect).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
-                    Toast.makeText(getApplicationContext(), "Tạo phản ánh thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Tạo phản ánh thành công. Chờ ban quản lý phê duyệt", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), ReflectActivity.class));
                 }
             });
         }
-
     }
+
 
     private void chooseImageFromGallery() {
         Intent intent = new Intent();

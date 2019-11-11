@@ -3,6 +3,7 @@ package com.example.networksocialapplication.resident.homeapp.view_profile_manag
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.networksocialapplication.CreateReflectActivity;
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.models.Manager;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ProfileManagerFromUserActivity extends AppCompatActivity implements View.OnClickListener{
+public class ProfileManagerFromUserActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView mCoverPhoto;
     private CircleImageView mAvatar;
@@ -34,7 +36,7 @@ public class ProfileManagerFromUserActivity extends AppCompatActivity implements
     private TextView mTxtLocation;
 
     private DatabaseReference mManagerDatabase;
-    private String mCurrentUserId;
+    private String mManagerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,19 +64,19 @@ public class ProfileManagerFromUserActivity extends AppCompatActivity implements
     }
 
     private void displayInformationBasic() {
-        mManagerDatabase.child(mCurrentUserId).addValueEventListener(new ValueEventListener() {
+        mManagerDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    Manager user = dataSnapshot.getValue(Manager.class);
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    Manager user = data.getValue(Manager.class);
+                    mManagerId = user.getManagerId();
                     mTxtUsername.setText(user.getUsername());
                     mDes.setText(user.getDes());
-                    mTxtHotline.setText(user.getHotline());
+                    mTxtHotline.setText(user.getPhoneNumber());
                     mTxtLocation.setText(user.getLocation());
                     Glide.with(getApplicationContext()).load(user.getAvatar()).error(R.drawable.ic_load_image_erroe).into(mAvatar);
                     Glide.with(getApplicationContext()).load(user.getCoverPhoto()).error(R.drawable.ic_load_image_erroe).into(mCoverPhoto);
                 }
-
             }
 
             @Override
@@ -85,7 +87,6 @@ public class ProfileManagerFromUserActivity extends AppCompatActivity implements
     }
 
     private void initFirebase() {
-        mCurrentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         mManagerDatabase = FirebaseDatabase.getInstance().getReference().child("Manager");
     }
 
@@ -93,6 +94,8 @@ public class ProfileManagerFromUserActivity extends AppCompatActivity implements
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.root_create_reflect:
+                Intent intent = new Intent(this, CreateReflectActivity.class);
+                startActivity(intent);
                 break;
             case R.id.root_chat_with_manager:
                 break;

@@ -7,10 +7,10 @@ public class Post {
     private String mUserID;
 //    private String mAvatar;
 //    private String mUsername;
-    private String mDatePosted;
-    private String mTimePosted;
-    private String mContentPost;
-    private String mImagePost;
+    private String mDate;
+    private String mTime;
+    private String mContent;
+    private String mImage;
     private ArrayList<String> mListImagePost;
 
 
@@ -19,18 +19,18 @@ public class Post {
         mUserID = userID;
 //        mAvatar = avatar;
 //        mUsername = username;
-        mDatePosted = datePosted;
-        mTimePosted = timePosted;
-        mContentPost = contentPost;
+        mDate = datePosted;
+        mTime = timePosted;
+        mContent = contentPost;
     }
 
     public Post(String userID,String datePosted, String timePosted, String contentPost) {
         mUserID = userID;
 //        mAvatar = avatar;
 //        mUsername = username;
-        mDatePosted = datePosted;
-        mTimePosted = timePosted;
-        mContentPost = contentPost;
+        mDate = datePosted;
+        mTime = timePosted;
+        mContent = contentPost;
     }
 
     public Post() {
@@ -45,11 +45,11 @@ public class Post {
     }
 
     public String getDatePosted() {
-        return mDatePosted;
+        return mDate;
     }
 
     public void setDatePosted(String datePosted) {
-        mDatePosted = datePosted;
+        mDate= datePosted;
     }
 
 //    public String getAvatar() {
@@ -77,27 +77,27 @@ public class Post {
 //    }
 
     public String getTimePosted() {
-        return mTimePosted;
+        return mTime;
     }
 
     public void setTimePosted(String timePosted) {
-        mTimePosted = timePosted;
+        mTime = timePosted;
     }
 
     public String getContentPost() {
-        return mContentPost;
+        return mContent;
     }
 
     public void setContentPost(String contentPost) {
-        mContentPost = contentPost;
+        mContent = contentPost;
     }
 
     public String getImagePost() {
-        return mImagePost;
+        return mImage;
     }
 
     public void setImagePost(String imagePost) {
-        mImagePost = imagePost;
+        mImage = imagePost;
     }
 
     public String getPostId() {
@@ -114,10 +114,10 @@ public class Post {
                 "mUserID='" + mUserID + '\'' +
 //                ", mAvatar='" + mAvatar + '\'' +
 //                ", mUsername='" + mUsername + '\'' +
-                ", mDatePosted='" + mDatePosted + '\'' +
-                ", mTimePosted='" + mTimePosted + '\'' +
-                ", mContentPost='" + mContentPost + '\'' +
-                ", mImagePost='" + mImagePost + '\'' +
+                ", mDatePosted='" + mDate + '\'' +
+                ", mTimePosted='" + mTime+ '\'' +
+                ", mContentPost='" + mContent + '\'' +
+                ", mImagePost='" + mImage+ '\'' +
                 '}';
     }
 }
