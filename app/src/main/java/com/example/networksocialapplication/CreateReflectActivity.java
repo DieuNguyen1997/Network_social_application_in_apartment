@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.models.Manager;
+import com.example.networksocialapplication.models.Reflect;
 import com.example.networksocialapplication.time_current.Time;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,6 +37,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static com.example.networksocialapplication.R.drawable.bg_btn;
 
@@ -160,19 +162,25 @@ public class CreateReflectActivity extends AppCompatActivity implements View.OnC
         if (mFieldReflect == null) {
             Toast.makeText(this, "Hãy chọn một lĩnh vực cần phản ánh", Toast.LENGTH_SHORT).show();
         } else {
+
+            Reflect reflect = new Reflect(mCurrentUserId,mTime.getDateCurrent(), mTime.getTimeHourCurrent(),content,title,mFieldReflect,idReflect);
+//            Map<String, Reflect> hashmap = new HashMap<>();
+//            hashmap.put(idReflect,reflect);
             HashMap<String, Object> hashMap = new HashMap<>();
             hashMap.put("reflectId", idReflect);
-            hashMap.put("userId", mCurrentUserId);
-            hashMap.put("date", mTime.getDateCurrent());
-            hashMap.put("time", mTime.getTimeHourCurrent());
-            hashMap.put("content", content);
+            hashMap.put("userID", mCurrentUserId);
+            hashMap.put("datePosted", mTime.getDateCurrent());
+            hashMap.put("timePosted", mTime.getTimeHourCurrent());
+            hashMap.put("contentPost", content);
             hashMap.put("title", title);
             hashMap.put("field", mFieldReflect);
+            mReflectRef.child(idReflect).setValue(reflect).addOnSuccessListener(new OnSuccessListener<Void>() {
 
-            mReflectRef.child(idReflect).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+//            mReflectRef.child(idReflect).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
                     Toast.makeText(getApplicationContext(), "Tạo phản ánh thành công. Chờ ban quản lý phê duyệt", Toast.LENGTH_SHORT).show();
+
                     startActivity(new Intent(getApplicationContext(), ReflectActivity.class));
                 }
             });
@@ -217,9 +225,10 @@ public class CreateReflectActivity extends AppCompatActivity implements View.OnC
                         Uri uri = task.getResult();
                         String imageUrl = uri.toString();
 
-                        mReflectRef.child(idReflect).child("image").setValue(imageUrl).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        mReflectRef.child(idReflect).child("imagePost").setValue(imageUrl).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
+                                Toast.makeText(getApplicationContext(), "Lưu ảnh thành công", Toast.LENGTH_SHORT).show();
 
                             }
                         });

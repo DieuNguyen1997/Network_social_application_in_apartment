@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.adapters.ChatAdapter;
 import com.example.networksocialapplication.models.Message;
+import com.example.networksocialapplication.models.Resident;
 import com.example.networksocialapplication.models.User;
 import com.example.networksocialapplication.user.notifications.Token;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,7 +33,7 @@ public class ListChatFragment extends Fragment {
     private final static String TAG = "chat";
     private RecyclerView mRecyclerView;
     private ChatAdapter mChatAdapter;
-    private List<User> mUsers;
+    private List<Resident> mUsers;
     private List<String> mUserIdList;
 
     private String mCurrentUserId;
@@ -103,7 +104,7 @@ public class ListChatFragment extends Fragment {
 
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     //get all usser
-                    User user = data.getValue(User.class);
+                    Resident user = data.getValue(Resident.class);
 
                     for (String userid : mUserIdList) {
                         //check user cos id trong lisst mUserIdList
@@ -111,7 +112,7 @@ public class ListChatFragment extends Fragment {
 
                             if (mUsers.size() != 0){
                                 for (int i  = 0; i < mUsers.size(); i++){
-                                    User userCheck = mUsers.get(i);
+                                    Resident userCheck = mUsers.get(i);
                                     if (!userCheck.getUserID().equals(user.getUserID())){
                                         mUsers.add(user);
                                     }

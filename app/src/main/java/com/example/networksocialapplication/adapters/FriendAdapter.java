@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.R;
+import com.example.networksocialapplication.models.Resident;
 import com.example.networksocialapplication.models.User;
 import com.example.networksocialapplication.resident.homeapp.profile_other_user.ProfileOtherUserActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,14 +32,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder> {
     private Context mContext;
-    private List<User> mUserList;
+    private List<Resident> mUserList;
 
     private FirebaseUser mFirebaseUser;
     private String mCurrentUserID;
     private DatabaseReference mFriendData;
 
 
-    public FriendAdapter(Context context, List<User> userList) {
+    public FriendAdapter(Context context, List<Resident> userList) {
         mContext = context;
         mUserList = userList;
     }
@@ -57,7 +58,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
             mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
             mCurrentUserID = mFirebaseUser.getUid();
 
-            final User user = mUserList.get(position);
+            final Resident user = mUserList.get(position);
             Glide.with(mContext).load(user.getAvatar()).into(holder.imgAvatar);
             holder.txtUsername.setText(user.getUsername());
             final String mReceiverUserID = user.getUserID();

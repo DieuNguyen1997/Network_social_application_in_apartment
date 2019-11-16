@@ -1,21 +1,15 @@
 package com.example.networksocialapplication.resident.homeapp.update_profile;
 
-import android.app.DatePickerDialog;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,17 +17,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.networksocialapplication.R;
-import com.example.networksocialapplication.resident.homeapp.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.example.networksocialapplication.time_current.DatePicker;
 
-import java.util.Calendar;
 import java.util.HashMap;
 
 public class UpdateProfileActivity extends AppCompatActivity {
@@ -43,16 +37,15 @@ public class UpdateProfileActivity extends AppCompatActivity {
     private EditText mEdtDes;
     private Button mBtnSave;
     private EditText mEdtPhoneNumber;
-    private TextView mTxtBirthDay;
-    private ImageButton mBtnCalender;
+    private TextInputEditText mTxtBirthDay;
     private Spinner mSpinNameRoom;
-    private DatePickerDialog.OnDateSetListener mDateSetListener;
     private RadioButton mMale, mFemale, mOther;
     private RadioGroup mRadioGroup;
 
     private FirebaseAuth mAuth;
     private DatabaseReference mUserRef;
     private String mCurrentUserID;
+    private DatePicker mDatePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +54,12 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
         initToolbar();
         initFirebase();
-        displayInfomation();
-        initView() ;
+        getResident();
+        initView();
 
     }
 
-    private void displayInfomation() {
+    private void getResident() {
         mUserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -80,11 +73,11 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 mEdtDes.setText(des);
                 mEdtPhoneNumber.setText(phone);
                 mTxtBirthDay.setText(dateOfBirth);
-                if (mMale.getText().toString().equals(gender)){
+                if (mMale.getText().toString().equals(gender)) {
                     mMale.setChecked(true);
-                }else if (mFemale.getText().toString().equals(gender)){
+                } else if (mFemale.getText().toString().equals(gender)) {
                     mFemale.setChecked(true);
-                }else{
+                } else {
                     mOther.setChecked(true);
                 }
 
@@ -98,10 +91,10 @@ public class UpdateProfileActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        mDatePicker = new DatePicker(this);
         mRadioGroup = findViewById(R.id.radio_group_gender_update_profile);
         mEdtPhoneNumber = findViewById(R.id.edt_phone_update_profile);
         mTxtBirthDay = findViewById(R.id.txt_birthday_update_profile);
-        mBtnCalender = findViewById(R.id.btn_calender_update_profile);
         mBtnSave = findViewById(R.id.btn_save_update_profile);
         mMale = findViewById(R.id.radio_btn_male_update_profile);
         mFemale = findViewById(R.id.radio_btn_female_update_profile);
@@ -112,36 +105,26 @@ public class UpdateProfileActivity extends AppCompatActivity {
         mBtnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                creatUser();
+                updateResident();
             }
         });
-        mBtnCalender.setOnClickListener(new View.OnClickListener() {
+        mTxtBirthDay.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_RIGHT_TIME_FINISH = 2;
 
-                Calendar calendar = Calendar.getInstance();
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-                int moth = calendar.get(Calendar.MONTH);
-                int year = calendar.get(Calendar.YEAR);
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(UpdateProfileActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, mDateSetListener, year, moth, day);
-                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                datePickerDialog.show();
-
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (mTxtBirthDay.getRight() - mTxtBirthDay.getCompoundDrawables()[DRAWABLE_RIGHT_TIME_FINISH].getBounds().width())) {
+                        mDatePicker.showDatePicker(mTxtBirthDay);
+                        return true;
+                    }
+                }
+                return false;
             }
         });
-        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month = month + 1;
-                String dateOfBirth = dayOfMonth + "/" + month + "/" + year;
-                mTxtBirthDay.setText(dateOfBirth);
-            }
-        };
-
     }
 
-    private void creatUser() {
+    private void updateResident() {
         //get phone number
         String username = mEdtUsername.getText().toString();
         String des = mEdtDes.getText().toString();
@@ -156,7 +139,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
         //get name room
 //        String nameRoom = mSpinNameRoom.getSelectedItem().toString();
         if (TextUtils.isEmpty(gender)) {
-            Toast.makeText(this,"Vui lòng chọn giới tính", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Vui lòng chọn giới tính", Toast.LENGTH_SHORT).show();
         }
         if (TextUtils.isEmpty(username)) {
             mEdtPhoneNumber.setError("Vui lòng nhập vào tên người dùng");
@@ -187,8 +170,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
                         Toast.makeText(getApplicationContext(), "Lưu thông tin thành công!!!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                        startActivity(intent);
+//                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+//                        startActivity(intent);
                     } else {
                         String messgae = task.getException().getMessage();
                         Toast.makeText(getApplicationContext(), messgae, Toast.LENGTH_SHORT).show();

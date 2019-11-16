@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.adapters.RequestFriendAdapter;
+import com.example.networksocialapplication.models.Resident;
 import com.example.networksocialapplication.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +30,7 @@ import java.util.List;
 public class ListRequestFriendFragment extends Fragment {
 
     private RequestFriendAdapter mAdapter;
-    private List<User> mUsers;
+    private List<Resident> mUsers;
     private RecyclerView mRecyclerView;
 
     private DatabaseReference mRequestFriendRef;
@@ -73,7 +74,7 @@ public class ListRequestFriendFragment extends Fragment {
                                         mUserRef.child(sender_id).addValueEventListener(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                User user = dataSnapshot.getValue(User.class);
+                                                Resident user = dataSnapshot.getValue(Resident.class);
                                                 mUsers.add(user);
                                                 mAdapter = new RequestFriendAdapter(getActivity(), mUsers);
                                                 mAdapter.notifyDataSetChanged();

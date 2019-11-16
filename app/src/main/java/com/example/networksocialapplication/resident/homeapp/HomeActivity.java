@@ -45,7 +45,7 @@ import com.google.firebase.database.ValueEventListener;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener,  EventFragment.OnFragmentInteractionListener {
+public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFragmentInteractionListener {
 
     private CircleImageView mAvatar;
     private TextView mTxtUsername;
@@ -257,6 +257,12 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
 
     private void status(String status){
         mUserData.child("status").setValue(status);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        status("online");
     }
 
     @Override

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.adapters.FriendAdapter;
+import com.example.networksocialapplication.models.Resident;
 import com.example.networksocialapplication.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +30,7 @@ public class ListFriendFragment extends Fragment {
 
     private FriendAdapter mFriendAdapter;
     private RecyclerView mRecyclerView;
-    private List<User> mUsers;
+    private List<Resident> mUsers;
 
     private DatabaseReference mFriendRef;
     private String mCurrentUserID;
@@ -72,7 +73,7 @@ public class ListFriendFragment extends Fragment {
                     mUserRef.child(mFriendID).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            User user = dataSnapshot.getValue(User.class);
+                            Resident user = dataSnapshot.getValue(Resident.class);
                             mUsers.add(user);
                             mFriendAdapter = new FriendAdapter(getContext(),mUsers);
                             mFriendAdapter.notifyDataSetChanged();

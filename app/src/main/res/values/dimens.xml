@@ -44,4 +44,6 @@
     <dimen name="txt_size_30sp">30sp</dimen>
     <dimen name="size_25dp">25dp</dimen>
     <dimen name="txt_size_25sp">25sp</dimen>
+    <dimen name="margin_170dp">170dp</dimen>
+    <dimen name="margin_120dp">120dp</dimen>
 </resources>

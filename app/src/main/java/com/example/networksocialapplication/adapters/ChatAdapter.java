@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.R;
+import com.example.networksocialapplication.models.Resident;
 import com.example.networksocialapplication.user.chat.ChatActivity;
 import com.example.networksocialapplication.models.Message;
 import com.example.networksocialapplication.models.User;
@@ -30,7 +31,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     private Context mContext;
-    private List<User> mUsers;
+    private List<Resident> mUsers;
     private boolean mIsChat;
 
     private DatabaseReference mUserRef;
@@ -38,7 +39,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     private String mLastMessage;
     private String mCurrentUserId;
 
-    public ChatAdapter(Context context, List<User> users, boolean isChat) {
+    public ChatAdapter(Context context, List<Resident> users, boolean isChat) {
         mContext = context;
         mUsers = users;
         mIsChat = isChat;
@@ -55,9 +56,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (mUsers != null) {
             initFirebase();
-            final User user = mUsers.get(position);
-            getDataInformationUser(user.getUserID(), holder.mAvatarChat, holder.mUsername);
-            final String userOtherId = user.getUserID();
+            final Resident user = mUsers.get(position);
+            getDataInformationUser(user.getResidentId(), holder.mAvatarChat, holder.mUsername);
+            final String userOtherId = user.getResidentId();
             if (mIsChat){
                 getLastMessage(userOtherId, holder.mTxtLastMessage);
             }

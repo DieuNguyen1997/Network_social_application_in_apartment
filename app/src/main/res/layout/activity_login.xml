@@ -9,6 +9,11 @@
     android:background="@color/color_bg_toolbar"
     tools:context=".user.login.LoginActivity">
 
+    <ImageView
+
+        android:src="@drawable/ic_apartment_50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_50dp"
             android:drawableLeft="@drawable/custom_ic_username"
-            android:hint="Tên tài khoản" />
+            android:hint="@string/txt_enter_email" />
 
         <EditText
             android:textSize="@dimen/txt_size_15sp"
@@ -51,23 +56,11 @@
             android:id="@+id/edt_password_lg"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_50dp"
-            android:hint="Mật khẩu"
-            android:inputType="textPassword" />
-
-        <EditText
-            android:textSize="@dimen/txt_size_15sp"
-            android:textColorHint="@color/colorWhite"
-            android:textColor="@color/colorWhite"
-            android:layout_margin="5dp"
-            android:background="@drawable/custom_edittext_login"
-            android:drawableLeft="@drawable/custom_ic_password"
-            android:id="@+id/edt_repassword_lg"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_50dp"
-            android:hint="Nhập lại mật khẩu"
+            android:hint="@string/txt_enter_password"
             android:inputType="textPassword" />
 
         <RelativeLayout
+            android:layout_marginTop="@dimen/margin_10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <CheckBox

@@ -11,8 +11,6 @@ public class Manager extends User{
         return mManagerId;
     }
 
-
-
     public void setManagerId(String managerId) {
         mManagerId = managerId;
     }

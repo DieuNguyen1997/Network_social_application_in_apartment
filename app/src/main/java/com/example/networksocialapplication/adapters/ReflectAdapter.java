@@ -36,7 +36,7 @@ public class ReflectAdapter extends RecyclerView.Adapter<ReflectAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (mReflects != null){
-            Reflect reflect = new Reflect();
+            Reflect reflect = mReflects.get(position);
             holder.mTitle.setText(reflect.getTitle());
             holder.mTime.setText("Tới: Ban quản lý lúc "+reflect.getDatePosted()+ " | "+reflect.getTimePosted());
             holder.mContent.setText(reflect.getContentPost());

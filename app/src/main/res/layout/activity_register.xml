@@ -8,6 +8,8 @@
     tools:context=".user.register.RegisterActivity">
 
     <TextView
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/size_50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -20,53 +22,97 @@
         android:layout_margin="20dp"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/edt_username_rs"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_perm_identity_black_24dp"
-            android:hint="Nhập tên tài khoản"
-            android:inputType="textEmailAddress" />
+            android:layout_marginTop="@dimen/margin_15dp"
+            android:hint="@string/txt_enter_email"
+            android:textColorHint="@color/color_Background"
+            app:boxStrokeColor="@color/color_Background"
+            app:counterEnabled="true"
+            app:counterMaxLength="50"
+            app:errorEnabled="true">
 
-        <EditText
-            android:id="@+id/edt_password_rs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nhập mật khẩu"
-            android:inputType="textPassword" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_username_rs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_perm_identity_black_24dp"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/edt_repassword_rs"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nhập lại mật khẩu"
-            android:inputType="textPassword" />
+            android:layout_marginTop="@dimen/margin_15dp"
+            android:hint="@string/txt_enter_password"
+            android:inputType="textPassword"
+            android:textColorHint="@color/color_Background"
+            app:boxStrokeColor="@color/color_yellow"
+            app:counterEnabled="true"
+            app:counterMaxLength="50"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_password_rs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_perm_identity_black_24dp"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_15dp"
+            android:hint="@string/txt_enter_repassword"
+            android:inputType="textPassword"
+            android:textColorHint="@color/color_Background"
+            app:boxStrokeColor="@color/color_yellow"
+            app:counterEnabled="true"
+            app:counterMaxLength="50"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_repassword_rs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_perm_identity_black_24dp"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginRight="@dimen/margin_20dp"
+        android:layout_marginLeft="@dimen/margin_20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="vertical">
 
         <Button
-            android:background="@drawable/bg_btn"
             android:id="@+id/btn_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:background="@drawable/bg_btn"
             android:text="Đăng ký" />
 
         <Button
-            android:layout_marginTop="@dimen/margin_10dp"
-            android:background="@drawable/bg_btn"
             android:id="@+id/btn_signup_google"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:background="@drawable/bg_btn"
             android:text="@string/activity_register_signup_with_google" />
+
         <TextView
+            android:layout_marginTop="@dimen/margin_10dp"
             android:id="@+id/txt_signin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

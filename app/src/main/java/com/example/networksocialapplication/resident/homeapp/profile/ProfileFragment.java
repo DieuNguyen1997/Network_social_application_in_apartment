@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.R;
+import com.example.networksocialapplication.models.Resident;
 import com.example.networksocialapplication.resident.homeapp.update_profile.UpdateProfileActivity;
 import com.example.networksocialapplication.adapters.PostAdapter;
 import com.example.networksocialapplication.models.Post;
@@ -52,7 +53,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener{
 
-    private static final int GALLERY_PICK = 143;
+    private static final int GALLERY_PICK_COVER = 144;
+    private static final int GALLERY_PICK_AVATAR = 143;
 
     private RecyclerView mRecyclerView;
     private PostAdapter mPostAdapter;
@@ -80,9 +82,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     private Button mBtnSave;
 
     private Uri mImageUri;
-    private StorageReference mImageProfileDatabase;
+    private StorageReference mImageAvatarDatabase;
+    private StorageReference mImageCoverDatabase;
     private UploadTask mUploadTask;
-
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -210,10 +212,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    User user = dataSnapshot.getValue(User.class);
+                    Resident user = dataSnapshot.getValue(Resident.class);
                     mTxtUsername.setText(user.getUsername());
                     mTxtDes.setText(user.getDes());
-                    mTxtPhoneNumber.setText(user.getDes());
+                    mTxtPhoneNumber.setText(user.getPhoneNumber());
                     mTxtGender.setText(user.getGender());
                     mTxtDateBirth.setText(user.getDateOfBirth());
                     Glide.with(getContext()).load(user.getAvatar()).error(R.drawable.ic_load_image_erroe).into(mAvatar);
@@ -264,7 +266,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         mCurrentUserId = mAuth.getCurrentUser().getUid();
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         mPostDatabase = FirebaseDatabase.getInstance().getReference().child("Post");
-        mImageProfileDatabase = FirebaseStorage.getInstance().getReference().child("Avatar").child(mCurrentUserId);
+        mImageAvatarDatabase = FirebaseStorage.getInstance().getReference().child("Avatar").child(mCurrentUserId);
+        mImageCoverDatabase = FirebaseStorage.getInstance().getReference().child("CoverPhoto").child(mCurrentUserId);
     }
 
 
@@ -291,41 +294,91 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                 dialog.show();
                 break;
             case R.id.btn_update_avatar_dialog:
-                choosePhotoFromGallery();
+                chooseAvatarFromGallery();
 
                 break;
             case  R.id.btn_update_cover_photo:
-                choosePhotoFromGallery();
+                chooseCoverPhotoFromGallery();
                 break;
         }
 
     }
-    private void choosePhotoFromGallery() {
+    private void chooseAvatarFromGallery() {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
-        startActivityForResult(intent, GALLERY_PICK);
+        startActivityForResult(intent, GALLERY_PICK_AVATAR);
+    }
+
+    private void chooseCoverPhotoFromGallery() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent, GALLERY_PICK_COVER);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GALLERY_PICK && resultCode == getActivity().RESULT_OK && data != null){
+        if (requestCode == GALLERY_PICK_AVATAR && resultCode == getActivity().RESULT_OK && data != null){
             mImageUri = data.getData();
-            updateImageProfileToFirebase();
+            updateAvatarProfileToFirebase();
+        }else if (requestCode == GALLERY_PICK_COVER && resultCode == getActivity().RESULT_OK && data != null){
+            mImageUri = data.getData();
+            updateCoverProfileToFirebase();
         }
     }
-    private void updateImageProfileToFirebase() {
+
+    private void updateCoverProfileToFirebase() {
         if (mImageUri != null) {
-            mImageProfileDatabase.putFile(mImageUri);
-            mUploadTask = mImageProfileDatabase.putFile(mImageUri);
+            mImageCoverDatabase.putFile(mImageUri);
+            mUploadTask = mImageCoverDatabase.putFile(mImageUri);
             mUploadTask.continueWithTask(new Continuation() {
                 @Override
                 public Object then(@NonNull Task task) throws Exception {
                     if (!task.isSuccessful()) {
                         throw task.getException();
                     } else {
-                        return mImageProfileDatabase.getDownloadUrl();
+                        return mImageCoverDatabase.getDownloadUrl();
+                    }
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    Uri downloadUri = task.getResult();
+                    String avatarUrl = downloadUri.toString();
+
+                    HashMap<String, Object> hashMap = new HashMap<>();
+                    hashMap.put("avatar",avatarUrl);
+                    mUserDatabase.child(mCurrentUserId).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(getActivity(), "Lưu url anh vao user thanh cong", Toast.LENGTH_SHORT).show();
+                            } else {
+                                String message = task.getException().getMessage();
+                                Toast.makeText(getActivity(), "không thành công", Toast.LENGTH_SHORT).show();
+                                Log.d("error", message);
+                            }
+                        }
+                    });
+                }
+            });
+
+        }
+    }
+
+    private void updateAvatarProfileToFirebase() {
+        if (mImageUri != null) {
+            mImageAvatarDatabase.putFile(mImageUri);
+            mUploadTask = mImageAvatarDatabase.putFile(mImageUri);
+            mUploadTask.continueWithTask(new Continuation() {
+                @Override
+                public Object then(@NonNull Task task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    } else {
+                        return mImageAvatarDatabase.getDownloadUrl();
                     }
                 }
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {

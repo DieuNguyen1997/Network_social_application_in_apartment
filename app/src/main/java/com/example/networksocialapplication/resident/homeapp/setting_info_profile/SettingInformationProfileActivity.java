@@ -7,9 +7,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -23,8 +23,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.resident.homeapp.HomeActivity;
+import com.example.networksocialapplication.time_current.DatePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -35,13 +37,14 @@ public class SettingInformationProfileActivity extends AppCompatActivity {
 
     private Button mBtnSave;
     private EditText mEdtPhoneNumber;
-    private TextView mTxtBirthDay;
+    private TextInputEditText mTxtBirthDay;
     private ImageButton mBtnCalender;
     private Spinner mSpinNameRoom;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private RadioButton mMale, mFemale, mOther;
     private RadioGroup mRadioGroup;
 
+    private DatePicker mDatePicker;
 
     private FirebaseAuth mAuth;
     private DatabaseReference mUserRef;
@@ -63,11 +66,10 @@ public class SettingInformationProfileActivity extends AppCompatActivity {
     }
 
     private void initView() {
-
+        mDatePicker = new DatePicker(this);
         mRadioGroup = findViewById(R.id.radio_group_gender);
         mEdtPhoneNumber = findViewById(R.id.edt_phone_setting_information);
         mTxtBirthDay = findViewById(R.id.setting_information_txt_birthday);
-        mBtnCalender = findViewById(R.id.btn_calender_setting_information);
         mSpinNameRoom = findViewById(R.id.spinner_name_room_setting_information);
         mBtnSave = findViewById(R.id.btn_save_setting_information);
         mMale = findViewById(R.id.radio_btn_male);
@@ -81,29 +83,21 @@ public class SettingInformationProfileActivity extends AppCompatActivity {
 
             }
         });
-        mBtnCalender.setOnClickListener(new View.OnClickListener() {
+        mTxtBirthDay.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_RIGHT_TIME_FINISH = 2;
 
-                Calendar calendar = Calendar.getInstance();
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-                int moth = calendar.get(Calendar.MONTH);
-                int year = calendar.get(Calendar.YEAR);
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(SettingInformationProfileActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, mDateSetListener, year, moth, day);
-                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                datePickerDialog.show();
-
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (mTxtBirthDay.getRight() - mTxtBirthDay.getCompoundDrawables()[DRAWABLE_RIGHT_TIME_FINISH].getBounds().width())) {
+                        mDatePicker.showDatePicker(mTxtBirthDay);
+                        return true;
+                    }
+                }
+                return false;
             }
         });
-        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month = month + 1;
-                String dateOfBirth = dayOfMonth + "/" + month + "/" + year;
-                mTxtBirthDay.setText(dateOfBirth);
-            }
-        };
+
     }
 
     public void creatUser() {

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/img_item_event_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profile_cover_image_height"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_background_event" />
+
+        <TextView
+            android:id="@+id/txt_name_item_event_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_item_event_horizontal"
+            android:layout_marginLeft="@dimen/margin_15dp"
+            android:layout_marginTop="@dimen/margin_15dp"
+            android:maxLines="1"
+            android:text="@string/txt_name_event"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/txt_size_20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_location_item_event_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_name_item_event_horizontal"
+            android:layout_marginLeft="@dimen/margin_15dp"
+            android:maxLines="1"
+            android:text="@string/txt_name_event" />
+
+        <TextView
+            android:textColor="@color/color_red"
+            android:id="@+id/txt_time_item_event_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_location_item_event_horizontal"
+            android:layout_marginLeft="@dimen/margin_15dp"
+            android:maxLines="1"
+            android:text="Bắt đầu : 12/9/2019 12:30 - Kết thúc : 13/9/2019 12:30" />
+
+        <TextView
+            android:id="@+id/txt_count_interest_item_event_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_time_item_event_horizontal"
+            android:layout_marginLeft="@dimen/margin_15dp"
+            android:maxLines="1"
+            android:text="100 người quan tâm" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_count_interest_item_event_horizontal"
+            android:layout_marginTop="@dimen/margin_15dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_10dp">
+
+                <Button
+                    android:padding="@dimen/margin_10dp"
+                    android:background="@drawable/background_btn_interest"
+                    android:id="@+id/btn_care_item_event_horizontal"
+                    android:layout_width="@dimen/margin_120dp"
+                    android:layout_height="@dimen/size_40dp"
+                    android:drawableLeft="@drawable/ic_star_gray_24dp"
+                    android:text="Quan tâm"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/btn_join_item_event_hozitical"
+                    android:layout_marginLeft="@dimen/margin_20dp"
+                    android:background="@drawable/background_btn_interest"
+                    android:layout_width="@dimen/margin_120dp"
+                    android:layout_height="@dimen/size_40dp"
+                    android:layout_toRightOf="@+id/btn_care_item_event_horizontal"
+                    android:text="Sẽ tham gia"
+                    android:textAllCaps="false" />
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </RelativeLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

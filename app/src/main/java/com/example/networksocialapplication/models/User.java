@@ -8,13 +8,6 @@ public class User {
     private String mCoverPhoto;
     private String mPhoneNumber;
 
-
-
-    private String mGender;
-    private String mDateOfBirth;
-    private String mStatus;
-
-
     public User() {
     }
 
@@ -54,13 +47,6 @@ public class User {
         mCoverPhoto = coverPhoto;
     }
 
-    public String getStatus() {
-        return mStatus;
-    }
-
-    public void setStatus(String status) {
-        mStatus = status;
-    }
 
     public String getUserID() {
         return mUserID;
@@ -92,23 +78,6 @@ public class User {
 
     public void setAvatar(String avatar) {
         mAvatar = avatar;
-    }
-
-
-    public String getGender() {
-        return mGender;
-    }
-
-    public void setGender(String gender) {
-        mGender = gender;
-    }
-
-    public String getDateOfBirth() {
-        return mDateOfBirth;
-    }
-
-    public void setDateOfBirth(String dateOfBirth) {
-        mDateOfBirth = dateOfBirth;
     }
 
     @Override
