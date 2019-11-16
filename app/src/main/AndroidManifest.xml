@@ -16,7 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ReflectActivity"></activity>
+        <activity android:name=".NotificationDetailActivity"></activity>
+        <activity android:name=".CreateEventActivity" />
+        <activity android:name=".CreateNotificationActivity" />
+        <activity android:name=".ReflectActivity" />
         <activity android:name=".CreateReflectActivity" />
         <activity android:name=".admin.HomeManagerActivity" />
         <activity android:name=".resident.homeapp.view_profile_manager.ProfileManagerFromUserActivity" />

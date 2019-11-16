@@ -52,6 +52,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             final Notification notification = mNotifications.get(position);
 
             UserDatabase userDatabase = new UserDatabase(mContext);
+            userDatabase.setUpUserRef();
             userDatabase.getAvatarAndUsernameUser(notification.getUserID(), holder.mTxtUsername, holder.mImgAvatar);
             holder.mCommentNotify.setText(notification.getText());
 

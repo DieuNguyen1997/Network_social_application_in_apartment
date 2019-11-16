@@ -140,7 +140,6 @@
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-
             app:counterEnabled="true"
             app:counterMaxLength="100"
             app:errorEnabled="true"

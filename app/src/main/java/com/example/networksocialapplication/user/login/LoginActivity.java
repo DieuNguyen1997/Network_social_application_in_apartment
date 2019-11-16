@@ -35,20 +35,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-//import com.facebook.AccessToken;
-//import com.facebook.CallbackManager;
-//import com.facebook.FacebookCallback;
-//import com.facebook.FacebookException;
-//import com.facebook.GraphRequest;
-//import com.facebook.GraphResponse;
-//import com.facebook.login.LoginResult;
-//import com.facebook.login.widget.LoginButton;
-
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText mEdtUsername;
     private EditText mEdtPassword;
-    private EditText mEdtConfirmPassword;
     private Button mBtnLogin;
     private Button mBtnReset;
     private ProgressDialog mProgressDialog;
@@ -96,7 +86,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void init() {
         mEdtUsername = findViewById(R.id.edt_username_lg);
         mEdtPassword = findViewById(R.id.edt_password_lg);
-        mEdtConfirmPassword = findViewById(R.id.edt_repassword_lg);
         mBtnLogin = findViewById(R.id.btn_login);
         mBtnReset = findViewById(R.id.btn_reset);
         mCheckBox = findViewById(R.id.cbx_nho_pass);
@@ -113,10 +102,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (saveLogin == true) {
             String email = mSharedPreferences.getString("email", "");
             String password = mSharedPreferences.getString("password", "");
-            String repass = mSharedPreferences.getString("repass", "");
             mEdtUsername.setText(email);
             mEdtPassword.setText(password);
-            mEdtConfirmPassword.setText(repass);
             mCheckBox.setChecked(saveLogin);
         }
     }
@@ -124,91 +111,73 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void resetData() {
         mEdtUsername.setText("");
         mEdtPassword.setText("");
-        mEdtConfirmPassword.setText("");
         mCheckBox.setChecked(false);
     }
 
-    private void checkAccount() {
+    private void loginAccount() {
         String email = mEdtUsername.getText().toString();
         String password = mEdtPassword.getText().toString();
-        String repass = mEdtConfirmPassword.getText().toString();
         if (!TextUtils.isEmpty(email)) {
             if (!TextUtils.isEmpty(password)) {
-                if (!TextUtils.isEmpty(repass)) {
-                    if (repass.equals(password)) {
-                        mProgressDialog.setMessage("Đang đăng nhập");
-                        mProgressDialog.show();
-                        mProgressDialog.setCanceledOnTouchOutside(true);
+                mProgressDialog.setMessage("Đang đăng nhập");
+                mProgressDialog.show();
+                mProgressDialog.setCanceledOnTouchOutside(true);
 
-                        if (email.equals("admin@gmail.com")&&password.equals("admin123")){
-                            mAuth.signInWithEmailAndPassword(email, password)
-                                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<AuthResult> task) {
-                                            if (task.isSuccessful()) {
-                                                mProgressDialog.dismiss();
-                                                Intent intent = new Intent(LoginActivity.this, HomeManagerActivity.class);
-                                                startActivity(intent);
-                                                finish();
-                                            } else {
-                                                mProgressDialog.dismiss();
-                                                String message = task.getException().getMessage();
-                                                Toast.makeText(LoginActivity.this, "Đăng nhập thất bại. Lỗi:" + message, Toast.LENGTH_SHORT).show();
-                                                resetData();
-                                            }
-                                        }
-                                    });
-                        }else {
-                            mAuth.signInWithEmailAndPassword(email, password)
-                                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<AuthResult> task) {
-                                            if (task.isSuccessful()) {
-                                                mProgressDialog.dismiss();
-                                                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                                startActivity(intent);
-                                                finish();
-                                            } else {
-                                                mProgressDialog.dismiss();
-                                                String message = task.getException().getMessage();
-                                                Toast.makeText(LoginActivity.this, "Đăng nhập thất bại. Lỗi:" + message, Toast.LENGTH_SHORT).show();
-                                                resetData();
-                                            }
-                                        }
-                                    });
-                        }
-
-
-                        if (mCheckBox.isChecked()) {
-                            mEditor.putString("email", email);
-                            mEditor.putString("password", password);
-                            mEditor.putString("repass", repass);
-                            mEditor.putBoolean("check", true);
-                            mEditor.commit();
-                        } else {
-                            mEditor.remove("email");
-                            mEditor.remove("password");
-                            mEditor.remove("repass");
-                            mEditor.remove("check");
-                            mEditor.apply();
-                        }
-                    } else
-                    {
-                        Toast.makeText(LoginActivity.this, "Mật khẩu không trùng khớp!", Toast.LENGTH_SHORT).show();
-                        mProgressDialog.dismiss();
-                    }
-                } else
-                {
-                    Toast.makeText(LoginActivity.this, "Bạn chưa nhập lại mật khẩu!", Toast.LENGTH_SHORT).show();
-                    mProgressDialog.dismiss();
+                if (email.equals("admin@gmail.com") && password.equals("admin123")) {
+                    mAuth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        mProgressDialog.dismiss();
+                                        Intent intent = new Intent(LoginActivity.this, HomeManagerActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        mProgressDialog.dismiss();
+                                        String message = task.getException().getMessage();
+                                        Toast.makeText(LoginActivity.this, "Đăng nhập thất bại. Lỗi:" + message, Toast.LENGTH_SHORT).show();
+                                        resetData();
+                                    }
+                                }
+                            });
+                } else {
+                    mAuth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        mProgressDialog.dismiss();
+                                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        mProgressDialog.dismiss();
+                                        String message = task.getException().getMessage();
+                                        Toast.makeText(LoginActivity.this, "Đăng nhập thất bại. Lỗi:" + message, Toast.LENGTH_SHORT).show();
+                                        resetData();
+                                    }
+                                }
+                            });
                 }
-            } else
-            {
+
+
+                if (mCheckBox.isChecked()) {
+                    mEditor.putString("email", email);
+                    mEditor.putString("password", password);
+                    mEditor.putBoolean("check", true);
+                    mEditor.commit();
+                } else {
+                    mEditor.remove("email");
+                    mEditor.remove("password");
+                    mEditor.remove("check");
+                    mEditor.apply();
+                }
+            } else {
                 Toast.makeText(LoginActivity.this, "Bạn chưa nhập mật khẩu!", Toast.LENGTH_SHORT).show();
                 mProgressDialog.dismiss();
             }
-        } else
-        {
+        } else {
             Toast.makeText(LoginActivity.this, "Bạn chưa nhập email!!", Toast.LENGTH_SHORT).show();
             mProgressDialog.dismiss();
         }
@@ -224,7 +193,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
-                checkAccount();
+                loginAccount();
                 break;
             case R.id.btn_reset:
                 resetData();

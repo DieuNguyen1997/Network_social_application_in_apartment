@@ -18,43 +18,68 @@
         android:orientation="vertical">
 
         <TextView
+            android:textColor="@color/color_Background"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/setting_infomation_label_phone"
             android:text="@string/label_username"
             android:textStyle="bold" />
 
-
-        <EditText
-            android:id="@+id/edt_username__update_profile"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/color_Background">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_username__update_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
+            android:textColor="@color/color_Background"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/setting_infomation_label_phone"
             android:text="@string/label_des"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/edt_des__update_profile"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/color_Background">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_des__update_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
+            android:textColor="@color/color_Background"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/setting_infomation_label_phone"
             android:text="@string/label_phone_setting_information"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/edt_phone_update_profile"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/color_Background">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_phone_update_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:textColor="@color/color_Background"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_gender_setting_information"
@@ -94,35 +119,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_5dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
+                android:textColor="@color/color_Background"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/setting_infomation_label_phone"
                 android:text="@string/label_birthday_setting_information"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/txt_birthday_update_profile"
-                android:layout_width="100dp"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_10dp"
-                android:text="07/09/1997" />
+                app:boxStrokeColor="@color/color_Background">
 
-            <ImageButton
-                android:id="@+id/btn_calender_update_profile"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_calendar_24" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_birthday_update_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_event_black_24dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
 
 
         <Button
-            android:layout_marginTop="@dimen/margin_20dp"
             android:id="@+id/btn_save_update_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_20dp"
             android:background="@drawable/bg_btn"
             android:text="@string/setting_information_btn_save" />
     </LinearLayout>

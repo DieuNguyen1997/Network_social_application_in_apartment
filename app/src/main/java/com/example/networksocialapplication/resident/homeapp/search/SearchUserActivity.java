@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.adapters.UserAdapter;
+import com.example.networksocialapplication.models.Resident;
 import com.example.networksocialapplication.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -27,7 +28,7 @@ import java.util.List;
 public class SearchUserActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private UserAdapter mUserAdapter;
-    private List<User> mUsers;
+    private List<Resident> mUsers;
 
     private SearchView mSearchView;
     private DatabaseReference mUserData;
@@ -83,9 +84,9 @@ public class SearchUserActivity extends AppCompatActivity {
                 mUsers.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                    User user = snapshot.getValue(User.class);
+                    Resident user = snapshot.getValue(Resident.class);
                     Log.d("search", user.toString());
-                    if (!user.getUserID().equals(mCurrentUserID)) {
+                    if (!user.getResidentId().equals(mCurrentUserID)) {
                         if (user.getUsername().toLowerCase().contains(query.toLowerCase())) {
                             mUsers.add(user);
                         }
@@ -103,29 +104,6 @@ public class SearchUserActivity extends AppCompatActivity {
         });
     }
 
-//    private void firebaseSearch(String s) {
-//        Query query = mUserData.orderByChild("username").startAt(s).endAt(s + "\uf8ff");
-//        FirebaseRecyclerOptions<User> options =
-//                new FirebaseRecyclerOptions.Builder<User>()
-//                        .setQuery(query, User.class)
-//                        .build();
-//        FirebaseRecyclerAdapter<User, UserViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<User, UserViewHolder>(options) {
-//            @Override
-//            protected void onBindViewHolder(@NonNull UserViewHolder holder, int position, @NonNull User model) {
-//                holder.setDetails(getApplicationContext(), model.getAvatar(), model.getUsername());
-//            }
-//
-//            @NonNull
-//            @Override
-//            public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//                LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-//                View view = inflater.inflate(R.layout.item_list_search_user, parent, false);
-//                return new UserViewHolder(view);
-//            }
-//        };
-//        mRecyclerView.setAdapter(firebaseRecyclerAdapter);
-//    }
-
     private void initRecyclerview() {
         mRecyclerView = findViewById(R.id.recycler_view_list_user_search);
         mRecyclerView.setHasFixedSize(true);
@@ -138,26 +116,5 @@ public class SearchUserActivity extends AppCompatActivity {
         mCurrentUserID = mAuth.getCurrentUser().getUid();
         mUserData = FirebaseDatabase.getInstance().getReference().child("Users");
     }
-
-//    public static class UserViewHolder extends RecyclerView.ViewHolder {
-//
-//        View mView;
-//
-//        public UserViewHolder(@NonNull View itemView) {
-//
-//            super(itemView);
-//            mView = itemView;
-//        }
-//
-//        public void setDetails(Context context, String avatarUrl, String username) {
-//            CircleImageView avatar = mView.findViewById(R.id.img_avatar_item_user_search);
-//            TextView user_name = mView.findViewById(R.id.txt_username_item_search);
-//            TextView name_room = mView.findViewById(R.id.txt_name_room_item_search);
-//
-//            Glide.with(context).load(avatarUrl).into(avatar);
-//            user_name.setText(username);
-//        }
-//    }
-
 
 }

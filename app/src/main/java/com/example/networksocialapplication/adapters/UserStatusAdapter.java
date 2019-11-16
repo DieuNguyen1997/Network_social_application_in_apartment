@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.models.Message;
+import com.example.networksocialapplication.models.Resident;
 import com.example.networksocialapplication.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -27,14 +28,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserStatusAdapter extends RecyclerView.Adapter<UserStatusAdapter.ViewHolder> {
     private Context mContext;
-    private List<User> mUsers;
+    private List<Resident> mUsers;
 
     private DatabaseReference mUserRef;
     private DatabaseReference mChatRef;
     private String mLastMessage;
     private String mCurrentUserId;
 
-    public UserStatusAdapter(Context context, List<User> users) {
+    public UserStatusAdapter(Context context, List<Resident> users) {
         mContext = context;
         mUsers = users;
     }
@@ -50,7 +51,7 @@ public class UserStatusAdapter extends RecyclerView.Adapter<UserStatusAdapter.Vi
     public void onBindViewHolder(@NonNull UserStatusAdapter.ViewHolder holder, int position) {
         if (mUsers != null) {
             initFirebase();
-            final User user = mUsers.get(position);
+            final Resident user = mUsers.get(position);
             getDataInformationUser(user.getUserID(), holder.mAvatarChat, holder.mUsername);
             if (user.getStatus().equals("online")) {
                 holder.mImgOn.setVisibility(View.VISIBLE);

@@ -188,9 +188,9 @@ public class SettingInforManagerActivity extends AppCompatActivity implements Vi
             HashMap<String , Object> hashMap = new HashMap<>();
             hashMap.put("username", userName);
             hashMap.put("des", des);
-            hashMap.put("hotline", hotline);
+            hashMap.put("phoneNumber", hotline);
             hashMap.put("location", location);
-            hashMap.put("userId", currentUserID);
+            hashMap.put("managerId", currentUserID);
 
 //            Manager manager = new Manager(userName,des,currentUserID,hotline,location);
             mUserDatabase.updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -24,7 +24,7 @@
     <string name="radio_button_other_gender">LGBT</string>
     <string name="label_date_setting_information">Ngày sinh</string>
     <string name="label_year_setting_information">Năm sinh</string>
-    <string name="setting_information_btn_save">Save</string>
+    <string name="setting_information_btn_save">Lưu</string>
     <string name="activity_register_signup_with_google">Sign up with google</string>
     <string name="activity_login_with_facebook">Login with Facebook</string>
     <string name="fragment_profile_edit_profile">Chỉnh sửa thông tin cá nhân</string>
@@ -117,6 +117,22 @@
     <string name="txt_toire">Vệ sinh</string>
     <string name="txt_add_image">Thêm ảnh</string>
     <string name="txt_content">Nội dung</string>
+    <string name="txt_choose_image">Tải ảnh lên</string>
+    <string name="edt_enter_title">Nhập tiêu đề ...</string>
+    <string name="edt_enter_content">Nhập nội dung thông báo ...</string>
+    <string name="create">Tạo thông báo</string>
+    <string name="txt_name_event">Tên sự kiện</string>
+    <string name="txt_location_event">Địa điểm tổ chức</string>
+    <string name="txt_des_event">Giới thiệu về sự kiện</string>
+    <string name="txt_start">Bắt đầu</string>
+    <string name="txt_finish">Kết thúc</string>
+    <string name="txt_date_start">Ngày bắt đầu</string>
+    <string name="txt_date_finish">Ngày kết thúc</string>
+    <string name="txt_time_start">Giờ bắt đầu</string>
+    <string name="txt_time_finish">Giờ kết thúc</string>
+    <string name="txt_enter_email">Email</string>
+    <string name="txt_enter_password">Mật khẩu</string>
+    <string name="txt_enter_repassword">Nhập lại mật khẩu</string>
 
 
     <array name="name_room">

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.adapters.PostAdapter;
+import com.example.networksocialapplication.models.Resident;
 import com.example.networksocialapplication.user.chat.ChatActivity;
 import com.example.networksocialapplication.models.Post;
 import com.example.networksocialapplication.models.User;
@@ -221,7 +222,7 @@ public class ProfileOtherUserActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    User user = dataSnapshot.getValue(User.class);
+                    Resident user = dataSnapshot.getValue(Resident.class);
                     mTxtUsername.setText(user.getUsername());
                     mTxtDes.setText(user.getDes());
                     mTxtPhoneNumber.setText(user.getDes());

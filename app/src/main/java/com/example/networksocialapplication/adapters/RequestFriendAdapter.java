@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.R;
+import com.example.networksocialapplication.models.Resident;
 import com.example.networksocialapplication.models.User;
 import com.example.networksocialapplication.resident.homeapp.profile_other_user.ProfileOtherUserActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,13 +29,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RequestFriendAdapter extends RecyclerView.Adapter<RequestFriendAdapter.ViewHolder> {
     private Context mContext;
-    private List<User> mUsers;
+    private List<Resident> mUsers;
 
     private DatabaseReference mFriendRequestRef;
     private DatabaseReference mFriendRef;
     private String mCurrentUserId;
 
-    public RequestFriendAdapter(Context context, List<User> users) {
+    public RequestFriendAdapter(Context context, List<Resident> users) {
         mContext = context;
         mUsers = users;
     }
@@ -51,7 +52,7 @@ public class RequestFriendAdapter extends RecyclerView.Adapter<RequestFriendAdap
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         if (mUsers != null) {
             initFirebase();
-            User user = mUsers.get(position);
+            Resident user = mUsers.get(position);
             holder.mUsername.setText(user.getUsername());
             Glide.with(mContext).load(user.getAvatar()).into(holder.mAvatarRquest);
 

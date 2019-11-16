@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NotificationDetailActivity">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/layout_app_bar"
+        android:id="@+id/toolbar"/>
+    <TextView
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/txt_time_notification_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_below="@+id/txt_time_notification_detail"
+        android:layout_margin="@dimen/margin_10dp"
+        android:textSize="@dimen/txt_size_20sp"
+        android:textStyle="bold"
+        android:text="Gần 1200 người diễn tập phòng cháy, chữa cháy"
+        android:id="@+id/txt_title_notification_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:scaleType="centerCrop"
+        android:layout_below="@+id/txt_title_notification_detail"
+        android:id="@+id/img_notification_detail"
+        android:src="@drawable/ic_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/profile_cover_image_height" />
+    <TextView
+        android:layout_margin="@dimen/margin_10dp"
+        android:layout_below="@+id/img_notification_detail"
+        android:id="@+id/txt_content_notification_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
+
+
+</ScrollView>

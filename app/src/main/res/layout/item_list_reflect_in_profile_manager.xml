@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_item_reflect"
+    android:orientation="vertical">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_avatar_item_reflect_profile_manager"
+        android:layout_width="@dimen/size_40dp"
+        android:layout_height="@dimen/size_40dp"
+        android:layout_marginTop="@dimen/margin_15dp"
+        android:src="@drawable/ic_avatar" />
+
+    <TextView
+        android:id="@+id/txt_username_item_reflect_profile_manager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_toRightOf="@+id/img_avatar_item_reflect_profile_manager"
+        android:text="@string/txt_username"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/txt_size_18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txt_time_item_reflect_profile_manager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_username_item_reflect_profile_manager"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:layout_toRightOf="@+id/img_avatar_item_reflect_profile_manager"
+        android:text="04/09/2019 lúc 14:38"
+        android:textColor="@color/color_Background"
+        android:textSize="@dimen/txt_size_15sp" />
+    <TextView
+        android:id="@+id/txt_field_item_reflect_profile_manager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_time_item_reflect_profile_manager"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:text="Khẩn cấp"
+        android:textStyle="bold"
+        android:textColor="@color/color_Background"
+        android:textSize="@dimen/txt_size_15sp" />
+    <TextView
+        android:layout_toRightOf="@+id/txt_field_item_reflect_profile_manager"
+        android:id="@+id/txt_title_item_reflect_profile_manager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_time_item_reflect_profile_manager"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:text="Khẩn cấp"
+        android:textStyle="bold"
+        android:textColor="@color/color_Background"
+        android:textSize="@dimen/txt_size_15sp" />
+
+    <ImageView
+        android:id="@+id/img_item_reflect_profile_manager"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/profile_cover_image_height"
+        android:layout_below="@+id/txt_title_item_reflect_profile_manager"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_avatar" />
+
+
+    <TextView
+        android:id="@+id/txt_content_item_reflect_profile_manager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img_item_reflect_profile_manager"
+        android:layout_margin="@dimen/margin_10dp"
+        android:text="0000000000000000000000000000000000"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/txt_size_15sp" />
+
+    <TextView
+        android:id="@+id/txt_count_comment_item_reflect_profile_manager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_content_item_reflect_profile_manager"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:text="9 phản hồi"
+        android:textSize="@dimen/txt_size_15sp" />
+
+    <TextView
+        android:id="@+id/txt_status_item_reflect_profile_manager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_content_item_reflect_profile_manager"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginRight="@dimen/margin_10dp"
+        android:text="Đã hoàn thành"
+        android:textColor="@color/color_yellow"
+        android:textSize="@dimen/txt_size_15sp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_count_comment_item_reflect_profile_manager"
+        android:layout_marginTop="@dimen/margin_5dp">
+
+        <LinearLayout
+            android:id="@+id/layout_like_item_reflect_profile_manager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/size_50dp"
+            android:orientation="horizontal"
+            android:padding="@dimen/margin_5dp">
+
+            <ImageView
+                android:id="@+id/img_icon_like_item_post"
+                android:layout_width="@dimen/size_20dp"
+                android:layout_height="@dimen/size_20dp"
+                android:src="@drawable/ic_love_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/margin_5dp"
+                android:text="@string/txt_like_item_post"
+                android:textSize="@dimen/txt_size_15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_comment_item_reflect_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/size_50dp"
+            android:orientation="horizontal"
+            android:padding="@dimen/margin_5dp">
+
+            <ImageView
+                android:layout_width="@dimen/size_20dp"
+                android:layout_height="@dimen/size_20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_comment" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/margin_5dp"
+                android:text="@string/txt_comment_item_post"
+                android:textSize="@dimen/txt_size_15sp" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:padding="@dimen/margin_10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffff"
@@ -9,22 +10,27 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:textStyle="bold"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/txt_notify_from_manager" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_margin="@dimen/margin_5dp"
         android:id="@+id/recycler_view_list_notify_from_manager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
 
     <TextView
+        android:textStyle="bold"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/txt_notify_from_friend" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_margin="@dimen/margin_5dp"
         android:id="@+id/recycler_view_list_notify_from_friend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+
 </LinearLayout>

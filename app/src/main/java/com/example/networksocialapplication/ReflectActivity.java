@@ -46,7 +46,7 @@ public class ReflectActivity extends AppCompatActivity {
         initToolbar();
         initFirebase();
         initRecyclerview();
-//        displayListReflect();
+        displayListReflect();
     }
 
     @Override
@@ -72,10 +72,9 @@ public class ReflectActivity extends AppCompatActivity {
         mReflectRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    String userID = data.child("userId").getValue().toString();
-                    Reflect reflect = data.getValue(Reflect.class);
-                    if (userID.equals(mCurrentUserId)) {
+                for (DataSnapshot item : dataSnapshot.getChildren()){
+                    Reflect reflect = item.getValue(Reflect.class);
+                    if (reflect.getUserID().equals(mCurrentUserId)){
                         mReflects.add(reflect);
                         mReflectAdapter = new ReflectAdapter(getApplicationContext(), mReflects);
                         mReflectAdapter.notifyDataSetChanged();
