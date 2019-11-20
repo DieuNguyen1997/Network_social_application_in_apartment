@@ -23,9 +23,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/profile_cover_image_height"
                 android:scaleType="centerCrop"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                tools:ignore="MissingConstraints" />
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteY="0dp" />
+
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_avatar_profile_fragment"
@@ -38,6 +41,8 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+
 
             <TextView
                 android:id="@+id/txt_username_profile"
@@ -70,60 +75,71 @@
                 tools:layout_editor_absoluteX="0dp">
 
                 <RelativeLayout
-                    android:padding="@dimen/margin_5dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/margin_5dp">
+
                     <TextView
                         android:id="@+id/txt_information_basic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/txt_information_user"
                         android:textStyle="bold" />
-                   <TableLayout
-                       android:padding="@dimen/margin_5dp"
-                       android:layout_below="@id/txt_information_basic"
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content">
-                       <TableRow android:padding="@dimen/margin_5dp">
-                           <TextView
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
-                               android:text="@string/label_phone_setting_information"
-                               android:textStyle="bold" />
-                           <TextView
-                               android:id="@+id/txt_phone_number_profile_fragment"
-                               android:layout_marginStart="@dimen/margin_20dp"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
-                               android:textStyle="bold" />
-                       </TableRow>
-                       <TableRow android:padding="@dimen/margin_5dp">
-                           <TextView
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
-                               android:text="@string/label_gender_setting_information"
-                               android:textStyle="bold" />
-                           <TextView
-                               android:layout_marginStart="@dimen/margin_20dp"
-                               android:id="@+id/txt_gender_profile_fragment"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
-                               android:textStyle="bold" />
-                       </TableRow>
-                       <TableRow android:padding="@dimen/margin_5dp">
-                           <TextView
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
-                               android:text="@string/label_date_setting_information"
-                               android:textStyle="bold" />
-                           <TextView
-                               android:layout_marginStart="@dimen/margin_20dp"
-                               android:id="@+id/txt_date_birth_profile_fragment"
-                               android:layout_width="wrap_content"
-                               android:layout_height="wrap_content"
-                               android:textStyle="bold" />
-                       </TableRow>
-                   </TableLayout>
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txt_information_basic"
+                        android:padding="@dimen/margin_5dp">
+
+                        <TableRow android:padding="@dimen/margin_5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/label_phone_setting_information"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txt_phone_number_profile_fragment"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_20dp"
+                                android:textStyle="bold" />
+                        </TableRow>
+
+                        <TableRow android:padding="@dimen/margin_5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/label_gender_setting_information"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txt_gender_profile_fragment"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_20dp"
+                                android:textStyle="bold" />
+                        </TableRow>
+
+                        <TableRow android:padding="@dimen/margin_5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/label_date_setting_information"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txt_date_birth_profile_fragment"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_20dp"
+                                android:textStyle="bold" />
+                        </TableRow>
+                    </TableLayout>
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 

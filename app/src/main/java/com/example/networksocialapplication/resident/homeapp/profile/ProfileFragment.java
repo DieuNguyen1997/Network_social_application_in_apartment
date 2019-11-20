@@ -348,9 +348,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                     Uri downloadUri = task.getResult();
                     String avatarUrl = downloadUri.toString();
 
-                    HashMap<String, Object> hashMap = new HashMap<>();
-                    hashMap.put("avatar",avatarUrl);
-                    mUserDatabase.child(mCurrentUserId).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                    mUserDatabase.child(mCurrentUserId).child("coverPhoto").setValue(avatarUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
@@ -387,9 +386,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                     Uri downloadUri = task.getResult();
                     String avatarUrl = downloadUri.toString();
 
-                    HashMap<String, Object> hashMap = new HashMap<>();
-                    hashMap.put("avatar",avatarUrl);
-                    mUserDatabase.child(mCurrentUserId).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    mUserDatabase.child(mCurrentUserId).child("avatar").setValue(avatarUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {

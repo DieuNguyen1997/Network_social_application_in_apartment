@@ -1,9 +1,12 @@
 package com.example.networksocialapplication.admin.profile_manager;
 
 import android.app.AlertDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,17 +15,26 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.networksocialapplication.CreateEventActivity;
+import com.example.networksocialapplication.CreateNotificationActivity;
 import com.example.networksocialapplication.R;
+import com.example.networksocialapplication.UpdateManagerActivity;
 import com.example.networksocialapplication.adapters.ReflectAdapter;
 import com.example.networksocialapplication.adapters.ReflectInManagerAdapter;
 import com.example.networksocialapplication.models.Manager;
 import com.example.networksocialapplication.models.Reflect;
 import com.example.networksocialapplication.models.User;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,15 +42,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static android.app.Activity.RESULT_OK;
+
 
 public class ProfileManagerFragment extends Fragment implements View.OnClickListener {
 
+    private static final int GALLERY_PICK_AVATAR = 140 ;
+    private static final int GALLERY_PICK_COVER_PHOTO = 142;
     private ImageView mCoverPhoto;
     private CircleImageView mAvatar;
     private TextView mTxtUsername;
@@ -46,6 +65,9 @@ public class ProfileManagerFragment extends Fragment implements View.OnClickList
     private LinearLayout mLayout_create_notify;
     private LinearLayout mLayout_create_event;
     private RecyclerView mRecyclerView;
+    private ImageButton mImgUpdateCoverPhoto;
+    private ImageButton mImgUpdateAvatar;
+    private ImageView mEditProfile;
 
     private TextView mTxtHotline;
     private TextView mTxtLocation;
@@ -55,6 +77,10 @@ public class ProfileManagerFragment extends Fragment implements View.OnClickList
     private String mCurrentUserId;
     private List<Reflect> mReflects;
     private ReflectInManagerAdapter mReflectAdapter;
+    private Uri mImageUri;
+    private StorageReference mAvatarDatabase;
+    private StorageReference mCoverPhotoDatabase;
+    private UploadTask mUploadTask;
 
 
     @Override
@@ -108,8 +134,15 @@ public class ProfileManagerFragment extends Fragment implements View.OnClickList
         mTxtUsername = view.findViewById(R.id.txt_username_profile_manager);
         mDes = view.findViewById(R.id.txt_des_profile_manager);
 
+        mImgUpdateAvatar = view.findViewById(R.id.btn_choose_avatar_profile_manager);
+        mImgUpdateCoverPhoto = view.findViewById(R.id.btn_choose_cover_profile_manager);
+        mEditProfile = view.findViewById(R.id.img_edit_profile_manager);
+
         mLayout_create_event.setOnClickListener(this);
         mLayout_create_notify.setOnClickListener(this);
+        mImgUpdateAvatar.setOnClickListener(this);
+        mImgUpdateCoverPhoto.setOnClickListener(this);
+        mEditProfile.setOnClickListener(this);
     }
 
     private void displayInformationBasic() {
@@ -141,23 +174,130 @@ public class ProfileManagerFragment extends Fragment implements View.OnClickList
         mCurrentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         mManagerDatabase = FirebaseDatabase.getInstance().getReference().child("Manager");
         mReflectRef = FirebaseDatabase.getInstance().getReference().child("Reflect");
+        mAvatarDatabase = FirebaseStorage.getInstance().getReference().child("Avatar");
+        mCoverPhotoDatabase = FirebaseStorage.getInstance().getReference().child("CoverPhoto");
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.root_create_notification:
-                createNotification();
+                startActivity(new Intent(getActivity(), CreateNotificationActivity.class));
                 break;
             case R.id.root_create_event:
-                createEvent();
+                startActivity(new Intent(getActivity(), CreateEventActivity.class));
+                break;
+            case R.id.btn_choose_avatar_profile_manager:
+                chooseAvatar();
+                break;
+            case R.id.btn_choose_cover_profile_manager:
+                chooseCoverPhoto();
+                break;
+            case R.id.img_edit_profile_manager:
+                startActivity(new Intent(getActivity(), UpdateManagerActivity.class));
                 break;
         }
     }
 
-    private void createEvent() {
+    private void chooseCoverPhoto() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent, GALLERY_PICK_COVER_PHOTO);
     }
 
-    private void createNotification() {
+    private void chooseAvatar() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent, GALLERY_PICK_AVATAR);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+       if (requestCode == GALLERY_PICK_AVATAR && resultCode == getActivity().RESULT_OK && data != null){
+           mImageUri = data.getData();
+           mAvatar.setImageURI(mImageUri);
+           updateAvatarProfileToFirebase();
+       }else if (requestCode == GALLERY_PICK_COVER_PHOTO && resultCode == getActivity().RESULT_OK && data != null){
+           mImageUri = data.getData();
+           mCoverPhoto.setImageURI(mImageUri);
+           updateCoverProfileToFirebase();
+       }
+    }
+
+    private void updateAvatarProfileToFirebase() {
+        if (mImageUri != null) {
+            mAvatarDatabase.putFile(mImageUri);
+            mUploadTask = mAvatarDatabase.putFile(mImageUri);
+            mUploadTask.continueWithTask(new Continuation() {
+                @Override
+                public Object then(@NonNull Task task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    } else {
+                        return mAvatarDatabase.getDownloadUrl();
+                    }
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    Uri downloadUri = task.getResult();
+                    String avatarUrl = downloadUri.toString();
+
+                    mManagerDatabase.child(mCurrentUserId).child("avatar").setValue(avatarUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(getActivity(), "Lưu url anh vao user thanh cong", Toast.LENGTH_SHORT).show();
+                            } else {
+                                String message = task.getException().getMessage();
+                                Toast.makeText(getActivity(), "không thành công", Toast.LENGTH_SHORT).show();
+                                Log.d("error", message);
+                            }
+                        }
+                    });
+                }
+            });
+
+        }
+    }
+
+    private void updateCoverProfileToFirebase() {
+        if (mImageUri != null) {
+            mCoverPhotoDatabase.putFile(mImageUri);
+            mUploadTask = mCoverPhotoDatabase.putFile(mImageUri);
+            mUploadTask.continueWithTask(new Continuation() {
+                @Override
+                public Object then(@NonNull Task task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    } else {
+                        return mCoverPhotoDatabase.getDownloadUrl();
+                    }
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    Uri downloadUri = task.getResult();
+                    String avatarUrl = downloadUri.toString();
+
+                    mManagerDatabase.child(mCurrentUserId).child("coverPhoto").setValue(avatarUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(getActivity(), "Lưu url anh vao user thanh cong", Toast.LENGTH_SHORT).show();
+                            } else {
+                                String message = task.getException().getMessage();
+                                Toast.makeText(getActivity(), "không thành công", Toast.LENGTH_SHORT).show();
+                                Log.d("error", message);
+                            }
+                        }
+                    });
+                }
+            });
+
+        }
     }
 }
