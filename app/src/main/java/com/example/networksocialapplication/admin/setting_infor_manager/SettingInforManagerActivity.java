@@ -130,16 +130,16 @@ public class SettingInforManagerActivity extends AppCompatActivity implements Vi
 
     private void saveAvatarProfileToFirebase() {
         if (mImageUri != null) {
-            mAvatarDatabase.child(currentUserID).putFile(mImageUri);
-            mUploadTask = mAvatarDatabase.putFile(mImageUri);
-            mUploadTask.continueWithTask(new Continuation() {
-                @Override
-                public Object then(@NonNull Task task) throws Exception {
-                    if (!task.isSuccessful()) {
-                        throw task.getException();
-                    } else {
-                        return mAvatarDatabase.getDownloadUrl();
-                    }
+                        mAvatarDatabase.child(currentUserID).putFile(mImageUri);
+                        mUploadTask = mAvatarDatabase.putFile(mImageUri);
+                        mUploadTask.continueWithTask(new Continuation() {
+                            @Override
+                            public Object then(@NonNull Task task) throws Exception {
+                                if (!task.isSuccessful()) {
+                                    throw task.getException();
+                                } else {
+                                    return mAvatarDatabase.getDownloadUrl();
+                                }
                 }
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
