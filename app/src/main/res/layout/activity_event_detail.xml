@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    tools:context=".EventDetailActivity">
+
+    <include layout="@layout/layout_app_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_item_event_detail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/profile_cover_image_height"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_background_event" />
+
+            <TextView
+                android:id="@+id/txt_name_item_event_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_item_event_detail"
+                android:layout_marginLeft="@dimen/margin_15dp"
+                android:layout_marginTop="@dimen/margin_15dp"
+                android:maxLines="1"
+                android:text="@string/txt_name_event"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txt_size_20sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/group_person"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_name_item_event_detail"
+                android:layout_marginLeft="@dimen/margin_15dp"
+                android:layout_marginTop="@dimen/margin_15dp"
+                android:src="@drawable/ic_supervisor_account_gray_24dp" />
+
+            <TextView
+                android:id="@+id/txt_nguoi_to_chuc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_name_item_event_detail"
+                android:layout_margin="@dimen/margin_15dp"
+                android:layout_toRightOf="@+id/group_person"
+                android:text="Công khai -  Tổ chức bởi ban quản lý khu chung cư" />
+
+            <ImageView
+                android:id="@+id/person"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_nguoi_to_chuc"
+                android:layout_marginLeft="@dimen/margin_15dp"
+                android:src="@drawable/ic_person_gray_24dp" />
+
+            <TextView
+                android:id="@+id/txt_count_interest_item_event_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_nguoi_to_chuc"
+                android:layout_marginLeft="@dimen/margin_15dp"
+                android:layout_toRightOf="@+id/person"
+                android:maxLines="1"
+                android:text="100 người quan tâm" />
+
+            <TextView
+                android:id="@+id/txt_count_join_item_event_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_nguoi_to_chuc"
+                android:layout_marginLeft="@dimen/margin_15dp"
+                android:layout_toRightOf="@+id/txt_count_interest_item_event_detail"
+                android:maxLines="1"
+                android:text="100 người quan tâm" />
+
+            <ImageView
+                android:id="@+id/img_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_count_interest_item_event_detail"
+                android:layout_marginLeft="@dimen/margin_15dp"
+                android:layout_marginTop="@dimen/margin_15dp"
+                android:src="@drawable/ic_access_time_black_24dp" />
+
+            <TextView
+                android:id="@+id/txt_time_item_event_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_count_interest_item_event_detail"
+                android:layout_marginLeft="@dimen/margin_15dp"
+                android:layout_marginTop="@dimen/margin_15dp"
+                android:layout_toRightOf="@+id/img_time"
+                android:maxLines="1"
+                android:text="Bắt đầu : 12/9/2019 12:30 - Kết thúc : 13/9/2019 12:30" />
+
+            <ImageView
+                android:id="@+id/img_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_time"
+                android:layout_marginLeft="@dimen/margin_15dp"
+                android:layout_marginTop="@dimen/margin_15dp"
+                android:src="@drawable/ic_location_on_gray_24dp" />
+
+            <TextView
+                android:id="@+id/txt_location_item_event_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_time"
+                android:layout_marginLeft="@dimen/margin_15dp"
+                android:layout_marginTop="@dimen/margin_15dp"
+                android:layout_toRightOf="@+id/img_address"
+                android:maxLines="1"
+                android:text="@string/txt_name_event" />
+
+
+            <RelativeLayout
+                android:id="@+id/layout_care"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_location_item_event_detail"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:padding="@dimen/margin_10dp">
+
+                <Button
+                    android:id="@+id/btn_care_item_event_detail"
+                    android:layout_width="@dimen/margin_120dp"
+                    android:layout_height="@dimen/size_40dp"
+                    android:background="@drawable/background_btn_interest"
+                    android:drawableLeft="@drawable/ic_star_gray_24dp"
+                    android:padding="@dimen/margin_10dp"
+                    android:text="Quan tâm"
+                    android:textAllCaps="false" />
+
+                <Button
+
+                    android:id="@+id/btn_join_item_event_detail"
+                    android:layout_width="@dimen/margin_120dp"
+                    android:layout_height="@dimen/size_40dp"
+                    android:layout_marginLeft="@dimen/margin_20dp"
+                    android:layout_toRightOf="@+id/btn_care_item_event_detail"
+                    android:background="@drawable/background_btn_interest"
+                    android:text="Sẽ tham gia"
+                    android:textAllCaps="false" />
+            </RelativeLayout>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/taplayout_event_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_care"
+                android:background="@color/colorWhite"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:tabSelectedTextColor="@color/color_yellow"
+                app:tabTextColor="@color/colorBlack"></com.google.android.material.tabs.TabLayout>
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager_event_detail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/taplayout_event_detail"
+                android:layout_marginTop="0dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></FrameLayout>
+            </androidx.viewpager.widget.ViewPager>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

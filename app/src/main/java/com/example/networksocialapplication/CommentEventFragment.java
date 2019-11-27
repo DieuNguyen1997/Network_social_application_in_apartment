@@ -1,33 +1,39 @@
-package com.example.networksocialapplication.user.comment;
+package com.example.networksocialapplication;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.adapters.CommentAdapter;
+import com.example.networksocialapplication.adapters.CommentEventAdapter;
 import com.example.networksocialapplication.models.Comment;
 import com.example.networksocialapplication.time_current.Time;
+import com.example.networksocialapplication.user.comment.CommentActivity;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,51 +49,47 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class CommentActivity extends AppCompatActivity implements View.OnClickListener{
 
+public class CommentEventFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "comment";
     private static final int REQUEST_CODE_CHOOSE_PHOTO_COMMENT = 112;
     private CircleImageView mAvatar;
     private ImageView mSend;
     private ImageView mChoosePhoto;
-    private ImageView mChooseSticker;
     private EditText mContentComment;
-    private Toolbar mToolbar;
     private RecyclerView mRecyclerView;
     private List<Comment> mComments;
     private ImageView mImgComment;
     private ImageButton mDelete;
     private CoordinatorLayout mLayout;
 
-    private DatabaseReference mPostRef;
+    private String mCurrentUserId;
     private DatabaseReference mCommentRef;
     private DatabaseReference mUserRef;
     private StorageReference mImageCommentRef;
 
-    private String mPostId;
-    private String mCurrentUserId;
-    private CommentAdapter mCommentAdapter;
+    private String mEventId;
+    private CommentEventAdapter mCommentAdapter;
     private Uri mImageUri;
     private Time mTime;
-    private String mUserPost;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)  {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_comment);
-
-        initToolbar();
-        initView();
-        initRecyclerview();
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_comment_event, container, false);
+        initView(view);
+        initRecyclerview(view);
         initFirebase();
         displayAvatar();
         displayListComment();
+        return view;
     }
 
-    private void initRecyclerview() {
-        mRecyclerView = findViewById(R.id.recycler_view_list_comment);
+    private void initRecyclerview(View view) {
+        mRecyclerView = view.findViewById(R.id.recycler_view_list_comment_event);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         mComments = new ArrayList<>();
     }
 
@@ -95,9 +97,9 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         mUserRef.child(mCurrentUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     String avatar = dataSnapshot.child("avatar").getValue().toString();
-                    Glide.with(getApplicationContext()).load(avatar).into(mAvatar);
+                    Glide.with(getActivity()).load(avatar).into(mAvatar);
                 }
             }
 
@@ -108,64 +110,43 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         });
     }
 
-    private void initToolbar() {
-        mToolbar = findViewById(R.id.toolbar_layout);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Bình luận");
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-    }
-
-    private void initView() {
+    private void initView(View view) {
+        mEventId = getActivity().getIntent().getStringExtra("eventId");
         mTime = new Time();
-        mLayout = findViewById(R.id.layout_image_comment);
-        mDelete = findViewById(R.id.btn_delete_image_comment);
-        mImgComment = findViewById(R.id.image_comment);
-        mAvatar = findViewById(R.id.img_avatar_comment_activity);
-        mContentComment = findViewById(R.id.edt_content_comment);
-        mChooseSticker = findViewById(R.id.img_choose_sticker_comment_activity);
-        mChoosePhoto = findViewById(R.id.img_choose_photo_comment_activity);
-        mSend = findViewById(R.id.img_send_comment);
+        mLayout = view.findViewById(R.id.layout_image_comment_event);
+        mDelete = view.findViewById(R.id.btn_delete_image_comment_event);
+        mImgComment = view.findViewById(R.id.image_comment_event);
+        mAvatar = view.findViewById(R.id.img_avatar_comment_event);
+        mContentComment = view.findViewById(R.id.edt_content_comment_event);
+        mChoosePhoto = view.findViewById(R.id.img_choose_photo_comment_event);
+        mSend = view.findViewById(R.id.img_send_comment_event);
 
         mChoosePhoto.setOnClickListener(this);
-        mChooseSticker.setOnClickListener(this);
         mSend.setOnClickListener(this);
         mDelete.setOnClickListener(this);
 
-        Intent intent = getIntent();
-        mPostId = intent.getStringExtra("postId");
-        mCurrentUserId = intent.getStringExtra("currentUserId");
-        mUserPost = intent.getStringExtra("userPost");
-//
-        if (mImageUri == null){
+        if (mImageUri == null) {
             mLayout.setVisibility(View.GONE);
         }
     }
 
     private void initFirebase() {
+        mCurrentUserId= FirebaseAuth.getInstance().getCurrentUser().getUid();
         mUserRef = FirebaseDatabase.getInstance().getReference().child("Users");
-        mCommentRef = FirebaseDatabase.getInstance().getReference().child("Comments").child(mPostId);
+        mCommentRef = FirebaseDatabase.getInstance().getReference().child("Comments").child(mEventId);
         mImageCommentRef = FirebaseStorage.getInstance().getReference().child("Image_Comments");
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.img_choose_photo_comment_activity:
+        switch (v.getId()) {
+            case R.id.img_choose_photo_comment_event:
                 chooseImageFromGallery();
                 break;
-            case R.id.img_choose_sticker_comment_activity:
-                break;
-            case R.id.img_send_comment:
+            case R.id.img_send_comment_event:
                 sendComment();
                 break;
-            case R.id.btn_delete_image_comment:
+            case R.id.btn_delete_image_comment_event:
                 deleteImage();
                 break;
         }
@@ -183,13 +164,15 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         startActivityForResult(intent, REQUEST_CODE_CHOOSE_PHOTO_COMMENT);
     }
 
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_CHOOSE_PHOTO_COMMENT && resultCode == RESULT_OK && data!= null){
+        if (requestCode == REQUEST_CODE_CHOOSE_PHOTO_COMMENT && resultCode == getActivity().RESULT_OK && data != null) {
             mImageUri = data.getData();
             mImgComment.setImageURI(mImageUri);
             mLayout.setVisibility(View.VISIBLE);
+            mDelete.setVisibility(View.VISIBLE);
         }
     }
 
@@ -198,12 +181,12 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         mCommentRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot data : dataSnapshot.getChildren()){
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
                     Comment comment = data.getValue(Comment.class);
                     Log.d(TAG, comment.toString());
                     mComments.add(comment);
                 }
-                mCommentAdapter = new CommentAdapter(getApplicationContext(), mComments);
+                mCommentAdapter = new CommentEventAdapter(getActivity(), mComments);
                 mCommentAdapter.notifyDataSetChanged();
                 mRecyclerView.setAdapter(mCommentAdapter);
             }
@@ -217,13 +200,13 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
 
     private void sendComment() {
         String content = mContentComment.getText().toString();
-        if (TextUtils.isEmpty(content)){
+        if (TextUtils.isEmpty(content)) {
             mContentComment.setError("Nhập nội dung bình luận!!!");
-        }else {
+        } else {
             String commentTime = mTime.getTimeCurrent();
             //Lưu ảnh vào trong storage
             final String commentId = mCommentRef.push().getKey();
-            Comment comment = new Comment(commentId,mCurrentUserId,content,commentTime, mPostId);
+            Comment comment = new Comment(commentId, mCurrentUserId, content, commentTime, mEventId);
             mCommentRef.child(commentId).setValue(comment).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
@@ -233,8 +216,8 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                 }
             });
 
-            if (mImageUri != null){
-                mImageCommentRef.child(commentId).child(mImageUri.getLastPathSegment()+".jpg").putFile(mImageUri);
+            if (mImageUri != null) {
+                mImageCommentRef.child(commentId).child(mImageUri.getLastPathSegment() + ".jpg").putFile(mImageUri);
 
                 UploadTask uploadTask = mImageCommentRef.putFile(mImageUri);
 
@@ -264,26 +247,14 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                         } else {
                             String mesasge = task.getException().getMessage();
                             Log.d(TAG, mesasge);
-                            Toast.makeText(CommentActivity.this, "Luu anh ko thanh cong", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Luu anh ko thanh cong", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
             }
-            addNotification(mCurrentUserId, mPostId, mUserPost);
-
 
         }
     }
 
-    public void addNotification(String userID, String postID, String userPost){
-        DatabaseReference notiRef = FirebaseDatabase.getInstance().getReference().child("Notifications").child(userPost);
-        String notifyId = notiRef.push().getKey();
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("userID", userID);
-        hashMap.put("text", "Đã bình luận bài viết của bạn");
-        hashMap.put("postID", postID);
-        hashMap.put("isPost", true);
-        hashMap.put("notifyID", notifyId);
-        notiRef.child(notifyId).setValue(hashMap);
-    }
+
 }

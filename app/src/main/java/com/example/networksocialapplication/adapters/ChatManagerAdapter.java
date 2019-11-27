@@ -1,10 +1,12 @@
 package com.example.networksocialapplication.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,9 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.R;
+import com.example.networksocialapplication.models.Manager;
 import com.example.networksocialapplication.models.Message;
 import com.example.networksocialapplication.models.Resident;
 import com.example.networksocialapplication.models.User;
+import com.example.networksocialapplication.user.chat.ChatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,44 +30,68 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class UserStatusAdapter extends RecyclerView.Adapter<UserStatusAdapter.ViewHolder> {
+public class ChatManagerAdapter extends RecyclerView.Adapter<ChatManagerAdapter.ViewHolder>{
     private Context mContext;
-    private List<Resident> mUsers;
+    private List<Manager> mUsers;
+    private boolean mIsChat;
 
     private DatabaseReference mUserRef;
     private DatabaseReference mChatRef;
     private String mLastMessage;
     private String mCurrentUserId;
 
-    public UserStatusAdapter(Context context, List<Resident> users) {
+    public ChatManagerAdapter(Context context, List<Manager> users, boolean isChat) {
         mContext = context;
         mUsers = users;
+        mIsChat = isChat;
     }
 
     @NonNull
     @Override
-    public UserStatusAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_list_chat_status, parent, false);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_list_chat, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UserStatusAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (mUsers != null) {
             initFirebase();
-            final Resident user = mUsers.get(position);
-            getDataInformationUser(user.getResidentId(), holder.mAvatarChat, holder.mUsername);
-            if (user.getStatus().equals("online")) {
-                holder.mImgOn.setVisibility(View.VISIBLE);
-            } else {
-                mUsers.remove(user);
+            final Manager user = mUsers.get(position);
+            getDataInformationUser(user.getManagerId(), holder.mAvatarChat, holder.mUsername);
+            final String userOtherId = user.getManagerId();
+            if (mIsChat) {
+                getLastMessage(userOtherId, holder.mTxtLastMessage);
             }
+//            if (mIsChat) {
+//                if (user.getStatus().equals("online")) {
+//                    holder.mImgOn.setVisibility(View.VISIBLE);
+//                    holder.mImgOff.setVisibility(View.GONE);
+//                } else {
+//                    holder.mImgOn.setVisibility(View.GONE);
+//                    holder.mImgOff.setVisibility(View.VISIBLE);
+//                }
+//            } else {
+//                holder.mImgOn.setVisibility(View.GONE);
+//                holder.mImgOff.setVisibility(View.GONE);
+//            }
+
+            holder.mLineChat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, ChatActivity.class);
+                    intent.putExtra("managerId", userOtherId);
+                    intent.putExtra("currentUserId", mCurrentUserId);
+                    mContext.startActivity(intent);
+                }
+            });
         }
+
     }
 
     private void initFirebase() {
         mCurrentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        mUserRef = FirebaseDatabase.getInstance().getReference().child("Manager");
         mChatRef = FirebaseDatabase.getInstance().getReference().child("Chats");
     }
 
@@ -113,16 +141,21 @@ public class UserStatusAdapter extends RecyclerView.Adapter<UserStatusAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        public RelativeLayout mLineChat;
         public CircleImageView mAvatarChat;
         public TextView mUsername;
+        public TextView mTxtLastMessage;
         public ImageView mImgOn;
+        public ImageView mImgOff;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            mAvatarChat = itemView.findViewById(R.id.img_avatar_item_user_status);
-            mUsername = itemView.findViewById(R.id.txt_username_item_user_status);
-            mImgOn = itemView.findViewById(R.id.img_status_on_item_user_status);
+            mAvatarChat = itemView.findViewById(R.id.img_avatar_item_list_chat);
+            mUsername = itemView.findViewById(R.id.txt_username_item_list_chat);
+            mTxtLastMessage = itemView.findViewById(R.id.txt_last_message_item_list_chat);
+            mImgOn = itemView.findViewById(R.id.img_status_on_item_list_chat);
+            mImgOff = itemView.findViewById(R.id.img_status_off_item_list_chat);
+            mLineChat = itemView.findViewById(R.id.line_item_list_chat);
         }
     }
-
 }

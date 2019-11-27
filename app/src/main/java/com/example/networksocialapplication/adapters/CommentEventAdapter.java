@@ -10,14 +10,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.R;
-import com.example.networksocialapplication.user.comment.CommentActivity;
 import com.example.networksocialapplication.models.Comment;
 import com.example.networksocialapplication.resident.homeapp.profile_other_user.ProfileOtherUserActivity;
+import com.example.networksocialapplication.user.comment.CommentActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,8 +32,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
-
+public class CommentEventAdapter  extends  RecyclerView.Adapter<CommentEventAdapter.ViewHolder> {
     private Context mContext;
     private List<Comment> mComments;
 
@@ -41,7 +41,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     private DatabaseReference mCommentRef;
     private DatabaseReference mPostRef;
 
-    public CommentAdapter(Context context, List<Comment> comments) {
+    public CommentEventAdapter(Context context, List<Comment> comments) {
         mContext = context;
         mComments = comments;
     }
@@ -55,12 +55,12 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final CommentEventAdapter.ViewHolder holder, int position) {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mLikeRef = FirebaseDatabase.getInstance().getReference().child("Likes");
         mCommentRef = FirebaseDatabase.getInstance().getReference().child("Comments");
-        mPostRef = FirebaseDatabase.getInstance().getReference().child("Post");
         holder.mLayoutCountLike.setVisibility(View.GONE);
+        holder.mDelete.setVisibility(View.GONE);
         holder.mDelete.setVisibility(View.GONE);
         mCurrentUserID = firebaseUser.getUid();
         if (mComments != null) {
@@ -76,7 +76,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             }
 
             final String commentId = comment.getCommentID();
-            final String postId = comment.getPostID();
             isLikeComment(commentId, holder.mLike);
             displayLikeComment(commentId, holder.mCountLike, holder.mLayoutCountLike);
             holder.mUsername.setOnClickListener(new View.OnClickListener() {
@@ -99,42 +98,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                     } else {
                         mLikeRef.child(commentId).child(mCurrentUserID).removeValue();
                     }
-                }
-            });
-
-
-            mPostRef.child(postId).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    String userIdPost = dataSnapshot.child("userID").getValue().toString();
-                    if (userIdPost.equals(mCurrentUserID)) {
-                        holder.mDelete.setVisibility(View.VISIBLE);
-                        holder.mDelete.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-
-                                deleteComment(postId, commentId);
-                            }
-                        });
-                    } else {
-                        if (userIdComment.equals(mCurrentUserID)) {
-                            holder.mDelete.setVisibility(View.VISIBLE);
-                            holder.mDelete.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-
-                                    deleteComment(postId, commentId);
-                                }
-                            });
-                        } else {
-                            holder.mDelete.setVisibility(View.GONE);
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
                 }
             });
 
@@ -236,50 +199,5 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         });
     }
 
-    public void deleteComment(final String postId, final String commentId) {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-//        builder.setTitle("Xóa bình luận");
-//        builder.setIcon(R.drawable.ic_delete_bin);
-//        builder.setMessage("Bạn có chắc chắn muốn xóa bình luận");
-//        builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-                mCommentRef.child(postId).child(commentId).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        mCommentRef.child(postId).child(commentId).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                mLikeRef.child(commentId).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Intent intent = new Intent(mContext, CommentActivity.class);
-                                        intent.putExtra("postId",postId);
-                                        intent.putExtra("currentUserId",mCurrentUserID);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        mContext.startActivity(intent);
-                                    }
-                                });
-
-                            }
-                        });
-
-                    }
-                });
-//            }
-//        });
-//        builder.setPositiveButton("Không", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                Intent intent = new Intent(mContext, CommentActivity.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                intent.putExtra("postId",postId);
-//                intent.putExtra("currentUserId",mCurrentUserID);
-//                mContext.startActivity(intent);
-//            }
-//        });
-//        AlertDialog dialog = builder.create();
-//        dialog.show();
-    }
 
 }

@@ -5,9 +5,19 @@ public class Reflect extends PostParent{
     private String mTitle;
     private String mField;
     private String mReflectId;
+    private String mStatus;
 
 
     public Reflect() {
+    }
+
+    public Reflect(String date, String time, String content, String userID, String title, String field, String reflectId, String status) {
+        super(date, time, content);
+        mUserID = userID;
+        mTitle = title;
+        mField = field;
+        mReflectId = reflectId;
+        mStatus = status;
     }
 
     public Reflect(String userID, String date, String time, String content, String title, String field, String reflectId) {
@@ -16,6 +26,14 @@ public class Reflect extends PostParent{
         mTitle = title;
         mField = field;
         mReflectId = reflectId;
+    }
+
+    public String getStatus() {
+        return mStatus;
+    }
+
+    public void setStatus(String status) {
+        mStatus = status;
     }
 
     public String getUserID() {

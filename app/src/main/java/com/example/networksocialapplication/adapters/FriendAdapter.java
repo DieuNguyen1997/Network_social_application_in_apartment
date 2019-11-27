@@ -61,7 +61,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
             final Resident user = mUserList.get(position);
             Glide.with(mContext).load(user.getAvatar()).into(holder.imgAvatar);
             holder.txtUsername.setText(user.getUsername());
-            final String mReceiverUserID = user.getUserID();
+            final String mReceiverUserID = user.getResidentId();
 
             mFriendData = FirebaseDatabase.getInstance().getReference().child("Friends");
             holder.btnUnfriend.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +89,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
                     });
                 }
             });
-            holder.mLine.setOnClickListener(new View.OnClickListener() {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, ProfileOtherUserActivity.class);

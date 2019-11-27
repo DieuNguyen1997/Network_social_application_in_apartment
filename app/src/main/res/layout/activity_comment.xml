@@ -42,6 +42,7 @@
                 android:layout_marginLeft="@dimen/margin_20dp" />
 
             <ImageButton
+                android:visibility="gone"
                 android:id="@+id/btn_delete_image_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

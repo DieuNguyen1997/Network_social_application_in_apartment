@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/line_user"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/line_user"
     android:padding="@dimen/margin_8dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -12,10 +12,11 @@
         android:src="@mipmap/ic_launcher" />
 
     <LinearLayout
-        android:layout_centerVertical="true"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_5dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/margin_10dp"
         android:layout_toEndOf="@id/img_avatar_item_user_search"
         android:orientation="vertical">
 
@@ -25,32 +26,33 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:text="@string/txt_username"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/color_Background"
+            android:textSize="@dimen/txt_size_18sp"
             android:textStyle="bold" />
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:text="@string/txt_nameroom"
-                android:textColor="@color/colorPrimaryDark" />
+                android:text="@string/txt_nameroom" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:text=" "
-                android:textColor="@color/colorPrimaryDark" />
+                android:text=" " />
+
             <TextView
                 android:id="@+id/txt_number_room_item_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:text="@string/txt_numberoom"
-                android:textColor="@color/colorPrimaryDark" />
+                android:text="@string/txt_numberoom" />
         </LinearLayout>
 
     </LinearLayout>

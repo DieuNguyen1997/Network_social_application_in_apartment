@@ -56,10 +56,12 @@ public class NotificationDetailActivity extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     NotificationFromManager notificationManager = dataSnapshot.getValue(NotificationFromManager.class);
                     mTime.setText("Thông báo ngày " + notificationManager.getDatePosted() + "lúc " + notificationManager.getTimePosted());
-                    if (mImage == null) {
-                        mImage.setVisibility(View.INVISIBLE);
+                    String image = notificationManager.getImagePost();
+                    if (image == null) {
+                        mImage.setVisibility(View.GONE);
                     } else {
-                        Glide.with(getApplicationContext()).load(notificationManager.getImagePost()).into(mImage);
+                        mImage.setVisibility(View.VISIBLE);
+                        Glide.with(getApplicationContext()).load(image).into(mImage);
                     }
                     mTxtTitle.setText(notificationManager.getTitle());
                     mContent.setText(notificationManager.getContentPost());
@@ -76,7 +78,7 @@ public class NotificationDetailActivity extends AppCompatActivity {
     private void initView() {
         mTime = findViewById(R.id.txt_time_notification_detail);
         mImage = findViewById(R.id.img_notification_detail);
-        mTxtTitle = findViewById(R.id.txt_time_notification_detail);
+        mTxtTitle = findViewById(R.id.txt_title_notification_detail);
         mContent = findViewById(R.id.txt_content_notification_detail);
     }
 }

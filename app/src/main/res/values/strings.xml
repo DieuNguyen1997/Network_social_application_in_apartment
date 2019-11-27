@@ -133,6 +133,8 @@
     <string name="txt_enter_email">Email</string>
     <string name="txt_enter_password">Mật khẩu</string>
     <string name="txt_enter_repassword">Nhập lại mật khẩu</string>
+    <string name="label_person_care_event">Những người quan tâm sự kiện:</string>
+    <string name="label_person_join_event">Những người tham gia sự kiện</string>
 
 
     <array name="name_room">

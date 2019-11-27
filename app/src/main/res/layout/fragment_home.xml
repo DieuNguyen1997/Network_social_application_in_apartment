@@ -16,7 +16,6 @@
             layout="@layout/layout_add_post" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_margin="@dimen/margin_10dp"
             android:id="@+id/list_post_fragment_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>

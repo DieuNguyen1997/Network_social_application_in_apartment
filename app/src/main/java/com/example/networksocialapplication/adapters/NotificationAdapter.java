@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.networksocialapplication.PostDetailActivity;
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.database.UserDatabase;
 import com.example.networksocialapplication.models.Notification;
@@ -66,23 +67,25 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (notification.isPost()){
-                        SharedPreferences.Editor editor = mContext.getSharedPreferences("save", Context.MODE_PRIVATE).edit();
-                        editor.putString("postid", notification.getPostID());
-                        editor.apply();
+//                    if (notification.isPost()) {
+//                        SharedPreferences.Editor editor = mContext.getSharedPreferences("save", Context.MODE_PRIVATE).edit();
+//                        editor.putString("postid", notification.getPostID());
+//                        editor.apply();
 
-                        Intent intent = new Intent(mContext, ProfileOtherUserActivity.class);
+                        Intent intent = new Intent(mContext, PostDetailActivity.class);
+                        intent.putExtra("postId", notification.getPostID());
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         mContext.startActivity(intent);
-                    }else {
-                        SharedPreferences.Editor editor = mContext.getSharedPreferences("save", Context.MODE_PRIVATE).edit();
-                        editor.putString("profileid", notification.getUserID());
-                        editor.apply();
-
-                        Intent intent = new Intent(mContext, ProfileOtherUserActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        mContext.startActivity(intent);
-                    }
+//                    }
+//                    }else {
+//                        SharedPreferences.Editor editor = mContext.getSharedPreferences("save", Context.MODE_PRIVATE).edit();
+//                        editor.putString("profileid", notification.getUserID());
+//                        editor.apply();
+//
+//                        Intent intent = new Intent(mContext, ProfileOtherUserActivity.class);
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        mContext.startActivity(intent);
+//                    }
                 }
             });
 

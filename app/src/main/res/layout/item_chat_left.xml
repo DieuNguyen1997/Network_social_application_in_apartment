@@ -21,11 +21,21 @@
         android:textColor="@color/color_Background"
         android:textSize="@dimen/txt_size_18sp" />
 
+    <ImageView
+        android:id="@+id/img_item_chat"
+        android:layout_width="200dp"
+        android:layout_height="@dimen/size_100dp"
+        android:layout_below="@+id/txt_content_chat"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/margin_10dp"
+        android:scaleType="centerCrop"
+        android:visibility="gone" />
+
     <TextView
         android:id="@+id/txt_time_item_chat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_content_chat"
+        android:layout_below="@+id/img_item_chat"
         android:layout_marginLeft="@dimen/margin_10dp"
         android:layout_marginTop="@dimen/margin_5dp"
         android:layout_toRightOf="@id/img_avatar_item_chat"
@@ -33,11 +43,11 @@
         android:textSize="@dimen/txt_size_12sp" />
 
     <TextView
-        android:visibility="gone"
         android:id="@+id/txt_seen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txt_time_item_chat"
         android:layout_alignParentRight="true"
-        android:text="@string/txt_seen" />
+        android:text="@string/txt_seen"
+        android:visibility="gone" />
 </RelativeLayout>

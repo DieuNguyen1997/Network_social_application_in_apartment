@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,9 +34,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     private String mImgUrl;
     private String mCurrentUserID;
 
-    private DatabaseReference mChatRef;
-    private DatabaseReference mUserRef;
-
     public MessageAdapter(Context context, List<Message> messages, String imgUrl) {
         mContext = context;
         mMessages = messages;
@@ -56,19 +54,23 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        mUserRef = FirebaseDatabase.getInstance().getReference().child(mCurrentUserID);
         if (mMessages != null) {
             Message message = mMessages.get(position);
             holder.mContentChat.setText(message.getContentChat());
             Glide.with(mContext).load(mImgUrl).into(holder.mImgAvatar);
             holder.mTimeChat.setText(message.getTimeChat());
-
-            if (position == mMessages.size() - 1){
-                if (message.isSeen()){
+            if (message.getImage() != null) {
+                holder.mImageChat.setVisibility(View.VISIBLE);
+                Glide.with(mContext).load(message.getImage()).into(holder.mImageChat);
+            } else {
+                holder.mImageChat.setVisibility(View.GONE);
+            }
+            if (position == mMessages.size() - 1) {
+                if (message.isSeen()) {
                     holder.mSeen.setText("Đã xem");
-                }else
+                } else
                     holder.mSeen.setText("Đã gửi");
-            }else holder.mSeen.setVisibility(View.GONE);
+            } else holder.mSeen.setVisibility(View.GONE);
         }
 
     }
@@ -84,14 +86,16 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         public TextView mContentChat;
         public TextView mTimeChat;
         public TextView mSeen;
+        public ImageView mImageChat;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             mImgAvatar = itemView.findViewById(R.id.img_avatar_item_chat);
             mContentChat = itemView.findViewById(R.id.txt_content_chat);
             mTimeChat = itemView.findViewById(R.id.txt_time_item_chat);
             mSeen = itemView.findViewById(R.id.txt_seen);
+            mImageChat = itemView.findViewById(R.id.img_item_chat);
         }
     }
 

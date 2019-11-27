@@ -1,7 +1,7 @@
 package com.example.networksocialapplication.models;
 
 public class Notification {
-
+    private String mNotifyID;
     private String mUserID;
     private String mText;
     private String mPostID;
@@ -15,6 +15,14 @@ public class Notification {
         mText = text;
         mPostID = postID;
         this.isPost = isPost;
+    }
+
+    public String getNotifyID() {
+        return mNotifyID;
+    }
+
+    public void setNotifyID(String notifyID) {
+        mNotifyID = notifyID;
     }
 
     public String getUserID() {
