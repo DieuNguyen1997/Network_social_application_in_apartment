@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".PostDetailActivity"></activity>
+        <activity android:name=".ChatManagerActivity"></activity>
+        <activity android:name=".EventDetailActivity" />
+        <activity android:name=".PostDetailActivity" />
         <activity android:name=".UpdateManagerActivity" />
         <activity android:name=".NotificationDetailActivity" />
         <activity android:name=".CreateEventActivity" />

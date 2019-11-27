@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -215,6 +216,32 @@ public class ProfileOtherUserActivity extends AppCompatActivity {
     }
 
     private void displayListPost() {
+        mPostDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
+                    Post post = item.getValue(Post.class);
+                    if (checkUserId(post)) {
+                        mListPost.add(post);
+                    }
+                }
+                Log.d(TAG, mListPost.toString());
+                mPostAdapter = new PostAdapter(getApplicationContext(), mListPost);
+                mRecyclerView.setAdapter(mPostAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private boolean checkUserId(Post post) {
+        if (post.getUserID().equals(mReceiverUserID)) {
+            return true;
+        }
+        return false;
     }
 
     private void displayInformationBasic() {
@@ -294,6 +321,7 @@ public class ProfileOtherUserActivity extends AppCompatActivity {
     }
 
     private void initRecyclerview() {
+        mListPost = new ArrayList<>();
         mLayoutRequestFriend = findViewById(R.id.root_request_friend);
         mLayoutCancelRequest = findViewById(R.id.root_cancel_request_friend);
         mRecyclerView = findViewById(R.id.profile_other_list_post);

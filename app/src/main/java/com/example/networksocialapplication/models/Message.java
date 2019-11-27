@@ -7,6 +7,9 @@ public class Message {
     private String mContentChat;
     private String mTimeChat;
     private boolean mIsSeen;
+    private String mImage;
+
+
 
     public Message() {
     }
@@ -18,6 +21,14 @@ public class Message {
         mTimeChat = timeChat;
         mIsSeen = isSeen;
 
+    }
+
+    public String getImage() {
+        return mImage;
+    }
+
+    public void setImage(String image) {
+        mImage = image;
     }
 
     public String getTimeChat() {

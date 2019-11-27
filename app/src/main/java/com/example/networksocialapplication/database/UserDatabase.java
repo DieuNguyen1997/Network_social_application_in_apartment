@@ -6,6 +6,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
+import com.example.networksocialapplication.models.Resident;
 import com.example.networksocialapplication.models.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,7 +36,7 @@ public class UserDatabase {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                  User user = dataSnapshot.getValue(User.class);
+                  Resident user = dataSnapshot.getValue(Resident.class);
                   username.setText(user.getUsername());
                   Glide.with(mContext).load(user.getAvatar()).into(avatar);
 

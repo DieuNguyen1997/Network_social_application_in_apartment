@@ -57,7 +57,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             holder.mLine.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String userId = user.getUserID();
+                    String userId = user.getResidentId();
                     Intent intent = new Intent(mContext, ProfileOtherUserActivity.class);
                     intent.putExtra("userID", userId);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

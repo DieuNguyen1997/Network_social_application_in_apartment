@@ -36,7 +36,7 @@ public class RequestFriendFragment extends Fragment {
         mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()){
+                switch (menuItem.getItemId()) {
                     case R.id.item_list_friend:
                         ListFriendFragment listFriendFragment = new ListFriendFragment();
                         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -49,8 +49,13 @@ public class RequestFriendFragment extends Fragment {
                         transaction1.replace(R.id.layout_contain_request_friend, requestFriendFragment);
                         transaction1.commit();
                         return true;
+                    default:
+                        ListFriendFragment listFriendFragment1 = new ListFriendFragment();
+                        FragmentTransaction transaction2 = getActivity().getSupportFragmentManager().beginTransaction();
+                        transaction2.replace(R.id.layout_contain_request_friend, listFriendFragment1);
+                        transaction2.commit();
+                        return true;
                 }
-                return false;
             }
         });
         return view;

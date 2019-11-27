@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.networksocialapplication.ChatManagerActivity;
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.adapters.PagerAdapter;
 import com.example.networksocialapplication.adapters.PagerHomeAdapter;
@@ -232,7 +233,7 @@ public class HomeManagerActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.item_reflect:
-                Intent intentChat = new Intent(HomeManagerActivity.this, ListChatActivity.class);
+                Intent intentChat = new Intent(HomeManagerActivity.this, ChatManagerActivity.class);
                 startActivity(intentChat);
                 return true;
             default:

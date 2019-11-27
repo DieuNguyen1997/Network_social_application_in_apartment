@@ -1,5 +1,6 @@
 package com.example.networksocialapplication.resident.homeapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.net.Uri;

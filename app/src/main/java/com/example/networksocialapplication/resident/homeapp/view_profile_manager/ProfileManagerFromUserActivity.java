@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.CreateReflectActivity;
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.models.Manager;
+import com.example.networksocialapplication.user.chat.ChatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -98,6 +99,9 @@ public class ProfileManagerFromUserActivity extends AppCompatActivity implements
                 startActivity(intent);
                 break;
             case R.id.root_chat_with_manager:
+                Intent intentChat = new Intent(this, ChatActivity.class);
+                intentChat.putExtra("managerId", mManagerId);
+                startActivity(intentChat);
                 break;
         }
     }

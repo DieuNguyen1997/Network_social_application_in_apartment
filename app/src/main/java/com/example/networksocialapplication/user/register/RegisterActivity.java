@@ -14,12 +14,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.admin.setting_infor_manager.SettingInforManagerActivity;
+import com.example.networksocialapplication.resident.homeapp.HomeActivity;
 import com.example.networksocialapplication.resident.homeapp.setting_image_profile.SettingImageProfileActivity;
 import com.example.networksocialapplication.user.login.LoginActivity;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 public class RegisterActivity extends AppCompatActivity {
     private Button mBtnSignUpGoogle;
@@ -29,13 +39,30 @@ public class RegisterActivity extends AppCompatActivity {
     private Button mBtnSignUp;
     private FirebaseAuth mAuth;
     private ProgressDialog mProgressDialog;
+    private GoogleSignInOptions mSignInOptions;
+    private GoogleApiClient mGoogleApiClient;
 
+    private final static int RC_SIGN_IN = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
         mAuth = FirebaseAuth.getInstance();
+        mSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        mGoogleApiClient = new GoogleApiClient.Builder(getApplicationContext())
+                .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
+                    @Override
+                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+                        Toast.makeText(RegisterActivity.this, "You got an error", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addApi(Auth.GOOGLE_SIGN_IN_API, mSignInOptions)
+                .build();
         mProgressDialog = new ProgressDialog(this);
         init();
     }
@@ -59,11 +86,56 @@ public class RegisterActivity extends AppCompatActivity {
         mBtnSignUpGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SettingImageProfileActivity.class);
-                startActivity(intent);
-                finish();
+                signInWithGoogle();
             }
         });
+    }
+
+    private void signInWithGoogle() {
+        mProgressDialog.setMessage("Đang đăng nhập bằng google. Vui lòng đợi trong giây lát!!");
+        mProgressDialog.show();
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+
+            GoogleSignInResult googleSignInResult = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+
+            if (googleSignInResult.isSuccess()) {
+
+                GoogleSignInAccount account = googleSignInResult.getSignInAccount();
+
+                firebaseAuthWithGoogle(account);
+            }
+
+        }
+    }
+
+    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
+        AuthCredential authCredential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+
+        Toast.makeText(RegisterActivity.this, "" + authCredential.getProvider(), Toast.LENGTH_LONG).show();
+
+        mAuth.signInWithCredential(authCredential)
+                .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener() {
+                    @Override
+                    public void onComplete(@NonNull Task AuthResultTask) {
+                        if (AuthResultTask.isSuccessful()) {
+                            mProgressDialog.dismiss();
+                            // Getting Current Login user details.
+                            Intent intent = new Intent(RegisterActivity.this, SettingImageProfileActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(RegisterActivity.this, "Something Went Wrong", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
     }
 
     private void createNewAccount() {

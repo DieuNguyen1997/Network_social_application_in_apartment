@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.models.Reflect;
+import com.example.networksocialapplication.models.StatusReflect;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class ReflectAdapter extends RecyclerView.Adapter<ReflectAdapter.ViewHold
 
     private Context mContext;
     private List<Reflect> mReflects;
+    private StatusReflect mStatusReflect;
 
     public ReflectAdapter(Context context, List<Reflect> reflects) {
         mContext = context;
@@ -40,6 +42,9 @@ public class ReflectAdapter extends RecyclerView.Adapter<ReflectAdapter.ViewHold
             holder.mTitle.setText(reflect.getTitle());
             holder.mTime.setText("Tới: Ban quản lý lúc "+reflect.getDatePosted()+ " | "+reflect.getTimePosted());
             holder.mContent.setText(reflect.getContentPost());
+            if (reflect.getStatus().equals(mStatusReflect.WAIT_PROGRESS)){
+                holder.mStatus.setText("Chờ xử lý");
+            }
             Glide.with(mContext).load(reflect.getImagePost()).into(holder.mImage);
         }
     }

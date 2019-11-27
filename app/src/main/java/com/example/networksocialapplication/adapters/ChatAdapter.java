@@ -78,9 +78,30 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             holder.mLineChat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+//                    DatabaseReference managerRef = FirebaseDatabase.getInstance().getReference().child("Manager");
+//                    managerRef.addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                            for (DataSnapshot data : dataSnapshot.getChildren()){
+//                                if (data.child(mCurrentUserId).exists()){
+//                                    Intent intent = new Intent(mContext, ChatActivity.class);
+//                                    intent.putExtra("otherUserId", userOtherId);
+//                                    mContext.startActivity(intent);
+//                                }else {
+//                                    Intent intent = new Intent(mContext, ChatActivity.class);
+//                                    intent.putExtra("otherUserId", userOtherId);
+//                                    mContext.startActivity(intent);
+//                                }
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                        }
+//                    });
                     Intent intent = new Intent(mContext, ChatActivity.class);
                     intent.putExtra("otherUserId", userOtherId);
-                    intent.putExtra("currentUserId", mCurrentUserId);
                     mContext.startActivity(intent);
                 }
             });

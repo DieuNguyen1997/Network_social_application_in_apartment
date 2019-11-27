@@ -14,8 +14,8 @@ public class Resident extends User {
         return residentId;
     }
 
-    public void setResidentId(String residentId) {
-        this.residentId = residentId;
+    public void setResidentId(String residentID) {
+        residentId = residentID;
     }
 
     public String getGender() {

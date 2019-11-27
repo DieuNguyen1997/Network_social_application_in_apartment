@@ -103,6 +103,7 @@
         android:textStyle="bold" />
 
     <RelativeLayout
+        android:id="@+id/layout_like_item_reflect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txt_count_comment_item_reflect_profile_manager"
@@ -158,5 +159,11 @@
                 android:text="@string/txt_comment_item_post"
                 android:textSize="@dimen/txt_size_15sp" />
         </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@id/layout_like_item_reflect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     </RelativeLayout>
 </RelativeLayout>

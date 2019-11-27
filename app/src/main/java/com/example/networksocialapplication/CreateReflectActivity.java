@@ -2,6 +2,7 @@ package com.example.networksocialapplication;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringDef;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -20,6 +21,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.models.Manager;
 import com.example.networksocialapplication.models.Reflect;
+import com.example.networksocialapplication.models.StatusReflect;
 import com.example.networksocialapplication.time_current.Time;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,6 +42,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.example.networksocialapplication.R.drawable.bg_btn;
+import static com.example.networksocialapplication.models.StatusReflect.WAIT_PROGRESS;
 
 public class CreateReflectActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -66,7 +69,7 @@ public class CreateReflectActivity extends AppCompatActivity implements View.OnC
     private UploadTask mUploadTask;
     private String mManagerId;
 
-
+    private StatusReflect mStatusReflec;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -174,6 +177,7 @@ public class CreateReflectActivity extends AppCompatActivity implements View.OnC
             hashMap.put("contentPost", content);
             hashMap.put("title", title);
             hashMap.put("field", mFieldReflect);
+            hashMap.put("status", WAIT_PROGRESS);
             mReflectRef.child(idReflect).setValue(reflect).addOnSuccessListener(new OnSuccessListener<Void>() {
 
 //            mReflectRef.child(idReflect).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -184,7 +188,21 @@ public class CreateReflectActivity extends AppCompatActivity implements View.OnC
                     startActivity(new Intent(getApplicationContext(), ReflectActivity.class));
                 }
             });
+
+            addNotificationToManager(idReflect);
         }
+    }
+
+    private void addNotificationToManager(String reflectId) {
+        DatabaseReference notiRef = FirebaseDatabase.getInstance().getReference().child("Notifications").child(reflectId);
+        String notifyId = notiRef.push().getKey();
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("userID", mCurrentUserId);
+        hashMap.put("text", "Đã like bài viết của bạn");
+        hashMap.put("postID", reflectId);
+        hashMap.put("isPost", true);
+        hashMap.put("notifyID", notifyId);
+        notiRef.child(notifyId).setValue(hashMap);
     }
 
 

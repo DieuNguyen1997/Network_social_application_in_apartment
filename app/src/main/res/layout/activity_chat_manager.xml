@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChatManagerActivity">
+    <com.google.android.material.appbar.AppBarLayout
+
+        android:id="@+id/appbar_list_chat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_list_chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+
+                android:id="@+id/img_avatar_list_chat_manager"
+                android:layout_width="@dimen/size_30dp"
+                android:layout_height="@dimen/size_30dp"
+                />
+
+            <TextView
+                android:layout_marginLeft="@dimen/margin_25dp"
+                android:text="Chats"
+                android:id="@+id/txt_username_toolbar_chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txt_size_25sp"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <FrameLayout
+        android:id="@+id/container_list_chat_manager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom_nav_chat"
+        android:layout_below="@id/appbar_list_chat">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_list_chat_manager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10dp"></androidx.recyclerview.widget.RecyclerView>
+
+    </FrameLayout>
+</LinearLayout>

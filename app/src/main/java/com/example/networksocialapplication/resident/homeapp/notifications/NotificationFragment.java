@@ -80,12 +80,12 @@ public class NotificationFragment extends Fragment {
     }
 
     private void initRecyclerViewFromManager(View view) {
-        mRecyclerView = view.findViewById(R.id.recycler_view_list_notify_from_manager);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
+        mRecyclerViewFromManager = view.findViewById(R.id.recycler_view_list_notify_from_manager);
+        mRecyclerViewFromManager.setHasFixedSize(true);
+        mRecyclerViewFromManager.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         mFromManagers = new ArrayList<>();
         mManagerAdapter = new NotificationSendManagerAdapter(getActivity(),mFromManagers);
-        mRecyclerView.setAdapter(mManagerAdapter);
+        mRecyclerViewFromManager.setAdapter(mManagerAdapter);
     }
 
     private void initRecyclerViewFromFriend(View view) {

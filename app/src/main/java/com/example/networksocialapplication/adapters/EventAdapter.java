@@ -1,6 +1,7 @@
 package com.example.networksocialapplication.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.networksocialapplication.EventDetailActivity;
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.models.Event;
 import com.example.networksocialapplication.models.Reflect;
@@ -69,6 +71,15 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                 public void onClick(View v) {
                     mJoinEventf.child(idEvent).child(mCurrentUserId).setValue(true);
                     holder.mBtnJoin.setText("Đã tham gia");
+                }
+            });
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, EventDetailActivity.class);
+                    intent.putExtra("eventId", idEvent);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(intent);
                 }
             });
         }

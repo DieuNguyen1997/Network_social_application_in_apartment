@@ -56,7 +56,7 @@ public class RequestFriendAdapter extends RecyclerView.Adapter<RequestFriendAdap
             holder.mUsername.setText(user.getUsername());
             Glide.with(mContext).load(user.getAvatar()).into(holder.mAvatarRquest);
 
-            final String sendId = user.getUserID();
+            final String sendId = user.getResidentId();
 
             holder.mBtnAccept.setOnClickListener(new View.OnClickListener() {
                 @Override

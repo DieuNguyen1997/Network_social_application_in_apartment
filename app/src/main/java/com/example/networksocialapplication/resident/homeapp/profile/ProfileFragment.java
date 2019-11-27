@@ -219,7 +219,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                     mTxtGender.setText(user.getGender());
                     mTxtDateBirth.setText(user.getDateOfBirth());
                     Glide.with(getContext()).load(user.getAvatar()).error(R.drawable.ic_load_image_erroe).into(mAvatar);
-                    Glide.with(getContext()).load(user.getCoverPhoto()).error(R.drawable.ic_load_image_erroe).into(mCoverPhoto);
+                    Glide.with(getActivity().getApplicationContext()).load(user.getCoverPhoto()).error(R.drawable.ic_load_image_erroe).into(mCoverPhoto);
                 }
 
             }

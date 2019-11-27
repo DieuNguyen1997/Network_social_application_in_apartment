@@ -215,6 +215,8 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
         });
     }
 
+
+
     private Uri getImageUri(Context context, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
@@ -234,6 +236,47 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
 //        for (int i = 0; i < mListImage.size(); i++) {
 //            Bitmap item = mListImage.get(i);
 //            Uri uri = getImageUri(getApplicationContext(),item);
+//            if (uri != null) {
+//                filePath.child(uri.getLastPathSegment() + mPostRandomName + ".jpg").putFile(uri);
+//                uploadTask = filePath.putFile(uri);
+//                uploadTask.continueWithTask(new Continuation() {
+//                    @Override
+//                    public Object then(@NonNull Task task) throws Exception {
+//                        if (!task.isSuccessful()) {
+//                            throw task.getException();
+//                        } else
+//                            return filePath.getDownloadUrl();
+//                    }
+//                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Uri> task) {
+//                        if (task.isSuccessful()) {
+//
+//                            Uri downLoadUri = task.getResult();
+//                            String postUrl = downLoadUri.toString();
+//
+//                            mPostDatabase.child(mCurrentUserId + " " + mPostRandomName).child("imagePost").setValue(postUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//                                    if (task.isSuccessful()) {
+//                                        Toast.makeText(AddPostActivity.this, "Luu anh vafo post thanh cong", Toast.LENGTH_SHORT).show();
+//                                    } else {
+//                                        String mesasge = task.getException().getMessage();
+//                                        Log.d(TAG, mesasge);
+//                                        Toast.makeText(AddPostActivity.this, "Luu anh ko thanh cong", Toast.LENGTH_SHORT).show();
+//                                    }
+//                                }
+//                            });
+//                        } else {
+//                            String mesasge = task.getException().getMessage();
+//                            Log.d(TAG, mesasge);
+//                            Toast.makeText(AddPostActivity.this, "Luu anh ko thanh cong", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+//            }
+//        }
+
         if (mUriImage != null) {
             filePath.child(mUriImage.getLastPathSegment() + mPostRandomName + ".jpg").putFile(mUriImage);
             uploadTask = filePath.putFile(mUriImage);
@@ -314,6 +357,7 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
             } else if (requestCode == REQUEST_IMAGE_CAPTURE) {
                 Bundle extras = data.getExtras();
                 Bitmap bitmap = (Bitmap) extras.get("data");
+//                mUriImage = getImageUri(getApplicationContext(), bitmap);
                 mListImage.add(bitmap);
                 mImageAdapter = new ImageAdapter(AddPostActivity.this, mListImage);
                 mRecyclerView.setAdapter(mImageAdapter);
