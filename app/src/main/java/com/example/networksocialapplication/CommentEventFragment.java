@@ -72,6 +72,7 @@ public class CommentEventFragment extends Fragment implements View.OnClickListen
     private CommentEventAdapter mCommentAdapter;
     private Uri mImageUri;
     private Time mTime;
+    private boolean mIsAttached;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,13 +94,28 @@ public class CommentEventFragment extends Fragment implements View.OnClickListen
         mComments = new ArrayList<>();
     }
 
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mIsAttached = true;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mIsAttached = false;
+    }
+
     private void displayAvatar() {
         mUserRef.child(mCurrentUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     String avatar = dataSnapshot.child("avatar").getValue().toString();
-                    Glide.with(getActivity()).load(avatar).into(mAvatar);
+                    if (mIsAttached){
+                        Glide.with(getActivity()).load(avatar).into(mAvatar);
+                    }
                 }
             }
 

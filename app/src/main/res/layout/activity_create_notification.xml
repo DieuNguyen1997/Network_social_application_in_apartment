@@ -22,8 +22,10 @@
         tools:layout_editor_absoluteX="16dp" />
 
     <Button
+        android:layout_marginEnd="@dimen/margin_10dp"
+        android:paddingLeft="@dimen/margin_10dp"
         android:id="@+id/btn_choose_image_create_notify"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/margin_150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"

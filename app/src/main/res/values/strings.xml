@@ -135,6 +135,7 @@
     <string name="txt_enter_repassword">Nhập lại mật khẩu</string>
     <string name="label_person_care_event">Những người quan tâm sự kiện:</string>
     <string name="label_person_join_event">Những người tham gia sự kiện</string>
+    <string name="all_comment">Tất cả bình luận</string>
 
 
     <array name="name_room">

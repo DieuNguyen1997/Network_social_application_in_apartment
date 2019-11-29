@@ -167,7 +167,6 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
             @Override
             public void onClick(View view) {
                 mNavigationView.setVisibility(View.VISIBLE);
-                finish();
             }
         });
     }

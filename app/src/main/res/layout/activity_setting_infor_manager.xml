@@ -10,10 +10,10 @@
 
 
     <ImageView
-        android:background="@color/color_gray"
         android:id="@+id/img_cover_photo_setting_profile_manager"
         android:layout_width="match_parent"
         android:layout_height="@dimen/profile_cover_image_height"
+        android:background="@color/color_gray"
         android:scaleType="centerCrop"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -68,81 +68,64 @@
         app:layout_constraintTop_toBottomOf="@+id/img_avatar_setting_profile_manager" />
 
     <EditText
-        android:background="@android:color/transparent"
         android:id="@+id/edt_des_setting_profile_manager"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_10dp"
+        android:background="@android:color/transparent"
         android:hint="@string/txt_des"
         android:textSize="@dimen/txt_size_15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_username_setting_profile_manager" />
 
-    <LinearLayout
-        android:layout_marginEnd="@dimen/margin_20dp"
-        android:id="@+id/linearLayout"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layour_enter_hotline_manager"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_50dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_20dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="horizontal"
+        android:layout_marginEnd="@dimen/margin_20dp"
+        android:hint="@string/label_hotline_setting_profile_manager"
+        android:textColorHint="@color/color_Background"
+        app:boxStrokeColor="@color/color_yellow"
+        app:counterEnabled="true"
+        app:counterMaxLength="12"
+        app:errorEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_des_setting_profile_manager"
         app:layout_constraintVertical_bias="0.053"
         tools:layout_editor_absoluteX="16dp">
 
-        <TextView
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/label_hotline_setting_profile_manager"
-            android:textSize="@dimen/txt_size_18sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:layout_gravity="center"
-            android:background="@android:color/transparent"
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_hotline_setting_infor_manager"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="9"
-            android:hint="@string/txt_phone_number_demo" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_50dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_20dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="@dimen/size_20dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="horizontal"
+        android:layout_marginEnd="@dimen/margin_20dp"
+        android:hint="@string/label_location_setting_profile_manager"
+        android:textColorHint="@color/color_Background"
+        app:boxStrokeColor="@color/color_yellow"
+        app:counterEnabled="true"
+        app:counterMaxLength="12"
+        app:errorEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.045"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintTop_toBottomOf="@+id/layour_enter_hotline_manager"
+        app:layout_constraintVertical_bias="0.053"
+        tools:layout_editor_absoluteX="16dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/label_location_setting_profile_manager"
-            android:textSize="@dimen/txt_size_18sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:background="@android:color/transparent"
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_location_setting_infor_manager"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="9"
-            android:hint="@string/txt_location_manager" />
-
-    </LinearLayout>
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_70dp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_save_setting_profile_manaager"
@@ -159,6 +142,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.165" />
+        app:layout_constraintTop_toBottomOf="@+id/layour_enter_hotline_manager"
+        app:layout_constraintVertical_bias="0.658" />
 </androidx.constraintlayout.widget.ConstraintLayout>

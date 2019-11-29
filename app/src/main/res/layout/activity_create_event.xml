@@ -92,7 +92,7 @@
                 android:hint="@string/txt_des_event" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/layout_time_start"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,16 +100,8 @@
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/txt_layout_des_create_event">
 
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:text="@string/txt_start"-->
-                <!--android:textSize="@dimen/txt_size_18sp"-->
-                <!--android:textStyle="bold" />-->
-
             <com.google.android.material.textfield.TextInputLayout
-
+                android:layout_alignParentLeft="true"
                 android:id="@+id/txt_layout_date_start_create_event"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="@dimen/margin_170dp"
@@ -125,6 +117,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:layout_alignParentRight="true"
                 android:id="@+id/txt_layout_time_start_create_event"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
@@ -139,9 +132,9 @@
                     android:drawableRight="@drawable/ic_access_time_black_24dp"
                     android:hint="@string/txt_time_start" />
             </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/layout_time_finish"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -158,7 +151,7 @@
                 <!--android:textStyle="bold" />-->
 
             <com.google.android.material.textfield.TextInputLayout
-
+                android:layout_alignParentLeft="true"
                 android:id="@+id/txt_layout_date_finish_create_event"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="@dimen/margin_170dp"
@@ -174,6 +167,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:layout_alignParentRight="true"
                 android:id="@+id/txt_layout_time_finish_create_event"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
@@ -188,7 +182,7 @@
                     android:drawableRight="@drawable/ic_access_time_black_24dp"
                     android:hint="@string/txt_time_finish" />
             </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
+        </RelativeLayout>
 
         <Button
             android:id="@+id/btn_create_event"

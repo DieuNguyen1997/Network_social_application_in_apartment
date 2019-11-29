@@ -23,8 +23,8 @@
 
         <ImageView
             android:id="@+id/btn_back_setting_profile"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/size_30dp"
+            android:layout_height="@dimen/size_30dp"
             android:layout_alignParentLeft="true"
             android:layout_margin="10dp"
             android:src="@drawable/ic_arrow_back_black_24dp" />
@@ -109,6 +109,10 @@
         app:layout_anchorGravity="center|bottom">
 
         <Button
+            android:textAllCaps="false"
+            android:paddingRight="@dimen/margin_15dp"
+            android:paddingLeft="@dimen/margin_15dp"
+            android:background="@drawable/background_btn_add_comment"
             android:id="@+id/btn_next_setting_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -132,7 +132,6 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
         mBtnChooseImage = findViewById(R.id.btn_choose_image_add_post);
         mBtnTakeImage = findViewById(R.id.btn_take_image_add_post);
         mBtnPost = findViewById(R.id.btn_post_add_post);
-        mBtnChooseBackground = findViewById(R.id.btn_choose_background_add_post);
 
         mBtnChooseImage.setOnClickListener(this);
         mBtnTakeImage.setOnClickListener(this);
@@ -157,9 +156,7 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.btn_take_image_add_post:
                 takePhoto();
                 break;
-            case R.id.btn_choose_background_add_post:
-                setBackgroundForPost();
-                break;
+
             case R.id.btn_post_add_post:
                 addPostToFirebase();
                 break;

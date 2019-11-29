@@ -33,6 +33,7 @@ public class RequestFriendFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_request_friend, container, false);
         mBottomNavigationView = view.findViewById(R.id.bottom_nav_friends);
+
         mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -50,14 +51,14 @@ public class RequestFriendFragment extends Fragment {
                         transaction1.commit();
                         return true;
                     default:
-                        ListFriendFragment listFriendFragment1 = new ListFriendFragment();
-                        FragmentTransaction transaction2 = getActivity().getSupportFragmentManager().beginTransaction();
-                        transaction2.replace(R.id.layout_contain_request_friend, listFriendFragment1);
-                        transaction2.commit();
-                        return true;
+
+                        return false;
                 }
             }
         });
+        if (savedInstanceState == null) {
+            mBottomNavigationView.setSelectedItemId(R.id.item_list_friend); // change to whichever id should be default
+        }
         return view;
     }
 

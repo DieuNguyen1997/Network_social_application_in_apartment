@@ -169,7 +169,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="@dimen/margin_5dp"
+                            android:layout_marginLeft="@dimen/margin_10dp"
                             android:text="@string/txt_like_item_post"
                             android:textSize="@dimen/txt_size_15sp" />
                     </LinearLayout>
@@ -195,7 +195,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="@dimen/margin_5dp"
+                            android:layout_marginLeft="@dimen/margin_10dp"
                             android:text="@string/txt_comment_item_post"
                             android:textSize="@dimen/txt_size_15sp" />
                     </LinearLayout>
@@ -219,10 +219,10 @@
             android:orientation="vertical">
 
             <TextView
+                android:layout_margin="@dimen/margin_15dp"
                 android:id="@+id/txt_all_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_10dp"
                 android:text="Tất cả các bình luận"
                 android:textStyle="bold" />
 
@@ -230,8 +230,8 @@
                 android:id="@+id/recycler_view_list_comment_post_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_all_comment"
-                android:layout_margin="@dimen/margin_5dp">
+                android:layout_marginStart="@dimen/margin_15dp"
+                android:layout_below="@+id/txt_all_comment">
 
             </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>

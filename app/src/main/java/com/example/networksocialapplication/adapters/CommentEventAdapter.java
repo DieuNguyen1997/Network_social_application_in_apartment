@@ -1,5 +1,6 @@
 package com.example.networksocialapplication.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -147,8 +148,11 @@ public class CommentEventAdapter  extends  RecyclerView.Adapter<CommentEventAdap
                 if (dataSnapshot.exists()) {
                     String avatar = dataSnapshot.child("avatar").getValue().toString();
                     String username = dataSnapshot.child("username").getValue().toString();
+                    if (isValidContextForGlide(mContext)) {
+                        // Load image via Glide lib using context
+                        Glide.with(mContext).load(avatar).into(mImgAvatar);
 
-                    Glide.with(mContext).load(avatar).into(mImgAvatar);
+                    }
                     txtUsername.setText(username);
                 }
             }
@@ -158,6 +162,18 @@ public class CommentEventAdapter  extends  RecyclerView.Adapter<CommentEventAdap
 
             }
         });
+    }
+    public static boolean isValidContextForGlide(final Context context) {
+        if (context == null) {
+            return false;
+        }
+        if (context instanceof Activity) {
+            final Activity activity = (Activity) context;
+            if (activity.isDestroyed() || activity.isFinishing()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void isLikeComment(String commmentId, final TextView txtLike) {

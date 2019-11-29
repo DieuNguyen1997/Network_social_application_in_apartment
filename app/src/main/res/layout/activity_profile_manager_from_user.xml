@@ -62,16 +62,16 @@
                 android:id="@+id/layout_setting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_10dp"
+                android:layout_marginStart="@dimen/size_30dp"
+                android:layout_marginEnd="@dimen/size_30dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_des_profile_manager_from_user">
-                profile_manager_from_user">
 
                 <LinearLayout
                     android:id="@+id/root_create_reflect"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_10dp"
                     android:layout_weight="1"
@@ -95,9 +95,9 @@
 
                 <LinearLayout
                     android:id="@+id/root_chat_with_manager"
-                    android:layout_margin="@dimen/margin_10dp"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_10dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
