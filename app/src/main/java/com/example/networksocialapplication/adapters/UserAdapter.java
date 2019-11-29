@@ -16,6 +16,7 @@ import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.models.Resident;
 import com.example.networksocialapplication.models.User;
 import com.example.networksocialapplication.resident.homeapp.profile_other_user.ProfileOtherUserActivity;
+import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -76,7 +77,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         public CircleImageView imgAvatar;
         public TextView txtUsername;
         public TextView txtNameRoom;
-        public RelativeLayout mLine;
+        public MaterialCardView mLine;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

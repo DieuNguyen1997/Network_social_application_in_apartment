@@ -139,6 +139,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         mDelete.setOnClickListener(this);
 
         Intent intent = getIntent();
+
         mPostId = intent.getStringExtra("postId");
         mCurrentUserId = intent.getStringExtra("currentUserId");
         mUserPost = intent.getStringExtra("userPost");
@@ -269,7 +270,9 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                     }
                 });
             }
-            addNotification(mCurrentUserId, mPostId, mUserPost);
+            if (!mCurrentUserId.equals(mUserPost)){
+                addNotification(mCurrentUserId, mPostId, mUserPost);
+            }
 
 
         }

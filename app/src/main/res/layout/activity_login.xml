@@ -35,6 +35,7 @@
         android:orientation="vertical">
 
         <EditText
+            android:drawablePadding="@dimen/margin_15dp"
             android:textSize="@dimen/txt_size_15sp"
             android:textColorHint="@color/colorWhite"
             android:textColor="@color/colorWhite"
@@ -47,6 +48,7 @@
             android:hint="@string/txt_enter_email" />
 
         <EditText
+            android:drawablePadding="@dimen/margin_15dp"
             android:textSize="@dimen/txt_size_15sp"
             android:textColorHint="@color/colorWhite"
             android:textColor="@color/colorWhite"

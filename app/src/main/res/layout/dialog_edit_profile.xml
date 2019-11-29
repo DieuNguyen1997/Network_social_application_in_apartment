@@ -10,8 +10,8 @@
 
         <Button
             android:textSize="@dimen/txt_size_18sp"
-            android:textColor="@color/color_yellow"
-            android:background="@color/color_Background"
+            android:textColor="@color/color_Background"
+            android:background="@color/colorWhite"
             android:textAllCaps="false"
             android:id="@+id/btn_edit_profile_dialog"
             android:layout_width="match_parent"
@@ -26,8 +26,8 @@
 
         <Button
             android:textSize="@dimen/txt_size_18sp"
-            android:textColor="@color/color_yellow"
-            android:background="@color/color_Background"
+            android:textColor="@color/color_Background"
+            android:background="@color/colorWhite"
             android:textAllCaps="false"
             android:id="@+id/btn_change_password_dialog"
             android:layout_width="match_parent"
@@ -42,8 +42,8 @@
         <Button
             android:layout_marginTop="@dimen/margin_5dp"
             android:textSize="@dimen/txt_size_18sp"
-            android:textColor="@color/color_yellow"
-            android:background="@color/color_Background"
+            android:textColor="@color/color_Background"
+            android:background="@color/colorWhite"
             android:textAllCaps="false"
             android:id="@+id/btn_update_avatar_dialog"
             android:layout_width="match_parent"
@@ -58,8 +58,8 @@
         <Button
             android:layout_marginTop="@dimen/margin_5dp"
             android:textSize="@dimen/txt_size_18sp"
-            android:textColor="@color/color_yellow"
-            android:background="@color/color_Background"
+            android:textColor="@color/color_Background"
+            android:background="@color/colorWhite"
             android:textAllCaps="false"
             android:id="@+id/btn_update_cover_photo"
             android:layout_width="match_parent"

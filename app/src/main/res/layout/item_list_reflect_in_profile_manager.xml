@@ -101,12 +101,22 @@
         android:textColor="@color/color_yellow"
         android:textSize="@dimen/txt_size_15sp"
         android:textStyle="bold" />
+    <Button
+        android:layout_margin="@dimen/margin_8dp"
+        android:padding="@dimen/margin_5dp"
+        android:background="@drawable/background_btn_interest"
+        android:id="@+id/btn_set_status_item_reflect_manager"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/txt_count_comment_item_reflect_profile_manager"
+        android:text="Đã tiếp nhận"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <RelativeLayout
         android:id="@+id/layout_like_item_reflect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txt_count_comment_item_reflect_profile_manager"
+        android:layout_below="@+id/btn_set_status_item_reflect_manager"
         android:layout_marginTop="@dimen/margin_5dp">
 
         <LinearLayout

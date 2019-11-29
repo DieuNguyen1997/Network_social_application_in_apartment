@@ -1,6 +1,7 @@
 package com.example.networksocialapplication.resident.homeapp.profile;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -85,6 +86,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     private StorageReference mImageAvatarDatabase;
     private StorageReference mImageCoverDatabase;
     private UploadTask mUploadTask;
+    private boolean mIsAttach;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -100,8 +102,29 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         initFirebase();
         displayInformationBasic();
         displayListPost();
-
         return view;
+    }
+
+//    @Override
+//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+//        super.onActivityCreated(savedInstanceState);
+//        if (!getActivity().isDestroyed()){
+//            displayInformationBasic();
+//            displayListPost();
+//        }
+//
+//    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+         mIsAttach = true;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mIsAttach =  false;
     }
 
     private void initView(View view) {
@@ -218,8 +241,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                     mTxtPhoneNumber.setText(user.getPhoneNumber());
                     mTxtGender.setText(user.getGender());
                     mTxtDateBirth.setText(user.getDateOfBirth());
-                    Glide.with(getContext()).load(user.getAvatar()).error(R.drawable.ic_load_image_erroe).into(mAvatar);
-                    Glide.with(getActivity().getApplicationContext()).load(user.getCoverPhoto()).error(R.drawable.ic_load_image_erroe).into(mCoverPhoto);
+                    if (mIsAttach){
+                        Glide.with(getActivity()).load(user.getAvatar()).error(R.drawable.ic_load_image_erroe).into(mAvatar);
+                        Glide.with(getActivity()).load(user.getCoverPhoto()).error(R.drawable.ic_load_image_erroe).into(mCoverPhoto);
+                    }
+
                 }
 
             }

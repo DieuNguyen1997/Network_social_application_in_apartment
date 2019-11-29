@@ -3,6 +3,8 @@ package com.example.networksocialapplication.user.list_chat_activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
@@ -65,27 +67,31 @@ public class ListChatActivity extends AppCompatActivity {
         });
     }
 
+
     private void initBottonnav() {
         mBottomNavigationView = findViewById(R.id.bottom_nav_chat);
+
         mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Fragment fragment = null ;
+                FragmentManager fragmentManager = getSupportFragmentManager();
                 switch (menuItem.getItemId()) {
                     case R.id.item_bottom_chat:
-                        ListChatFragment fragment1 = new ListChatFragment();
-                        FragmentTransaction transaction1 = getSupportFragmentManager().beginTransaction();
-                        transaction1.replace(R.id.container_list_chat, fragment1);
-                        transaction1.commit();
-                        return true;
+                        fragment = new ListChatFragment();
+                        break;
                     case R.id.item_bottom_operating_status:
-                        OveratStatusFragment fragment = new OveratStatusFragment();
-                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.container_list_chat, fragment);
-                        transaction.commit();
-                        return true;
+                      fragment = new OveratStatusFragment();
+                        break;
+                    default:
+                        fragment = new ListChatFragment();
+                        break;
                 }
-                return false;
+                fragmentManager.beginTransaction().replace(R.id.container_list_chat, fragment).commit();
+                return true;
             }
         });
+        mBottomNavigationView.setSelectedItemId(R.id.item_bottom_chat);
     }
+
 }

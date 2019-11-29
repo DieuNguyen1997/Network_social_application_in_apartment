@@ -12,8 +12,11 @@ import android.app.AlertDialog;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -58,6 +61,8 @@ public class EventDetailActivity extends AppCompatActivity {
     private List<Resident> mCares;
     private List<Resident> mJoins;
     private UserAdapter mAdapter;
+    private Animation mAnim_slide_up;
+    private LinearLayout mLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,6 +183,8 @@ public class EventDetailActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        mLayout = findViewById(R.id.layout_comment_event_detail);
+        mAnim_slide_up = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_slide_up);
         mEventId = getIntent().getStringExtra("eventId");
         mImage = findViewById(R.id.img_item_event_detail);
         mName = findViewById(R.id.txt_name_item_event_detail);
@@ -311,6 +318,7 @@ public class EventDetailActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
 
                 viewPager.setCurrentItem(tab.getPosition());
+//                mLayout.startAnimation(mAnim_slide_up);
             }
 
             @Override

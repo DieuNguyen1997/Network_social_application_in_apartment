@@ -137,7 +137,7 @@
 
                 <Button
                     android:id="@+id/btn_care_item_event_detail"
-                    android:layout_width="@dimen/margin_120dp"
+                    android:layout_width="@dimen/margin_150dp"
                     android:layout_height="@dimen/size_40dp"
                     android:background="@drawable/background_btn_interest"
                     android:drawableLeft="@drawable/ic_star_gray_24dp"
@@ -148,7 +148,7 @@
                 <Button
 
                     android:id="@+id/btn_join_item_event_detail"
-                    android:layout_width="@dimen/margin_120dp"
+                    android:layout_width="@dimen/margin_150dp"
                     android:layout_height="@dimen/size_40dp"
                     android:layout_marginLeft="@dimen/margin_20dp"
                     android:layout_toRightOf="@+id/btn_care_item_event_detail"
@@ -157,28 +157,39 @@
                     android:textAllCaps="false" />
             </RelativeLayout>
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/taplayout_event_detail"
+            <LinearLayout
+                android:id="@+id/layout_comment_event_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/layout_care"
-                android:background="@color/colorWhite"
-                android:minHeight="?attr/actionBarSize"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:tabSelectedTextColor="@color/color_yellow"
-                app:tabTextColor="@color/colorBlack"></com.google.android.material.tabs.TabLayout>
+                android:orientation="vertical">
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/viewpager_event_detail"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/taplayout_event_detail"
-                android:layout_marginTop="0dp">
-
-                <FrameLayout
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/taplayout_event_detail"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"></FrameLayout>
-            </androidx.viewpager.widget.ViewPager>
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:minHeight="?attr/actionBarSize"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                    app:tabSelectedTextColor="@color/color_yellow"
+                    app:tabTextColor="@color/colorBlack">
+
+                </com.google.android.material.tabs.TabLayout>
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewpager_event_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/taplayout_event_detail"
+                    android:layout_marginTop="0dp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </FrameLayout>
+                </androidx.viewpager.widget.ViewPager>
+
+            </LinearLayout>
 
         </RelativeLayout>
     </ScrollView>

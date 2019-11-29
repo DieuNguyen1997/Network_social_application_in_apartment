@@ -74,7 +74,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 public void onClick(View v) {
                     if (holder.mImgLike.getTag().equals("like")) {
                         holder.likeDataRef.child(postKey).child(holder.mCurrentUserID).setValue("true");
-                        holder.addNotification(currentUser,postKey, post.getUserID());
+                        if (!post.getUserID().equals(currentUser)){
+                            holder.addNotification(currentUser,postKey, post.getUserID());
+                        }
                     } else {
                         holder.likeDataRef.child(postKey).child(holder.mCurrentUserID).removeValue();
                     }

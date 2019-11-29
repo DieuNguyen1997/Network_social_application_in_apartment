@@ -2,11 +2,9 @@ package com.example.networksocialapplication;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringDef;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -18,10 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.example.networksocialapplication.models.Manager;
 import com.example.networksocialapplication.models.Reflect;
-import com.example.networksocialapplication.models.StatusReflect;
 import com.example.networksocialapplication.time_current.Time;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,22 +24,16 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
-import java.util.Map;
 
-import static com.example.networksocialapplication.R.drawable.bg_btn;
-import static com.example.networksocialapplication.models.StatusReflect.WAIT_PROGRESS;
 
-public class CreateReflectActivity extends AppCompatActivity implements View.OnClickListener {
+public class CreateReflectActivity extends AppCompatActivity implements View.OnClickListener,StatusReflect {
 
     private static final int REQUEST_CODE_CHOOSE_IMAGE = 116;
     private LinearLayout mRootAddImage;
@@ -69,7 +58,6 @@ public class CreateReflectActivity extends AppCompatActivity implements View.OnC
     private UploadTask mUploadTask;
     private String mManagerId;
 
-    private StatusReflect mStatusReflec;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,21 +65,9 @@ public class CreateReflectActivity extends AppCompatActivity implements View.OnC
 
         initToolbar();
         initFirebase();
+//        initView();
         initView();
-    }
 
-    private void initToolbar() {
-        mToolbar = findViewById(R.id.toolbar_layout);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Tạo phản ánh");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 
     private void initView() {
@@ -112,8 +88,22 @@ public class CreateReflectActivity extends AppCompatActivity implements View.OnC
         mBtnToire.setOnClickListener(this);
         mBtnSend.setOnClickListener(this);
         mRootAddImage.setOnClickListener(this);
-
     }
+
+    private void initToolbar() {
+        mToolbar = findViewById(R.id.toolbar_layout);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("Tạo phản ánh");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
 
     private void initFirebase() {
         mCurrentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -127,19 +117,23 @@ public class CreateReflectActivity extends AppCompatActivity implements View.OnC
         switch (v.getId()) {
             case R.id.btn_field_all:
                 mFieldReflect = mBtnAll.getText().toString();
-                mBtnAll.setBackgroundColor(Color.rgb(249, 170, 51));
+                mBtnAll.setBackgroundResource(R.drawable.bg_btn);
+//                mBtnAll.setBackgroundColor(Color.rgb(249, 170, 51));
                 break;
             case R.id.btn_field_protect:
                 mFieldReflect = mBtnProtect.getText().toString();
-                mBtnProtect.setBackgroundColor(Color.rgb(249, 170, 51));
+                mBtnProtect.setBackgroundResource(R.drawable.bg_btn);
+//                mBtnProtect.setBackgroundColor(Color.rgb(249, 170, 51));
                 break;
             case R.id.btn_field_techno:
                 mFieldReflect = mBtnTechnology.getText().toString();
-                mBtnTechnology.setBackgroundColor(Color.rgb(249, 170, 51));
+                mBtnTechnology.setBackgroundResource(R.drawable.bg_btn);
+//                mBtnTechnology.setBackgroundColor(Color.rgb(249, 170, 51));
                 break;
             case R.id.btn_field_toire:
                 mFieldReflect = mBtnToire.getText().toString();
-                mBtnToire.setBackgroundColor(Color.rgb(249, 170, 51));
+                mBtnToire.setBackgroundResource(R.drawable.bg_btn);
+//                mBtnToire.setBackgroundColor(Color.rgb(249, 170, 51));
                 break;
             case R.id.btn_send_reflect:
                 sendReflect();
@@ -154,6 +148,7 @@ public class CreateReflectActivity extends AppCompatActivity implements View.OnC
         final String title = mEdtTitle.getText().toString();
         final String content = mEdtContent.getText().toString();
         final String idReflect = mReflectRef.push().getKey();
+
         saveImageToFirebase(idReflect);
 
         if (TextUtils.isEmpty(title)) {
@@ -166,21 +161,10 @@ public class CreateReflectActivity extends AppCompatActivity implements View.OnC
             Toast.makeText(this, "Hãy chọn một lĩnh vực cần phản ánh", Toast.LENGTH_SHORT).show();
         } else {
 
-            Reflect reflect = new Reflect(mCurrentUserId,mTime.getDateCurrent(), mTime.getTimeHourCurrent(),content,title,mFieldReflect,idReflect);
-//            Map<String, Reflect> hashmap = new HashMap<>();
-//            hashmap.put(idReflect,reflect);
-            HashMap<String, Object> hashMap = new HashMap<>();
-            hashMap.put("reflectId", idReflect);
-            hashMap.put("userID", mCurrentUserId);
-            hashMap.put("datePosted", mTime.getDateCurrent());
-            hashMap.put("timePosted", mTime.getTimeHourCurrent());
-            hashMap.put("contentPost", content);
-            hashMap.put("title", title);
-            hashMap.put("field", mFieldReflect);
-            hashMap.put("status", WAIT_PROGRESS);
+            Reflect reflect = new Reflect(mCurrentUserId, mTime.getDateCurrent(), mTime.getTimeHourCurrent(), content, title, mFieldReflect, idReflect,WAIT_PROGRESS);
             mReflectRef.child(idReflect).setValue(reflect).addOnSuccessListener(new OnSuccessListener<Void>() {
 
-//            mReflectRef.child(idReflect).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                //            mReflectRef.child(idReflect).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
                     Toast.makeText(getApplicationContext(), "Tạo phản ánh thành công. Chờ ban quản lý phê duyệt", Toast.LENGTH_SHORT).show();
