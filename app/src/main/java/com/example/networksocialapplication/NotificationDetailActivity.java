@@ -45,6 +45,12 @@ public class NotificationDetailActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Chi tiết thông báo");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void displayNotificationDetail() {

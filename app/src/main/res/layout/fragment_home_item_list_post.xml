@@ -27,10 +27,10 @@
                     android:layout_height="@dimen/size_50dp" />
 
                 <RelativeLayout
-                    android:layout_marginStart="@dimen/margin_15dp"
-                    android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/margin_15dp"
                     android:layout_marginLeft="5dp">
 
                     <TextView
@@ -92,9 +92,10 @@
                     android:textSize="@dimen/txt_size_15sp" />
 
                 <ImageView
+                    android:visibility="gone"
                     android:id="@+id/img_post_item_post"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/profile_cover_image_height"
                     android:layout_below="@+id/txt_content_post_list"
                     android:layout_marginTop="@dimen/margin_10dp"
                     android:scaleType="centerCrop" />
@@ -161,6 +162,7 @@
             </RelativeLayout>
 
             <androidx.cardview.widget.CardView
+                android:elevation="@dimen/margin_5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -169,14 +171,14 @@
                     android:layout_height="wrap_content">
 
                     <LinearLayout
-                        android:padding="@dimen/margin_5dp"
-                        android:layout_marginStart="@dimen/size_50dp"
                         android:id="@+id/layout_like_item_post"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_gravity="center"
-                        android:orientation="horizontal">
+                        android:layout_marginStart="@dimen/size_50dp"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/margin_5dp">
 
                         <ImageView
                             android:id="@+id/img_icon_like_item_post"
@@ -194,15 +196,15 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:padding="@dimen/margin_5dp"
-                        android:layout_marginEnd="@dimen/size_50dp"
                         android:id="@+id/layout_comment_item_post"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
-                        android:orientation="horizontal">
+                        android:layout_marginEnd="@dimen/size_50dp"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/margin_5dp">
 
                         <ImageView
                             android:layout_width="@dimen/size_20dp"

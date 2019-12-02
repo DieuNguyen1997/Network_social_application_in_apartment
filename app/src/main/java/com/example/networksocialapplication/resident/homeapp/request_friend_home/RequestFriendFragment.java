@@ -57,7 +57,7 @@ public class RequestFriendFragment extends Fragment {
             }
         });
         if (savedInstanceState == null) {
-            mBottomNavigationView.setSelectedItemId(R.id.item_list_friend); // change to whichever id should be default
+            mBottomNavigationView.setSelectedItemId(R.id.item_list_request_friend); // change to whichever id should be default
         }
         return view;
     }

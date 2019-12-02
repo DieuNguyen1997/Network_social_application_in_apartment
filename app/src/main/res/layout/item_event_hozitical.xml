@@ -2,6 +2,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:elevation="@dimen/margin_10dp"
     android:layout_margin="@dimen/margin_10dp">
 
     <RelativeLayout
@@ -74,7 +75,7 @@
                     android:padding="@dimen/margin_10dp"
                     android:background="@drawable/background_btn_interest"
                     android:id="@+id/btn_care_item_event_horizontal"
-                    android:layout_width="@dimen/margin_120dp"
+                    android:layout_width="@dimen/margin_150dp"
                     android:layout_height="@dimen/size_40dp"
                     android:drawableLeft="@drawable/ic_star_gray_24dp"
                     android:text="Quan tâm"
@@ -84,7 +85,7 @@
                     android:id="@+id/btn_join_item_event_hozitical"
                     android:layout_marginLeft="@dimen/margin_20dp"
                     android:background="@drawable/background_btn_interest"
-                    android:layout_width="@dimen/margin_120dp"
+                    android:layout_width="@dimen/margin_150dp"
                     android:layout_height="@dimen/size_40dp"
                     android:layout_toRightOf="@+id/btn_care_item_event_horizontal"
                     android:text="Sẽ tham gia"

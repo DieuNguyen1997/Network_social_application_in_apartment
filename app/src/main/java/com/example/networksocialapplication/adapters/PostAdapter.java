@@ -49,7 +49,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
-        View view = layoutInflater.inflate(R.layout.fragment_home_item_list_post, null);
+        View view = layoutInflater.inflate(R.layout.fragment_home_item_list_post, parent, false);
         return new ViewHolder(view);
     }
 
@@ -63,7 +63,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             holder.mTimePosted.setText(post.getTimePosted());
             holder.mContentPost.setText(post.getContentPost());
             holder.mDatePosted.setText(post.getDatePosted());
-            Glide.with(mContext).load(post.getImagePost()).into(holder.mImagePost);
+            if (post.getImagePost() != null){
+                holder.mImagePost.setVisibility(View.VISIBLE);
+                Glide.with(mContext).load(post.getImagePost()).into(holder.mImagePost);
+            }
             final String postKey = post.getPostId();
             holder.isLike(postKey);
             holder.numberLike(postKey);

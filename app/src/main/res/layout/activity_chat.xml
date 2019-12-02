@@ -90,6 +90,7 @@
         android:layout_above="@+id/add_chat">
 
         <ImageView
+            android:scaleType="centerCrop"
             android:id="@+id/image_chat"
             android:layout_width="@dimen/size_image_list"
             android:layout_height="@dimen/size_image_list"
