@@ -37,6 +37,7 @@
         tools:layout_editor_absoluteX="0dp">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:background="@color/color_bg_toolbar"
             android:id="@+id/recycler_view_list_reflect_of_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>

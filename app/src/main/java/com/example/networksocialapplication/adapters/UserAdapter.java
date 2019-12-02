@@ -77,7 +77,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         public CircleImageView imgAvatar;
         public TextView txtUsername;
         public TextView txtNameRoom;
-        public MaterialCardView mLine;
+        public RelativeLayout mLine;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -158,6 +158,7 @@
             </RelativeLayout>
 
             <LinearLayout
+                android:layout_below="@+id/layout_care"
                 android:id="@+id/layout_comment_event_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

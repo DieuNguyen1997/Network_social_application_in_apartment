@@ -33,7 +33,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class CommentEventAdapter  extends  RecyclerView.Adapter<CommentEventAdapter.ViewHolder> {
+public class CommentEventAdapter extends RecyclerView.Adapter<CommentViewHolder> {
     private Context mContext;
     private List<Comment> mComments;
 
@@ -49,14 +49,14 @@ public class CommentEventAdapter  extends  RecyclerView.Adapter<CommentEventAdap
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
-        View view = layoutInflater.inflate(R.layout.item_comment,null);
-        return new ViewHolder(view);
+        View view = layoutInflater.inflate(R.layout.item_comment, null);
+        return new CommentViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final CommentEventAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final CommentViewHolder holder, int position) {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mLikeRef = FirebaseDatabase.getInstance().getReference().child("Likes");
         mCommentRef = FirebaseDatabase.getInstance().getReference().child("Comments");
@@ -71,7 +71,7 @@ public class CommentEventAdapter  extends  RecyclerView.Adapter<CommentEventAdap
             displayInforUser(holder.mAvatar, holder.mUsername, userIdComment);
             holder.mTime.setText(comment.getTimeComment());
             holder.mContentComment.setText(comment.getContent());
-            if (comment.getImageComment() != null){
+            if (comment.getImageComment() != null) {
                 holder.mImage.setVisibility(View.VISIBLE);
                 Glide.with(mContext).load(comment.getImageComment()).into(holder.mImage);
             }
@@ -110,35 +110,6 @@ public class CommentEventAdapter  extends  RecyclerView.Adapter<CommentEventAdap
         return mComments.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public LinearLayout mLayoutCountLike;
-        public CircleImageView mAvatar;
-        public TextView mUsername;
-        public TextView mContentComment;
-        public TextView mLike;
-        public TextView mReply;
-        public TextView mTime;
-        public View mView;
-        public TextView mCountLike;
-        public TextView mDelete;
-        public ImageView mImage;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            mView = itemView;
-            mImage = mView.findViewById(R.id.img_item_comment);
-            mDelete = mView.findViewById(R.id.txt_delete_item_comment);
-            mLayoutCountLike = mView.findViewById(R.id.layout_count_like);
-            mAvatar = mView.findViewById(R.id.img_avatar_item_comment);
-            mUsername = mView.findViewById(R.id.txt_username_item_comment);
-            mContentComment = mView.findViewById(R.id.txt_content_item_comment);
-            mLike = mView.findViewById(R.id.txt_like_item_comment);
-            mReply = mView.findViewById(R.id.txt_reply_item_comment);
-            mTime = mView.findViewById(R.id.txt_time_item_comment);
-            mCountLike = mView.findViewById(R.id.txt_count_like_item_comment);
-        }
-
-    }
 
     private void displayInforUser(final CircleImageView mImgAvatar, final TextView txtUsername, String userId) {
         DatabaseReference mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
@@ -163,6 +134,7 @@ public class CommentEventAdapter  extends  RecyclerView.Adapter<CommentEventAdap
             }
         });
     }
+
     public static boolean isValidContextForGlide(final Context context) {
         if (context == null) {
             return false;

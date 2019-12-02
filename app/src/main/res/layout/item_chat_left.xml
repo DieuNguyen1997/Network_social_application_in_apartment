@@ -27,7 +27,8 @@
         android:layout_height="@dimen/size_100dp"
         android:layout_below="@+id/txt_content_chat"
         android:layout_alignParentRight="true"
-        android:layout_margin="@dimen/margin_10dp"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginTop="@dimen/margin_5dp"
         android:scaleType="centerCrop"
         android:visibility="gone" />
 

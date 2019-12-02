@@ -135,7 +135,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
     private void displayMessage(final String imageUrl) {
 
-        if (mManagerId == null){
+        if (mManagerId == null) {
             mChatRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -157,7 +157,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 }
             });
             seenMessage(mUserReceiveid);
-        }else {
+        } else {
             mChatRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -345,7 +345,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
     private void sendMessage() {
         String content = mContentChat.getText().toString();
-        String chatId = mChatRef.push().getKey();
+        final String chatId = mChatRef.push().getKey();
         String timeCurrent = mTimeCurrent.getTimeCurrent();
 
         if (mManagerId == null) {
@@ -356,6 +356,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 mChatRef.child(chatId).setValue(message).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        sendImage(chatId);
                         mContentChat.setText("");
                     }
                 });
@@ -387,13 +388,13 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
                 mChatRef.child(chatId).setValue(message).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        sendImage(chatId);
                         mContentChat.setText("");
                     }
                 });
             }
         }
 
-        sendImage(chatId);
 
     }
 

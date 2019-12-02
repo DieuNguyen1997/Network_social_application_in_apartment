@@ -118,22 +118,30 @@ public class CreateReflectActivity extends AppCompatActivity implements View.OnC
             case R.id.btn_field_all:
                 mFieldReflect = mBtnAll.getText().toString();
                 mBtnAll.setBackgroundResource(R.drawable.bg_btn);
-//                mBtnAll.setBackgroundColor(Color.rgb(249, 170, 51));
+                mBtnProtect.setBackgroundResource(R.drawable.bg_btn_reflect);
+                mBtnToire.setBackgroundResource(R.drawable.bg_btn_reflect);
+                mBtnTechnology.setBackgroundResource(R.drawable.bg_btn_reflect);
                 break;
             case R.id.btn_field_protect:
                 mFieldReflect = mBtnProtect.getText().toString();
                 mBtnProtect.setBackgroundResource(R.drawable.bg_btn);
-//                mBtnProtect.setBackgroundColor(Color.rgb(249, 170, 51));
+                mBtnAll.setBackgroundResource(R.drawable.bg_btn_reflect);
+                mBtnToire.setBackgroundResource(R.drawable.bg_btn_reflect);
+                mBtnTechnology.setBackgroundResource(R.drawable.bg_btn_reflect);
                 break;
             case R.id.btn_field_techno:
                 mFieldReflect = mBtnTechnology.getText().toString();
                 mBtnTechnology.setBackgroundResource(R.drawable.bg_btn);
-//                mBtnTechnology.setBackgroundColor(Color.rgb(249, 170, 51));
+                mBtnProtect.setBackgroundResource(R.drawable.bg_btn_reflect);
+                mBtnToire.setBackgroundResource(R.drawable.bg_btn_reflect);
+                mBtnAll.setBackgroundResource(R.drawable.bg_btn_reflect);
                 break;
             case R.id.btn_field_toire:
                 mFieldReflect = mBtnToire.getText().toString();
                 mBtnToire.setBackgroundResource(R.drawable.bg_btn);
-//                mBtnToire.setBackgroundColor(Color.rgb(249, 170, 51));
+                mBtnProtect.setBackgroundResource(R.drawable.bg_btn_reflect);
+                mBtnAll.setBackgroundResource(R.drawable.bg_btn_reflect);
+                mBtnTechnology.setBackgroundResource(R.drawable.bg_btn_reflect);
                 break;
             case R.id.btn_send_reflect:
                 sendReflect();

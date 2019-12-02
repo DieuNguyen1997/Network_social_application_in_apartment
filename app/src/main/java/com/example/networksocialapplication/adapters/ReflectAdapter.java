@@ -45,7 +45,7 @@ public class ReflectAdapter extends RecyclerView.Adapter<ReflectAdapter.ViewHold
     private Context mContext;
     private List<Reflect> mReflects;
     private List<Comment> mCommets;
-    private CommentAdapter mCommentAdapter;
+    private CommentReflectAdapter mCommentAdapter;
     private Time mTime;
     private DatabaseReference mCommentRef;
     private String mCurrentUserId;
@@ -80,6 +80,7 @@ public class ReflectAdapter extends RecyclerView.Adapter<ReflectAdapter.ViewHold
             holder.mRootCommnet.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     holder.mRootCommentFragment.setVisibility(View.VISIBLE);
                     Glide.with(mContext).load(reflect.getImagePost()).into(holder.mAvatar);
                     diplayListComment(reflectId, holder.mRecyclerView);
@@ -90,6 +91,8 @@ public class ReflectAdapter extends RecyclerView.Adapter<ReflectAdapter.ViewHold
                             sendComment(holder.mContentComment, reflectId, holder.mLayout);
                         }
                     });
+
+
                 }
             });
         }
@@ -124,7 +127,7 @@ public class ReflectAdapter extends RecyclerView.Adapter<ReflectAdapter.ViewHold
                     Comment comment = data.getValue(Comment.class);
                     mCommets.add(comment);
                 }
-                mCommentAdapter = new CommentAdapter(mContext, mCommets);
+                mCommentAdapter = new CommentReflectAdapter(mContext, mCommets);
                 mCommentAdapter.notifyDataSetChanged();
                 recyclerView.setAdapter(mCommentAdapter);
 
