@@ -13,27 +13,26 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_list_chat"
+            android:id="@+id/toolbar_list_chat_activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorWhite"
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark">
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
             <de.hdodenhof.circleimageview.CircleImageView
 
                 android:id="@+id/img_avatar_list_chat"
                 android:layout_width="@dimen/size_30dp"
-                android:layout_height="@dimen/size_30dp"
-             />
+                android:layout_height="@dimen/size_30dp" />
 
             <TextView
-                android:layout_marginLeft="@dimen/margin_25dp"
-                android:text="Chats"
                 android:id="@+id/txt_username_toolbar_chat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_25dp"
+                android:text="Chats"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/txt_size_25sp"
                 android:textStyle="bold" />
@@ -51,10 +50,10 @@
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:background="@color/colorWhite"
         android:id="@+id/bottom_nav_chat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="@color/colorWhite"
         app:menu="@menu/menu_bottom_chat"></com.google.android.material.bottomnavigation.BottomNavigationView>
 </RelativeLayout>

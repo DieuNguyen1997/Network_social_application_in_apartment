@@ -1,5 +1,6 @@
 package com.example.networksocialapplication.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -101,7 +102,9 @@ public class ChatManagerAdapter extends RecyclerView.Adapter<ChatManagerAdapter.
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     User user = dataSnapshot.getValue(User.class);
-                    Glide.with(mContext).load(user.getAvatar()).into(avatar);
+                    if (isValidContextForGlide(mContext)){
+                        Glide.with(mContext).load(user.getAvatar()).into(avatar);
+                    }
                     username.setText(user.getUsername());
                 }
             }
@@ -111,6 +114,18 @@ public class ChatManagerAdapter extends RecyclerView.Adapter<ChatManagerAdapter.
 
             }
         });
+    }
+    public static boolean isValidContextForGlide(final Context context) {
+        if (context == null) {
+            return false;
+        }
+        if (context instanceof Activity) {
+            final Activity activity = (Activity) context;
+            if (activity.isDestroyed() || activity.isFinishing()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void getLastMessage(final String userId, final TextView lastmessage) {

@@ -72,7 +72,7 @@ public class UserStatusAdapter extends RecyclerView.Adapter<UserStatusAdapter.Vi
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    User user = dataSnapshot.getValue(User.class);
+                    Resident user = dataSnapshot.getValue(Resident.class);
                     Glide.with(mContext).load(user.getAvatar()).into(avatar);
                     username.setText(user.getUsername());
                 }

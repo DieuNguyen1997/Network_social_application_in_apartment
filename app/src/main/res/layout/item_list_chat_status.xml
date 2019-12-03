@@ -8,10 +8,10 @@
     android:padding="@dimen/margin_8dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
+
         android:id="@+id/img_avatar_item_user_status"
         android:layout_width="@dimen/size_70dp"
-        android:layout_height="@dimen/size_70dp"
-        android:src="@mipmap/ic_launcher" />
+        android:layout_height="@dimen/size_70dp"/>
 
     <TextView
         android:layout_marginStart="@dimen/margin_20dp"

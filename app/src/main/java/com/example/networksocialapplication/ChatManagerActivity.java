@@ -83,6 +83,7 @@ public class ChatManagerActivity extends AppCompatActivity {
                         mUserIdList.add(message.getSenderId());
                     }
                 }
+                mUserIdList.toString();
                 readChat();
             }
 
@@ -106,7 +107,7 @@ public class ChatManagerActivity extends AppCompatActivity {
 
                     for (String userid : mUserIdList) {
                         //check user cos id trong lisst mUserIdList
-                        if (user.getResidentId().equals(userid)){
+                        if (userid.equals(user.getResidentId())){
 
                             if (mUsers.size() != 0){
                                 for (int i  = 0; i < mUsers.size(); i++){
