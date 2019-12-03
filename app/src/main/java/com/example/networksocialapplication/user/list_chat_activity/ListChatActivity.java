@@ -54,7 +54,7 @@ public class ListChatActivity extends AppCompatActivity {
     }
 
     private void initToolbar() {
-        mToolbar = findViewById(R.id.toolbar_list_chat);
+        mToolbar = findViewById(R.id.toolbar_list_chat_activity);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Chats");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -83,9 +83,9 @@ public class ListChatActivity extends AppCompatActivity {
                     case R.id.item_bottom_operating_status:
                       fragment = new OveratStatusFragment();
                         break;
-                    default:
-                        fragment = new ListChatFragment();
-                        break;
+//                    default:
+//                        fragment = new ListChatFragment();
+//                        break;
                 }
                 fragmentManager.beginTransaction().replace(R.id.container_list_chat, fragment).commit();
                 return true;

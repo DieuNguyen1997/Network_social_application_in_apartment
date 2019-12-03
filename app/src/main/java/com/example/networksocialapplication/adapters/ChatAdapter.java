@@ -59,6 +59,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             final Resident user = mUsers.get(position);
             getDataInformationUser(user.getResidentId(), holder.mAvatarChat, holder.mUsername);
             final String userOtherId = user.getResidentId();
+
             if (mIsChat){
                 getLastMessage(userOtherId, holder.mTxtLastMessage);
             }
@@ -119,7 +120,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    User user = dataSnapshot.getValue(User.class);
+                    Resident user = dataSnapshot.getValue(Resident.class);
                     Glide.with(mContext).load(user.getAvatar()).into(avatar);
                     username.setText(user.getUsername());
                 }

@@ -53,13 +53,11 @@ public class ListChatFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_list_chat, container, false);
-        initRecyclerview(view);
-        initRecyclerviewManager(view);
-
         mUsers = new ArrayList<>();
         mUserIdList = new ArrayList<>();
         mManagers = new ArrayList<>();
-
+        initRecyclerview(view);
+        initRecyclerviewManager(view);
         initFirebase();
         displayListChat();
         updateToken(FirebaseInstanceId.getInstance().getToken());
@@ -73,12 +71,13 @@ public class ListChatFragment extends Fragment {
     }
 
     private void initRecyclerview(View view) {
-        mRecyclerView = view.findViewById(R.id.recycler_view_list_chat);
+        mRecyclerView = view.findViewById(R.id.recycler_view_list_chat_fragment);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
+
     }
 
-    private void updateToken(String token){
+    private void updateToken(String token) {
         Token token1 = new Token(token);
         mTokenRef.child(mCurrentUserId).setValue(token1);
 
@@ -107,7 +106,8 @@ public class ListChatFragment extends Fragment {
                         mUserIdList.add(message.getSenderId());
                     }
                 }
-                readChat();
+                readChatUser();
+//                readChatManager();
             }
 
             @Override
@@ -118,7 +118,7 @@ public class ListChatFragment extends Fragment {
     }
 
 
-    private void readChat() {
+    private void readChatUser() {
         mUserDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -130,27 +130,27 @@ public class ListChatFragment extends Fragment {
 
                     for (String userid : mUserIdList) {
                         //check user cos id trong lisst mUserIdList
-                        if (user.getResidentId().equals(userid)){
+                        if (user.getResidentId().equals(userid)) {
 
-                            if (mUsers.size() != 0){
-                                for (int i  = 0; i < mUsers.size(); i++){
+                            if (mUsers.size() != 0) {
+                                for (int i = 0; i < mUsers.size(); i++) {
                                     Resident userCheck = mUsers.get(i);
-                                    if (!userCheck.getResidentId().equals(user.getResidentId())){
+                                    if (!userCheck.getResidentId().equals(user.getResidentId())) {
                                         mUsers.add(user);
                                     }
                                 }
                             } else {
                                 mUsers.add(user);
                             }
-                        }
-                        else {
-                            readMessFromManager();
+                        }else {
+                            readChatManager();
                         }
                     }
                 }
-                mChatAdapter = new ChatAdapter(getActivity(), mUsers,true);
+                mChatAdapter = new ChatAdapter(getActivity(), mUsers, true);
                 mChatAdapter.notifyDataSetChanged();
                 mRecyclerView.setAdapter(mChatAdapter);
+
             }
 
             @Override
@@ -160,34 +160,33 @@ public class ListChatFragment extends Fragment {
         });
     }
 
-    public void readMessFromManager(){
+    public void readChatManager() {
         mMangerDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mUsers.clear();
-
+                mManagers.clear();
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     //get all usser
                     Manager manager = data.getValue(Manager.class);
 
                     for (String userid : mUserIdList) {
                         //check user cos id trong lisst mUserIdList
-                        if (manager.getManagerId().equals(userid)){
+                        if (manager.getManagerId().equals(userid)) {
 
-                            if (mManagers.size() != 0){
-                                for (int i  = 0; i < mManagers.size(); i++){
+                            if (mManagers.size() != 0) {
+                                for (int i = 0; i < mManagers.size(); i++) {
                                     Manager userCheck = mManagers.get(i);
-                                    if (!userCheck.getManagerId().equals(manager.getManagerId())){
+                                    if (!userCheck.getManagerId().equals(manager.getManagerId())) {
                                         mManagers.add(manager);
                                     }
                                 }
                             } else {
                                 mManagers.add(manager);
                             }
-                        }
+                       }
                     }
                 }
-                mChatManagerAdapter = new ChatManagerAdapter(getActivity(), mManagers,true);
+                mChatManagerAdapter = new ChatManagerAdapter(getActivity(), mManagers, true);
                 mChatManagerAdapter.notifyDataSetChanged();
                 mRecyclerViewManager.setAdapter(mChatManagerAdapter);
             }
