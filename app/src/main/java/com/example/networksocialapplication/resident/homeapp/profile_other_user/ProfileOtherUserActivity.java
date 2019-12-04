@@ -244,6 +244,7 @@ public class ProfileOtherUserActivity extends AppCompatActivity {
         return false;
     }
 
+
     private void displayInformationBasic() {
         mUserDatabase.child(mReceiverUserID).addValueEventListener(new ValueEventListener() {
             @Override

@@ -50,23 +50,23 @@ public class UserDatabase {
         });
     }
 
-    public void getAvatarUser(String mUserId, final CircleImageView imgAvatar) {
-        mUserRef.child(mUserId).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                     String avatar = dataSnapshot.child("avatar").getValue().toString();
-                     Glide.with(mContext).load(avatar).into(imgAvatar);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }
+//    public void getAvatarUser(String mUserId, final CircleImageView imgAvatar) {
+//        mUserRef.child(mUserId).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                if (dataSnapshot.exists()) {
+//                     String avatar = dataSnapshot.child("avatar").getValue().toString();
+//                     Glide.with(mContext).load(avatar).into(imgAvatar);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+//
+//    }
 
 
 }

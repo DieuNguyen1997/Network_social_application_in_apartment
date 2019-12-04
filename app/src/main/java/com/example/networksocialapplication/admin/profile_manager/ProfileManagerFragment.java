@@ -1,6 +1,7 @@
 package com.example.networksocialapplication.admin.profile_manager;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -81,6 +82,7 @@ public class ProfileManagerFragment extends Fragment implements View.OnClickList
     private StorageReference mAvatarDatabase;
     private StorageReference mCoverPhotoDatabase;
     private UploadTask mUploadTask;
+    private boolean isAttached;
 
 
     @Override
@@ -145,6 +147,18 @@ public class ProfileManagerFragment extends Fragment implements View.OnClickList
         mEditProfile.setOnClickListener(this);
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        isAttached = true;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        isAttached = false;
+    }
+
     private void displayInformationBasic() {
         mManagerDatabase.child(mCurrentUserId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -157,8 +171,11 @@ public class ProfileManagerFragment extends Fragment implements View.OnClickList
                     mDes.setText(manager.getDes());
                     mTxtHotline.setText(manager.getPhoneNumber());
                     mTxtLocation.setText(manager.getLocation());
-                    Glide.with(getActivity()).load(manager.getAvatar()).error(R.drawable.ic_load_image_erroe).into(mAvatar);
-                    Glide.with(getActivity()).load(manager.getCoverPhoto()).error(R.drawable.ic_load_image_erroe).into(mCoverPhoto);
+                    if (isAttached){
+                        Glide.with(getActivity()).load(manager.getAvatar()).error(R.drawable.ic_load_image_erroe).into(mAvatar);
+                        Glide.with(getActivity()).load(manager.getCoverPhoto()).error(R.drawable.ic_load_image_erroe).into(mCoverPhoto);
+                    }
+
                 }
 
             }

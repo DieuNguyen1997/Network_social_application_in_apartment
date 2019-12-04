@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:icon="@drawable/ic_reflect_black"
+        android:id="@+id/item_bottom_reflect_wait"
+        android:title="@string/txt_list_reflect_wait_progress" />
+
+    <item
+        android:icon="@drawable/ic_reflect_black"
+        android:id="@+id/item_bottom_reflect_received"
+        android:title="@string/txt_list_reflect_received" />
+
+    <item
+        android:icon="@drawable/ic_reflect_black"
+        android:id="@+id/item_bottom_reflect_progressed"
+        android:title="@string/txt_list_reflect_progressed" />
+</menu>

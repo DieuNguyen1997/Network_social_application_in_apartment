@@ -166,7 +166,7 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
         if (requestCode == REQUEST_CODE_CHOOSE_IMAGE_EVENT && resultCode == RESULT_OK && data != null){
             mImageUri = data.getData();
             mImage.setImageURI(mImageUri);
-            mBtnChooseImage.setVisibility(View.INVISIBLE);
+//            mBtnChooseImage.setVisibility(View.INVISIBLE);
         }
     }
     private void saveImageToFirebase(final String eventId) {
