@@ -363,21 +363,21 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             }
             final String messageSend = content;
 
-            mUserRef.child(mCurrentUserId).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Resident user = dataSnapshot.getValue(Resident.class);
-                    if (mNotify) {
-                        sendNotification(mUserReceiveid, user.getUsername(), messageSend);
-                    }
-                    mNotify = false;
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
+//            mUserRef.child(mCurrentUserId).addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                    Resident user = dataSnapshot.getValue(Resident.class);
+//                    if (mNotify) {
+//                        sendNotification(mUserReceiveid, user.getUsername(), messageSend);
+//                    }
+//                    mNotify = false;
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                }
+//            });
 
         } else {
             Message message = new Message(chatId, mCurrentUserId, mManagerId, content, timeCurrent, false);

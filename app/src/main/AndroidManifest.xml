@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".admin.create_election.CreateElectionActivity"></activity>
         <activity android:name=".ChatManagerActivity" />
         <activity android:name=".EventDetailActivity" />
         <activity android:name=".PostDetailActivity" />

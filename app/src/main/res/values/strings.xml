@@ -136,6 +136,19 @@
     <string name="label_person_care_event">Những người quan tâm sự kiện:</string>
     <string name="label_person_join_event">Những người tham gia sự kiện</string>
     <string name="all_comment">Tất cả bình luận</string>
+    <string name="txt_list_reflect_wait_progress">Chờ xử lý</string>
+    <string name="txt_list_reflect_received">Đã tiếp nhận</string>
+    <string name="txt_list_reflect_progressed">Đã xử lý</string>
+    <string name="txt_creat_election">Tạo bầu cử</string>
+    <string name="year">Năm</string>
+    <string name="label_create_candidate">Tạo danh sách ứng cử viên</string>
+    <string name="count">Số lượng</string>
+    <string name="lable_name">Họ và tên</string>
+    <string name="label_address_apartment_create_cadicate">Địa chỉ căn hộ</string>
+    <string name="label_job_create_cadicate">Nghề nghiệp hiện nay</string>
+    <string name="label_year_start_create_cadicate">Bắt đầu sống ở chung cư từ năm?</string>
+    <string name="label_slogan_create_cadicate">Tiêu chí hành động nếu được bầu</string>
+    <string name="txt_create_candicate">Thêm vào danh sách</string>
 
 
     <array name="name_room">
