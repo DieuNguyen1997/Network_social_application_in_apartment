@@ -76,26 +76,46 @@ public class ReflectAdapter extends RecyclerView.Adapter<ReflectAdapter.ViewHold
             holder.mContent.setText(reflect.getContentPost());
             holder.mStatus.setText(reflect.getStatus());
             Glide.with(mContext).load(reflect.getImagePost()).into(holder.mImage);
-
+            getCountComment(reflectId, holder.mCountComment);
             holder.mRootCommnet.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                        holder.mRootCommentFragment.setVisibility(View.VISIBLE);
+                        holder.mRootCommnet.setTag("Mở bình luận");
+                        Glide.with(mContext).load(reflect.getImagePost()).into(holder.mAvatar);
+                        diplayListComment(reflectId, holder.mRecyclerView);
+                        holder.mChoosePhoto.setVisibility(View.GONE);
+                        holder.mSend.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                sendComment(holder.mContentComment, reflectId, holder.mLayout);
+                            }
+                        });
+                }
+            });
 
-                    holder.mRootCommentFragment.setVisibility(View.VISIBLE);
-                    Glide.with(mContext).load(reflect.getImagePost()).into(holder.mAvatar);
-                    diplayListComment(reflectId, holder.mRecyclerView);
-                    holder.mChoosePhoto.setVisibility(View.GONE);
-                    holder.mSend.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            sendComment(holder.mContentComment, reflectId, holder.mLayout);
-                        }
-                    });
-
-
+            holder.mRootCommnet.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    holder.mRootCommentFragment.setVisibility(View.GONE);
+                    return false;
                 }
             });
         }
+    }
+
+    private void getCountComment(String reflectId, final TextView countComment) {
+        mCommentRef.child(reflectId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                countComment.setText(dataSnapshot.getChildrenCount()+"");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void sendComment(final EditText edtContent, String ReflectId, final CoordinatorLayout layout) {

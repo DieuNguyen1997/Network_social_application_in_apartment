@@ -235,7 +235,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ChatActivity.this, ListChatActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                finish();
             }
         });
         displayUserReceiveInfor();
