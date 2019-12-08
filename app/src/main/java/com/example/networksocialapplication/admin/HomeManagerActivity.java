@@ -125,9 +125,6 @@ public class HomeManagerActivity extends AppCompatActivity {
                     case R.id.nav_item_reflect:
 
                         break;
-                    case R.id.nav_item_service:
-
-                        break;
                 }
                 return false;
             }

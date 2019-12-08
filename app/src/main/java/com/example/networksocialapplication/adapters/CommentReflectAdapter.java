@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.models.Comment;
+import com.example.networksocialapplication.models.Resident;
 import com.example.networksocialapplication.resident.homeapp.profile_other_user.ProfileOtherUserActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -117,21 +118,42 @@ public class CommentReflectAdapter extends RecyclerView.Adapter<CommentViewHolde
     }
 
 
-    private void displayInforUser(final CircleImageView mImgAvatar, final TextView txtUsername, String userId) {
-        DatabaseReference mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
+    private void displayInforUser(final CircleImageView mImgAvatar, final TextView txtUsername, final String userId) {
+        DatabaseReference mUserRef = FirebaseDatabase.getInstance().getReference().child("Users");
         mUserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    String avatar = dataSnapshot.child("avatar").getValue().toString();
-                    String username = dataSnapshot.child("username").getValue().toString();
-                    if (isValidContextForGlide(mContext)) {
-                        // Load image via Glide lib using context
-                        Glide.with(mContext).load(avatar).into(mImgAvatar);
+                for (DataSnapshot data : dataSnapshot.getChildren()){
+                        Resident resident = data.getValue(Resident.class);
+                        if (resident.getResidentId().equals(userId)){
+                            if (isValidContextForGlide(mContext)) {
+                                // Load image via Glide lib using context
+                                Glide.with(mContext).load(resident.getAvatar()).into(mImgAvatar);
 
+                            }
+                            txtUsername.setText(resident.getUsername());
+                        }else {
+                            DatabaseReference managerRef = FirebaseDatabase.getInstance().getReference().child("Manager").child(userId);
+                            managerRef.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    String avatar = dataSnapshot.child("avatar").getValue().toString();
+                                    String username = dataSnapshot.child("username").getValue().toString();
+                                    if (isValidContextForGlide(mContext)) {
+                                        // Load image via Glide lib using context
+                                        Glide.with(mContext).load(avatar).into(mImgAvatar);
+                                    }
+                                    txtUsername.setText(username);
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                        }
                     }
-                    txtUsername.setText(username);
-                }
+
             }
 
             @Override

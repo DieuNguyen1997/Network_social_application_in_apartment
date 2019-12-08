@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_marginTop="@dimen/margin_5dp"
     android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_5dp"
     android:background="@drawable/background_item_reflect"
     android:orientation="vertical">
 
@@ -34,7 +34,7 @@
         android:layout_height="@dimen/profile_cover_image_height"
         android:layout_below="@+id/txt_title_item_reflect_user"
         android:layout_marginTop="@dimen/margin_10dp"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop" />
 
 
     <TextView
@@ -127,6 +127,7 @@
                 android:textSize="@dimen/txt_size_15sp" />
         </LinearLayout>
     </RelativeLayout>
+
 
     <LinearLayout
         android:id="@+id/container_comment_reflect"

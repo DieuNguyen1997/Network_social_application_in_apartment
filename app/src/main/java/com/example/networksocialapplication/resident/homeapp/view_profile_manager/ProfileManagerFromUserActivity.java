@@ -2,6 +2,8 @@ package com.example.networksocialapplication.resident.homeapp.view_profile_manag
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +15,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.CreateReflectActivity;
 import com.example.networksocialapplication.R;
+import com.example.networksocialapplication.adapters.ReflectInManagerAdapter;
 import com.example.networksocialapplication.models.Manager;
+import com.example.networksocialapplication.models.Reflect;
 import com.example.networksocialapplication.user.chat.ChatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +25,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -38,15 +45,20 @@ public class ProfileManagerFromUserActivity extends AppCompatActivity implements
 
     private DatabaseReference mManagerDatabase;
     private String mManagerId;
+    private DatabaseReference mReflectRef;
+    private List<Reflect> mReflects;
+    private RecyclerView mRecyclerView;
+    private ReflectInManagerAdapter mReflectAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_manager_from_user);
         initView();
+        initRecyclerview();
         initFirebase();
         displayInformationBasic();
-
+        displayListReflectFromResident();
     }
 
     private void initView() {
@@ -62,6 +74,33 @@ public class ProfileManagerFromUserActivity extends AppCompatActivity implements
 
         mLayout_create_reflect.setOnClickListener(this);
         mLayout_chat_manager.setOnClickListener(this);
+    }
+
+    private void initRecyclerview() {
+        mReflects = new ArrayList<>();
+        mRecyclerView = findViewById(R.id.recycler_view_list_reflect_profile_manager);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
+    }
+
+    private void displayListReflectFromResident() {
+        mReflectRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
+                    Reflect reflect = item.getValue(Reflect.class);
+                    mReflects.add(reflect);
+                    mReflectAdapter = new ReflectInManagerAdapter(getApplicationContext(), mReflects);
+                    mReflectAdapter.notifyDataSetChanged();
+                    mRecyclerView.setAdapter(mReflectAdapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void displayInformationBasic() {
@@ -89,6 +128,7 @@ public class ProfileManagerFromUserActivity extends AppCompatActivity implements
 
     private void initFirebase() {
         mManagerDatabase = FirebaseDatabase.getInstance().getReference().child("Manager");
+        mReflectRef = FirebaseDatabase.getInstance().getReference().child("Reflect");
     }
 
     @Override

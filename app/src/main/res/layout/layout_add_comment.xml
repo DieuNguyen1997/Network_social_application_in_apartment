@@ -17,8 +17,7 @@
             android:id="@+id/img_avatar_comment_layout"
             android:layout_width="@dimen/size_40dp"
             android:layout_height="@dimen/size_40dp"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_avatar" />
+            android:layout_centerVertical="true"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -39,14 +38,14 @@
                 android:hint="@string/txt_add_comment"
                 android:maxLines="10" />
 
-            <ImageView
-                android:id="@+id/img_choose_photo_comment_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/margin_15dp"
-                android:src="@drawable/ic_camera_alt_background_24dp" />
+            <!--<ImageView-->
+                <!--android:id="@+id/img_choose_photo_comment_layout"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginRight="@dimen/margin_15dp"-->
+                <!--android:src="@drawable/ic_camera_alt_background_24dp" />-->
 
         </RelativeLayout>
 
@@ -61,25 +60,25 @@
 
     </RelativeLayout>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:visibility="gone"
-        android:id="@+id/layout_image_comment_event_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <!--<androidx.coordinatorlayout.widget.CoordinatorLayout-->
+        <!--android:visibility="gone"-->
+        <!--android:id="@+id/layout_image_comment_event_layout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
-        <ImageView
-            android:id="@+id/image_comment_event_layout"
-            android:layout_width="@dimen/size_image_list"
-            android:layout_height="@dimen/size_image_list"
-            android:layout_marginLeft="@dimen/margin_20dp" />
+        <!--<ImageView-->
+            <!--android:id="@+id/image_comment_event_layout"-->
+            <!--android:layout_width="@dimen/size_image_list"-->
+            <!--android:layout_height="@dimen/size_image_list"-->
+            <!--android:layout_marginLeft="@dimen/margin_20dp" />-->
 
-        <ImageButton
-            android:id="@+id/btn_delete_image_comment_event_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_btn_deletew"
-            android:src="@drawable/ic_delete_white"
-            android:visibility="gone" />
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <!--<ImageButton-->
+            <!--android:id="@+id/btn_delete_image_comment_event_layout"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/bg_btn_deletew"-->
+            <!--android:src="@drawable/ic_delete_white"-->
+            <!--android:visibility="gone" />-->
+    <!--</androidx.coordinatorlayout.widget.CoordinatorLayout>-->
 
 </LinearLayout>
