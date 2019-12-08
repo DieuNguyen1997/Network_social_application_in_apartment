@@ -35,21 +35,21 @@
         android:orientation="vertical">
 
         <EditText
-            android:drawablePadding="@dimen/margin_15dp"
-            android:textSize="@dimen/txt_size_15sp"
+            android:drawablePadding="@dimen/margin_10dp"
+            android:textSize="@dimen/txt_size_18sp"
             android:textColorHint="@color/colorWhite"
             android:textColor="@color/colorWhite"
             android:layout_margin="@dimen/margin_5dp"
             android:background="@drawable/custom_edittext_login"
             android:id="@+id/edt_username_lg"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_50dp"
+            android:layout_height="@dimen/size_70dp"
             android:drawableLeft="@drawable/custom_ic_username"
             android:hint="@string/txt_enter_email" />
 
         <EditText
-            android:drawablePadding="@dimen/margin_15dp"
-            android:textSize="@dimen/txt_size_15sp"
+            android:drawablePadding="@dimen/margin_10dp"
+            android:textSize="@dimen/txt_size_18sp"
             android:textColorHint="@color/colorWhite"
             android:textColor="@color/colorWhite"
             android:layout_margin="@dimen/margin_5dp"
@@ -57,7 +57,7 @@
             android:drawableLeft="@drawable/custom_ic_password"
             android:id="@+id/edt_password_lg"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_50dp"
+            android:layout_height="@dimen/size_70dp"
             android:hint="@string/txt_enter_password"
             android:inputType="textPassword" />
 

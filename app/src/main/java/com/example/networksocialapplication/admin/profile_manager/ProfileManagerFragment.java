@@ -94,7 +94,7 @@ public class ProfileManagerFragment extends Fragment implements View.OnClickList
         initFirebase();
         initRecyclerview(view);
         displayInformationBasic();
-        displayListReflectFromResident();
+//        displayListReflectFromResident();
         return view;
     }
 
@@ -105,25 +105,25 @@ public class ProfileManagerFragment extends Fragment implements View.OnClickList
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
     }
 
-    private void displayListReflectFromResident() {
-        mReflectRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot item : dataSnapshot.getChildren()) {
-                    Reflect reflect = item.getValue(Reflect.class);
-                    mReflects.add(reflect);
-                    mReflectAdapter = new ReflectInManagerAdapter(getActivity(), mReflects);
-                    mReflectAdapter.notifyDataSetChanged();
-                    mRecyclerView.setAdapter(mReflectAdapter);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
+//    private void displayListReflectFromResident() {
+//        mReflectRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                for (DataSnapshot item : dataSnapshot.getChildren()) {
+//                    Reflect reflect = item.getValue(Reflect.class);
+//                    mReflects.add(reflect);
+//                    mReflectAdapter = new ReflectInManagerAdapter(getActivity(), mReflects);
+//                    mReflectAdapter.notifyDataSetChanged();
+//                    mRecyclerView.setAdapter(mReflectAdapter);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
 
     private void initView(View view) {
         mLayout_create_notify = view.findViewById(R.id.root_create_notification);

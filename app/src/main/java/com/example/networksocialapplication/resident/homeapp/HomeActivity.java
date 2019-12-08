@@ -129,9 +129,6 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
                     case R.id.nav_item_reflect:
                         startActivity(new Intent(getApplicationContext(), ReflectActivity.class));
                         break;
-                    case R.id.nav_item_service:
-
-                        break;
                 }
                 return false;
             }

@@ -19,10 +19,6 @@
         android:icon="@drawable/ic_reflect_black"
         android:title="Phản ánh" />
     <item
-        android:id="@+id/nav_item_service"
-        android:icon="@drawable/ic_service_black"
-        android:title="Dịch vụ" />
-    <item
         android:id="@+id/nav_item_apartment"
         android:icon="@drawable/ic_home_black_24dp"
         android:title="Căn hộ" />

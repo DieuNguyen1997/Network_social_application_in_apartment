@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.StatusReflect;
+import com.example.networksocialapplication.database.UserDatabase;
 import com.example.networksocialapplication.models.Comment;
 import com.example.networksocialapplication.models.Reflect;
 import com.example.networksocialapplication.time_current.Time;
@@ -80,27 +81,26 @@ public class ReflectAdapter extends RecyclerView.Adapter<ReflectAdapter.ViewHold
             holder.mRootCommnet.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (holder.mRootCommentFragment.isShown()) {
+                        holder.mRootCommentFragment.setVisibility(View.GONE);
+
+                    } else {
                         holder.mRootCommentFragment.setVisibility(View.VISIBLE);
-                        holder.mRootCommnet.setTag("Mở bình luận");
-                        Glide.with(mContext).load(reflect.getImagePost()).into(holder.mAvatar);
+                        UserDatabase userDatabase = new UserDatabase(mContext);
+                        userDatabase.setUpUserRef();
+                        userDatabase.getAvatarUser(reflect.getUserID(), holder.mAvatar);
                         diplayListComment(reflectId, holder.mRecyclerView);
-                        holder.mChoosePhoto.setVisibility(View.GONE);
                         holder.mSend.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                sendComment(holder.mContentComment, reflectId, holder.mLayout);
+                                sendComment(holder.mContentComment, reflectId);
                             }
                         });
+                    }
                 }
             });
 
-            holder.mRootCommnet.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    holder.mRootCommentFragment.setVisibility(View.GONE);
-                    return false;
-                }
-            });
+
         }
     }
 
@@ -108,7 +108,7 @@ public class ReflectAdapter extends RecyclerView.Adapter<ReflectAdapter.ViewHold
         mCommentRef.child(reflectId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                countComment.setText(dataSnapshot.getChildrenCount()+"");
+                countComment.setText(dataSnapshot.getChildrenCount() + " bình luận");
             }
 
             @Override
@@ -118,7 +118,7 @@ public class ReflectAdapter extends RecyclerView.Adapter<ReflectAdapter.ViewHold
         });
     }
 
-    private void sendComment(final EditText edtContent, String ReflectId, final CoordinatorLayout layout) {
+    private void sendComment(final EditText edtContent, String ReflectId) {
         String content = edtContent.getText().toString();
         if (TextUtils.isEmpty(content)) {
             edtContent.setError("Nhập nội dung bình luận!!!");
@@ -131,7 +131,6 @@ public class ReflectAdapter extends RecyclerView.Adapter<ReflectAdapter.ViewHold
                 @Override
                 public void onSuccess(Void aVoid) {
                     edtContent.setText("");
-                    layout.setVisibility(View.GONE);
                     Log.d(TAG, "Add comment success");
                 }
             });
@@ -177,13 +176,9 @@ public class ReflectAdapter extends RecyclerView.Adapter<ReflectAdapter.ViewHold
         public LinearLayout mRootLike;
         public LinearLayout mRootCommentFragment;
 
-        private static final String TAG = "comment";
-        private static final int REQUEST_CODE_CHOOSE_PHOTO_COMMENT = 112;
         private CircleImageView mAvatar;
         private ImageView mSend;
-        private ImageView mChoosePhoto;
         private RecyclerView mRecyclerView;
-        private CoordinatorLayout mLayout;
         private EditText mContentComment;
 
         public ViewHolder(@NonNull View itemView) {
@@ -213,10 +208,8 @@ public class ReflectAdapter extends RecyclerView.Adapter<ReflectAdapter.ViewHold
         }
 
         private void initView(View view) {
-            mLayout = view.findViewById(R.id.layout_image_comment_event_layout);
             mAvatar = view.findViewById(R.id.img_avatar_comment_layout);
             mContentComment = view.findViewById(R.id.edt_content_comment_layout);
-            mChoosePhoto = view.findViewById(R.id.img_choose_photo_comment_layout);
             mSend = view.findViewById(R.id.img_send_comment_layout);
         }
     }
