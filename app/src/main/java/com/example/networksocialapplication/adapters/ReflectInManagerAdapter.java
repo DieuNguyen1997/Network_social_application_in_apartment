@@ -76,8 +76,8 @@ public class ReflectInManagerAdapter extends RecyclerView.Adapter<ReflectInManag
             mCommets = new ArrayList<>();
             mTime = new Time();
 
-            final String reflectId = reflect.getReflectId();
-            displayInforBasic(reflectId, holder.mUsername, holder.mAvatarReflect);
+            final String userID = reflect.getUserID();
+            displayInforBasic(userID, holder.mUsername, holder.mAvatarReflect);
             holder.mTitle.setText(reflect.getTitle());
             holder.mTime.setText(reflect.getDatePosted() + " lúc " + reflect.getTimePosted());
             holder.mContent.setText(reflect.getContentPost());
@@ -118,11 +118,11 @@ public class ReflectInManagerAdapter extends RecyclerView.Adapter<ReflectInManag
 
                             }
                         });
-                        diplayListComment(reflectId, holder.mRecyclerView);
+                        diplayListComment(userID, holder.mRecyclerView);
                         holder.mSendManager.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                sendComment(holder.mContentComment, reflectId);
+                                sendComment(holder.mContentComment, userID);
                             }
                         });
                     }
@@ -147,6 +147,10 @@ public class ReflectInManagerAdapter extends RecyclerView.Adapter<ReflectInManag
 
 
         }
+        else {
+            Toast.makeText(mContext,"Không có phản ánh nào trong trang này", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void getCountComment(String reflectId, final TextView countComment) {
@@ -239,7 +243,6 @@ public class ReflectInManagerAdapter extends RecyclerView.Adapter<ReflectInManag
         public TextView mStatus;
         public Button mButtonSetStatus;
         public LinearLayout mLinearLayoutComment;
-        public LinearLayout mLinearLayoutLike;
         private RecyclerView mRecyclerView;
 
         private CircleImageView mAvatarmManager;
@@ -261,7 +264,6 @@ public class ReflectInManagerAdapter extends RecyclerView.Adapter<ReflectInManag
             mStatus = itemView.findViewById(R.id.txt_status_item_reflect_profile_manager);
             mButtonSetStatus = itemView.findViewById(R.id.btn_set_status_item_reflect_manager);
             mLinearLayoutComment = itemView.findViewById(R.id.layout_comment_item_reflect_manager);
-            mLinearLayoutLike = itemView.findViewById(R.id.layout_like_item_reflect_profile_manager);
             mLayoutComment = itemView.findViewById(R.id.container_comment_reflect_manager);
             initView(itemView);
             initRecyclerview(itemView);

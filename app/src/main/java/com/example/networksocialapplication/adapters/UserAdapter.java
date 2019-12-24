@@ -29,9 +29,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private Context mContext;
     private List<Resident> mUserList;
 
-    private FirebaseUser mFirebaseUser;
-    private String mCurrentUserID;
-
 
     public UserAdapter(Context context, List<Resident> userList) {
         mContext = context;
@@ -49,12 +46,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         if (mUserList != null) {
-            mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-            mCurrentUserID = mFirebaseUser.getUid();
+
             final Resident user = mUserList.get(position);
 //            holder.btnFollow.setVisibility(View.VISIBLE);
-            Glide.with(mContext).load(user.getAvatar()).into(holder.imgAvatar);
+            Glide.with(mContext).load(user.getAvatar()).into(holder.imgAvatarResident);
             holder.txtUsername.setText(user.getUsername());
+            String username = user.getRoom();
+            holder.txtNameRoom.setText(user.getRoom());
             holder.mLine.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -74,7 +72,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends PostAdapter.ViewHolder {
-        public CircleImageView imgAvatar;
+        public CircleImageView imgAvatarResident;
         public TextView txtUsername;
         public TextView txtNameRoom;
         public RelativeLayout mLine;
@@ -82,29 +80,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mLine = itemView.findViewById(R.id.line_user);
-            imgAvatar = itemView.findViewById(R.id.img_avatar_item_user_search);
+            imgAvatarResident = itemView.findViewById(R.id.img_avatar_item_user_search);
             txtUsername = itemView.findViewById(R.id.txt_username_item_search);
-            txtNameRoom = itemView.findViewById(R.id.txt_name_room_item_search);
+            txtNameRoom = itemView.findViewById(R.id.txt_number_room_item_search);
         }
 
-//        private void isFollowing(final String userId, final Button button) {
-//            DatabaseReference followData = FirebaseDatabase.getInstance().getReference().child("Follows").child(mFirebaseUser.getUid()).child("following");
-//            followData.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                    if (dataSnapshot.child(userId).exists()) {
-//                        button.setText("Đã theo dõi");
-//                    } else {
-//                        button.setText("Theo dõi");
-//                    }
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                }
-//            });
-//        }
 
     }
 }

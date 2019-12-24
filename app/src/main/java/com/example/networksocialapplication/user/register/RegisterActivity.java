@@ -78,9 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 createNewAccount();
-                mProgressDialog.setTitle("Đăng ký tài khoản");
-                mProgressDialog.setMessage("Vui lòng đợi trong giây lát");
-                mProgressDialog.show();
+
             }
         });
         mBtnSignUpGoogle.setOnClickListener(new View.OnClickListener() {
@@ -148,6 +146,9 @@ public class RegisterActivity extends AppCompatActivity {
             if (!TextUtils.isEmpty(password)) {
                 if (!TextUtils.isEmpty(repass)) {
                     if (repass.equals(password)) {
+                        mProgressDialog.setTitle("Đăng ký tài khoản");
+                        mProgressDialog.setMessage("Vui lòng đợi trong giây lát");
+                        mProgressDialog.show();
                         if (email.equals("admin@gmail.com") && password.equals("admin123")) {
                             mAuth.createUserWithEmailAndPassword(email, password)
                                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -183,20 +184,16 @@ public class RegisterActivity extends AppCompatActivity {
                         }
 
                     } else {
-                        mProgressDialog.dismiss();
                         Toast.makeText(getApplicationContext(), "Mật khẩu không trùng khớp!", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    mProgressDialog.dismiss();
                     Toast.makeText(getApplicationContext(), "Bạn chưa nhập lại mật khẩu!", Toast.LENGTH_SHORT).show();
 
                 }
             } else {
-                mProgressDialog.dismiss();
                 Toast.makeText(getApplicationContext(), "Bạn chưa nhập mật khẩu!", Toast.LENGTH_SHORT).show();
             }
         } else {
-            mProgressDialog.dismiss();
             Toast.makeText(getApplicationContext(), "Bạn chưa nhập email!!", Toast.LENGTH_SHORT).show();
         }
     }

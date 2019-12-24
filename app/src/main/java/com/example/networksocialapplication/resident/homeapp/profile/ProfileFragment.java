@@ -76,6 +76,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     private TextView mTxtPhoneNumber;
     private TextView mTxtGender;
     private TextView mTxtDateBirth;
+    private TextView mTxtRoom;
 
     private EditText edtCurrentPass;
     private EditText edtNewPass;
@@ -128,6 +129,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     }
 
     private void initView(View view) {
+        mTxtRoom = view.findViewById(R.id.txt_room_profile_fragment_resident);
         mTxtPhoneNumber = view.findViewById(R.id.txt_phone_number_profile_fragment);
         mTxtDateBirth = view.findViewById(R.id.txt_date_birth_profile_fragment);
         mTxtGender = view.findViewById(R.id.txt_gender_profile_fragment);
@@ -241,6 +243,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                     mTxtPhoneNumber.setText(user.getPhoneNumber());
                     mTxtGender.setText(user.getGender());
                     mTxtDateBirth.setText(user.getDateOfBirth());
+                    mTxtRoom.setText(user.getRoom()+"");
                     if (mIsAttach){
                         Glide.with(getActivity()).load(user.getAvatar()).error(R.drawable.ic_load_image_erroe).into(mAvatar);
                         Glide.with(getActivity()).load(user.getCoverPhoto()).error(R.drawable.ic_load_image_erroe).into(mCoverPhoto);

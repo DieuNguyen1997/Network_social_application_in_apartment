@@ -184,6 +184,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
+    @Override
+    public void finish() {
+        if (mProgressDialog != null && mProgressDialog.isShowing())
+        {
+            mProgressDialog.dismiss();
+        }
+    }
+
     public void onClickSignUp(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);

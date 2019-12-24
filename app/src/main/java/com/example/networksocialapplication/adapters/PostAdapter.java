@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -107,10 +108,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                             public boolean onMenuItemClick(MenuItem item) {
                                 switch (item.getItemId()) {
                                     case R.id.item_delete_post:
-                                        holder.deletePost(mContext, post);
-                                        break;
-                                    case R.id.item_edit_post:
-                                        holder.editPost(post);
+                                        holder.deletePost(mContext, postKey);
                                         break;
                                     default:
                                         break;
@@ -125,6 +123,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 holder.mTxtMenu.setVisibility(View.INVISIBLE);
             }
 
+        }
+        else {
+            Toast.makeText(mContext,"Bạn chưa có bài đăng nào. Họ không đăng thì mình đăng.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -185,7 +186,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             mAvatar.setImageURI(uri);
         }
 
-        public void deletePost(final Context context, final Post post) {
+        public void deletePost(final Context context, final String postKey) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("Xóa bài đăng");
             builder.setMessage("Bạn có chắc chắn muốn xóa bài đăng này?");
@@ -194,16 +195,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
-                    postDatabase.child(post.getPostId()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Intent intent = new Intent(context, HomeActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                context.startActivity(intent);
+                    if (postKey != null){
+                        postDatabase.child(postKey).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Intent intent = new Intent(context, HomeActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    context.startActivity(intent);
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
 
                 }
             });
@@ -218,57 +221,62 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         }
 
-        public void editPost(Post post) {
-//            Intent intent = new Intent()
-        }
-
         public void isLike(String postKey) {
-            likeDataRef.child(postKey).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.child(mCurrentUserID).exists()) {
-                        mImgLike.setImageResource(R.drawable.ic_love_red);
-                        mImgLike.setTag("liked");
-                    } else {
-                        mImgLike.setImageResource(R.drawable.ic_love_white);
-                        mImgLike.setTag("like");
+            if (postKey != null){
+                likeDataRef.child(postKey).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.child(mCurrentUserID).exists()) {
+                            mImgLike.setImageResource(R.drawable.ic_love_red);
+                            mImgLike.setTag("liked");
+                        } else {
+                            mImgLike.setImageResource(R.drawable.ic_love_white);
+                            mImgLike.setTag("like");
+                        }
                     }
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                }
-            });
+                    }
+                });
+            }
         }
 
         public void numberLike(String postKey) {
-            likeDataRef.child(postKey).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    mTxtCountLike.setText(String.valueOf(dataSnapshot.getChildrenCount()));
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+            if (postKey != null){
+                likeDataRef.child(postKey).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        mTxtCountLike.setText(String.valueOf(dataSnapshot.getChildrenCount()));
+                    }
 
-                }
-            });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
         }
 
         public void displayNumberComment(String postKey){
-            DatabaseReference commentRef = FirebaseDatabase.getInstance().getReference().child("Comments").child(postKey);
-            commentRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    mTxtCountComment.setText(dataSnapshot.getChildrenCount()+" Bình luận");
-                }
+            if (postKey != null){
+                DatabaseReference commentRef = FirebaseDatabase.getInstance().getReference().child("Comments").child(postKey);
+                commentRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        mTxtCountComment.setText(dataSnapshot.getChildrenCount()+" Bình luận");
+                    }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                }
-            });
+                    }
+                });
+            }
+
         }
 
         public void displayInforUser(final Context context, String userId){

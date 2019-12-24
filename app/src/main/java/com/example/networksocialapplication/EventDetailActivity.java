@@ -27,6 +27,7 @@ import com.example.networksocialapplication.database.UserDatabase;
 import com.example.networksocialapplication.models.Event;
 import com.example.networksocialapplication.models.Resident;
 import com.example.networksocialapplication.models.User;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -64,6 +65,8 @@ public class EventDetailActivity extends AppCompatActivity {
     private Animation mAnim_slide_up;
     private LinearLayout mLayout;
 
+    private BottomSheetBehavior mBottomSheetBehavior;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,11 +75,18 @@ public class EventDetailActivity extends AppCompatActivity {
         initView();
         initToolbar();
         initFirebase();
-        initViewPager();
+//        initViewPager();
+        initBottomSheet();
         getStatusEvent();
         getCountCareEvent();
         getCountJointEvent();
         getEvent();
+    }
+
+    private void initBottomSheet() {
+        View bottomSheet = findViewById(R.id.bottom_sheet_event_detail);
+        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        initViewPager(bottomSheet);
     }
 
     private void getCountJointEvent() {
@@ -303,13 +313,13 @@ public class EventDetailActivity extends AppCompatActivity {
         });
     }
 
-    private void initViewPager() {
-        TabLayout tabLayout = findViewById(R.id.taplayout_event_detail);
+    private void initViewPager(View view) {
+        TabLayout tabLayout = view.findViewById(R.id.taplayout_event_detail);
         tabLayout.addTab(tabLayout.newTab().setText("Giới thiệu"));
         tabLayout.addTab(tabLayout.newTab().setText("Thảo luận"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager viewPager = findViewById(R.id.viewpager_event_detail);
+        final ViewPager viewPager = view.findViewById(R.id.viewpager_event_detail);
         PagerEventAdapter adapter = new PagerEventAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));

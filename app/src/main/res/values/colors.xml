@@ -19,4 +19,5 @@
     <color name="tabUnselectedIconColor">#000000</color>
     <color name="color_gray">#EEEEEE</color>
     <color name="color_off_gray">#bfbfbf</color>
+    <color name="color_pink">#FAF0E6</color>
 </resources>

@@ -10,9 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.adapters.FriendAdapter;
+import com.example.networksocialapplication.models.Notification;
 import com.example.networksocialapplication.models.Resident;
 import com.example.networksocialapplication.models.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,8 +38,7 @@ public class ListFriendFragment extends Fragment {
     private DatabaseReference mFriendRef;
     private String mCurrentUserID;
     private DatabaseReference mUserRef;
-
-
+    private TextView mTextView;
 
 
     public ListFriendFragment() {
@@ -49,6 +51,7 @@ public class ListFriendFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_list_friend, container, false);
         mRecyclerView = view.findViewById(R.id.recycler_view_list_friend);
+        mTextView = view.findViewById(R.id.txt_list_friend);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL, false));
         mUsers = new ArrayList<>();
@@ -68,22 +71,26 @@ public class ListFriendFragment extends Fragment {
         mFriendRef.child(mCurrentUserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot item : dataSnapshot.getChildren()){
-                    String mFriendID = item.getKey();
-                    mUserRef.child(mFriendID).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            Resident user = dataSnapshot.getValue(Resident.class);
-                            mUsers.add(user);
-                            mFriendAdapter = new FriendAdapter(getContext(),mUsers);
-                            mFriendAdapter.notifyDataSetChanged();
-                            mRecyclerView.setAdapter(mFriendAdapter);
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                if (dataSnapshot.exists()){
+                    for (DataSnapshot item : dataSnapshot.getChildren()){
+                        String mFriendID = item.getKey();
+                        mUserRef.child(mFriendID).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                Resident user = dataSnapshot.getValue(Resident.class);
+                                mUsers.add(user);
+                                mFriendAdapter = new FriendAdapter(getContext(),mUsers);
+                                mFriendAdapter.notifyDataSetChanged();
+                                mRecyclerView.setAdapter(mFriendAdapter);
 
-                        }
-                    });
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+
                 }
 
             }

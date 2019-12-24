@@ -18,7 +18,7 @@
             android:id="@+id/img_cover_photo_setting_profile"
             android:layout_width="match_parent"
             android:layout_height="@dimen/profile_cover_image_height"
-            android:background="@color/colorPrimary"
+            android:background="#FFCC66"
             android:scaleType="centerCrop" />
 
         <ImageView
@@ -72,11 +72,12 @@
         app:layout_anchorGravity="center|bottom">
 
         <EditText
+            android:gravity="center"
             android:id="@+id/edt_username_setting_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_top_username_setting_profile"
-            android:hint="@string/setting_profie_username"
+            android:hint="@string/label_username"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/txt_username_setting_profile"
             android:textStyle="bold" />
@@ -91,11 +92,12 @@
         app:layout_anchorGravity="center|bottom">
 
         <EditText
+            android:gravity="center"
             android:id="@+id/edt_des_setting_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_top_username_setting_profile"
-            android:hint="@string/setting_profie_des"
+            android:hint="@string/label_des"
             android:textColor="@color/colorPray"
             android:textSize="@dimen/txt_des_setting_profile" />
 

@@ -21,7 +21,7 @@
     <item
         android:id="@+id/nav_item_apartment"
         android:icon="@drawable/ic_home_black_24dp"
-        android:title="Căn hộ" />
+        android:title="Bầu cử" />
     <item android:title="Liên hệ">
         <menu>
             <item

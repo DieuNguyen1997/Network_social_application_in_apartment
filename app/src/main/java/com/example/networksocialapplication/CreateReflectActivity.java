@@ -217,15 +217,14 @@ public class CreateReflectActivity extends AppCompatActivity implements View.OnC
     private void saveImageToFirebase(final String idReflect) {
 
         if (mImageUri != null) {
-            mImageRef.child(idReflect).putFile(mImageUri);
-            mUploadTask = mImageRef.putFile(mImageUri);
+            mUploadTask = mImageRef.child(idReflect).putFile(mImageUri);
             mUploadTask.continueWithTask(new Continuation() {
                 @Override
                 public Object then(@NonNull Task task) throws Exception {
                     if (!task.isSuccessful()) {
                         throw task.getException();
                     } else {
-                        return mImageRef.getDownloadUrl();
+                        return mImageRef.child(idReflect).getDownloadUrl();
                     }
                 }
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {

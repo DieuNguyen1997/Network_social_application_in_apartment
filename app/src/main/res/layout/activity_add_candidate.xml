@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddCandidateActivity">
+
+    <include layout="@layout/layout_app_bar"
+        android:id="@+id/toolbar_add_candidate"/>
+    <ImageView
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:layout_below="@+id/toolbar_add_candidate"
+        android:id="@+id/img_avatar_create_cadicate"
+        android:layout_width="@dimen/margin_120dp"
+        android:layout_height="@dimen/margin_120dp"
+        android:scaleType="centerCrop" />
+
+    <ImageButton
+        android:id="@+id/btn_camera_create_cadicate"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_above="@id/txt_layout_adress_apartment_create_candicate"
+        android:layout_toLeftOf="@+id/txt_layout_datebirth_create_candicate"
+        android:src="@drawable/ic_photo_camera_black_24dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:layout_below="@+id/toolbar_add_candidate"
+        android:id="@+id/txt_layout_name_create_cadicate"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_toRightOf="@+id/img_avatar_create_cadicate"
+        app:boxStrokeColor="@color/color_Background">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_name_create_candicate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/lable_name" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txt_layout_datebirth_create_candicate"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_layout_name_create_cadicate"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_toRightOf="@+id/img_avatar_create_cadicate"
+        app:boxStrokeColor="@color/color_Background">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_datebirth_create_candicate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/ic_event_black_24dp"
+            android:hint="@string/label_date_setting_information" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txt_layout_adress_apartment_create_candicate"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img_avatar_create_cadicate"
+        android:layout_marginTop="@dimen/margin_5dp"
+        app:boxStrokeColor="@color/color_Background">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_address_apartment_create_cadicate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/label_address_apartment_create_cadicate" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txt_layout_job_create_candicate"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_layout_adress_apartment_create_candicate"
+        app:boxStrokeColor="@color/color_Background">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_job_create_cadicate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/label_job_create_cadicate" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txt_layout_year_start_create_candicate"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_layout_job_create_candicate"
+        android:layout_marginTop="@dimen/margin_5dp"
+        app:boxStrokeColor="@color/color_Background">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_year_start_create_cadicate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/label_year_start_create_cadicate" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/txt_layout_slogan_create_candicate"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_layout_year_start_create_candicate"
+        android:layout_marginTop="@dimen/margin_5dp"
+        app:boxStrokeColor="@color/color_Background">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_slogan_create_cadicate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/label_slogan_create_cadicate" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_add_candidae"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:layout_below="@+id/txt_layout_slogan_create_candicate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="@dimen/margin_15dp"
+        android:background="@color/color_Background"
+        android:padding="@dimen/margin_5dp"
+        android:text="@string/txt_create_candicate"
+        android:textColor="@color/colorWhite" />
+</RelativeLayout>

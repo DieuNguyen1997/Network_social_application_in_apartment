@@ -6,8 +6,17 @@ public class Resident extends User {
     private String mGender;
     private String mDateOfBirth;
     private String mStatus;
+    private String mRoom;
 
     public Resident() {
+    }
+
+    public String getRoom() {
+        return mRoom;
+    }
+
+    public void setRoom(String room) {
+        mRoom = room;
     }
 
     public String getResidentId() {

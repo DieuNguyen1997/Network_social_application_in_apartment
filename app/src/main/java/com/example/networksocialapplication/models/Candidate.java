@@ -1,34 +1,45 @@
 package com.example.networksocialapplication.models;
 
 public class Candidate {
-    private  String mCadiadateId;
+    private String mCadiadateId;
+    private String mElectionId;
     private String mFullName;
+    private String mImage;
     private String mDateOfBirth;
     private String mAddress;
     private String mJob;
     private String mStartYear;
     private String mSlogan;
-    private String mYear;
 
-    public Candidate(String cadiadateId, String fullName, String dateOfBirth, String address, String job, String startYear, String slogan, String year) {
+    public Candidate(String cadiadateId, String electionId, String fullName, String dateOfBirth, String address, String job, String startYear, String slogan) {
         mCadiadateId = cadiadateId;
+        mElectionId = electionId;
         mFullName = fullName;
         mDateOfBirth = dateOfBirth;
         mAddress = address;
         mJob = job;
         mStartYear = startYear;
         mSlogan = slogan;
-        mYear = year;
     }
 
-    public Candidate(String cadiadateId, String fullName, String dateOfBirth, String address, String job, String startYear, String slogan) {
-        mCadiadateId = cadiadateId;
-        mFullName = fullName;
-        mDateOfBirth = dateOfBirth;
-        mAddress = address;
-        mJob = job;
-        mStartYear = startYear;
-        mSlogan = slogan;
+
+    public Candidate() {
+    }
+
+    public String getElectionId() {
+        return mElectionId;
+    }
+
+    public void setElectionId(String electionId) {
+        mElectionId = electionId;
+    }
+
+    public String getImage() {
+        return mImage;
+    }
+
+    public void setImage(String image) {
+        mImage = image;
     }
 
     public String getCadiadateId() {
@@ -87,12 +98,6 @@ public class Candidate {
         mSlogan = slogan;
     }
 
-    public String getYear() {
-        return mYear;
-    }
 
-    public void setYear(String year) {
-        mYear = year;
-    }
 }
 

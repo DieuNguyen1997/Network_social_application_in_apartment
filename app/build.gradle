@@ -3,7 +3,7 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.1"
+    buildToolsVersion '29.0.2'
     defaultConfig {
         applicationId "com.example.networksocialapplication"
         minSdkVersion 22
@@ -51,4 +51,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
 
     implementation 'com.google.android.material:material:1.0.0'
+//    implementation 'com.github.dhaval2404:imagepicker-support:1.1'
 }

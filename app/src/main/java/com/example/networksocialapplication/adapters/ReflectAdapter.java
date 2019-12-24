@@ -173,7 +173,6 @@ public class ReflectAdapter extends RecyclerView.Adapter<ReflectAdapter.ViewHold
         public TextView mStatus;
 
         public LinearLayout mRootCommnet;
-        public LinearLayout mRootLike;
         public LinearLayout mRootCommentFragment;
 
         private CircleImageView mAvatar;
@@ -191,7 +190,6 @@ public class ReflectAdapter extends RecyclerView.Adapter<ReflectAdapter.ViewHold
             mCountComment = itemView.findViewById(R.id.txt_count_comment_item_reflect_user);
             mStatus = itemView.findViewById(R.id.txt_status_item_reflect_user);
             mRootCommnet = itemView.findViewById(R.id.layout_comment_item_reflect_user);
-            mRootLike = itemView.findViewById(R.id.layout_like_item_reflect_user);
             mRootCommentFragment = itemView.findViewById(R.id.container_comment_reflect);
             mRecyclerView = itemView.findViewById(R.id.recycler_view_list_comment_item_reflect);
             mRecyclerView.setHasFixedSize(true);

@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -136,7 +137,6 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
         mBtnChooseImage.setOnClickListener(this);
         mBtnTakeImage.setOnClickListener(this);
         mBtnPost.setOnClickListener(this);
-        mBtnChooseBackground.setOnClickListener(this);
     }
 
     private void initFirebase() {
@@ -153,10 +153,10 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.btn_choose_image_add_post:
                 chooseImageFromGallery();
                 break;
-            case R.id.btn_take_image_add_post:
-                takePhoto();
-                break;
-
+//            case R.id.btn_take_image_add_post:
+////                onClickCamera();
+////                takePhoto();
+//                break;
             case R.id.btn_post_add_post:
                 addPostToFirebase();
                 break;
@@ -165,53 +165,57 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
 
     private void addPostToFirebase() {
         //luwu anh trong firebase
-        storeImageToFirebseStorage();
         //luwu thoong tin bai viet
         saveInformationToDatabase();
     }
 
     private void saveInformationToDatabase() {
         final String content = mEdtContent.getText().toString();
-        Post post = new Post(mCurrentUserId, mSaveCurrentDate, mSaveCurrentTime, content);
-        mPostDatabase.child(mCurrentUserId + " " + mPostRandomName).setValue(post).addOnCompleteListener(new OnCompleteListener() {
-            @Override
-            public void onComplete(@NonNull Task task) {
-                if (task.isSuccessful()) {
-                    Log.d(TAG, "Luu noi dung bai viet thanh cong");
-                    Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-                    startActivity(intent);
-                } else {
-                    String mesasge = task.getException().getMessage();
-                    Log.d(TAG, mesasge);
+        if (TextUtils.isEmpty(content)) {
+            Toast.makeText(AddPostActivity.this, "Vui lòng không để trống", Toast.LENGTH_SHORT).show();
+        } else {
+            Post post = new Post(mCurrentUserId, mSaveCurrentDate, mSaveCurrentTime, content);
+            mPostDatabase.child(mCurrentUserId + " " + mPostRandomName).setValue(post).addOnCompleteListener(new OnCompleteListener() {
+                @Override
+                public void onComplete(@NonNull Task task) {
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "Luu noi dung bai viet thanh cong");
+                        storeImageToFirebseStorage();
+                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                        startActivity(intent);
+                    } else {
+                        String mesasge = task.getException().getMessage();
+                        Log.d(TAG, mesasge);
+                    }
                 }
-            }
-        });
+            });
 
-        //get key post
-        mPostDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    String postKey = data.getKey();
-                    mPostDatabase.child(postKey).child("postId").setValue(postKey).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Log.d(TAG, "id success");
-                            } else
-                                Toast.makeText(AddPostActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            //get key post
+            mPostDatabase.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot data : dataSnapshot.getChildren()) {
+                        String postKey = data.getKey();
+                        mPostDatabase.child(postKey).child("postId").setValue(postKey).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Log.d(TAG, "id success");
+                                } else
+                                    Toast.makeText(AddPostActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+        }
+
     }
-
 
 
     private Uri getImageUri(Context context, Bitmap inImage) {
@@ -221,61 +225,18 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
         return Uri.parse(path);
     }
 
+
+
+
     private void storeImageToFirebseStorage() {
 
         mSaveCurrentDate = mTime.getDateCurrent();
         mSaveCurrentTime = mTime.getTimeHourCurrent();
-
         mPostRandomName = mTime.getTimeCurrent();
 
-        final StorageReference filePath = mPostImageReference.child("Post_Images").child(mCurrentUserId).child("Time" + mPostRandomName);
-
-//        for (int i = 0; i < mListImage.size(); i++) {
-//            Bitmap item = mListImage.get(i);
-//            Uri uri = getImageUri(getApplicationContext(),item);
-//            if (uri != null) {
-//                filePath.child(uri.getLastPathSegment() + mPostRandomName + ".jpg").putFile(uri);
-//                uploadTask = filePath.putFile(uri);
-//                uploadTask.continueWithTask(new Continuation() {
-//                    @Override
-//                    public Object then(@NonNull Task task) throws Exception {
-//                        if (!task.isSuccessful()) {
-//                            throw task.getException();
-//                        } else
-//                            return filePath.getDownloadUrl();
-//                    }
-//                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Uri> task) {
-//                        if (task.isSuccessful()) {
-//
-//                            Uri downLoadUri = task.getResult();
-//                            String postUrl = downLoadUri.toString();
-//
-//                            mPostDatabase.child(mCurrentUserId + " " + mPostRandomName).child("imagePost").setValue(postUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<Void> task) {
-//                                    if (task.isSuccessful()) {
-//                                        Toast.makeText(AddPostActivity.this, "Luu anh vafo post thanh cong", Toast.LENGTH_SHORT).show();
-//                                    } else {
-//                                        String mesasge = task.getException().getMessage();
-//                                        Log.d(TAG, mesasge);
-//                                        Toast.makeText(AddPostActivity.this, "Luu anh ko thanh cong", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                }
-//                            });
-//                        } else {
-//                            String mesasge = task.getException().getMessage();
-//                            Log.d(TAG, mesasge);
-//                            Toast.makeText(AddPostActivity.this, "Luu anh ko thanh cong", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                });
-//            }
-//        }
 
         if (mUriImage != null) {
-            filePath.child(mUriImage.getLastPathSegment() + mPostRandomName + ".jpg").putFile(mUriImage);
+            final StorageReference filePath = mPostImageReference.child("Post_Images").child(mCurrentUserId).child("Time" + mPostRandomName).child(mUriImage.getLastPathSegment() + mPostRandomName + ".jpg");
             uploadTask = filePath.putFile(mUriImage);
             uploadTask.continueWithTask(new Continuation() {
                 @Override
@@ -316,10 +277,6 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
-
-    private void setBackgroundForPost() {
-
-    }
 
     private void takePhoto() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

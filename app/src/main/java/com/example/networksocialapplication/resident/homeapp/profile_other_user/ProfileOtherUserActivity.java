@@ -58,6 +58,7 @@ public class ProfileOtherUserActivity extends AppCompatActivity {
     private LinearLayout mLayoutCancelRequest;
     private TextView mTxtSendRequest;
     private ImageView mCoverPhoto;
+    private TextView mTxtRoom;
 
     private String mSenderUserID;
     private String mReceiverUserID;
@@ -256,6 +257,7 @@ public class ProfileOtherUserActivity extends AppCompatActivity {
                     mTxtPhoneNumber.setText(user.getDes());
                     mTxtGender.setText(user.getGender());
                     mTxtDateBirth.setText(user.getDateOfBirth());
+                    mTxtRoom.setText(user.getRoom());
                     Glide.with(getApplicationContext()).load(user.getAvatar()).error(R.drawable.ic_load_image_erroe).into(mAvatar);
                     Glide.with(getApplicationContext()).load(user.getCoverPhoto()).error(R.drawable.ic_load_image_erroe).into(mCoverPhoto);
 
@@ -272,37 +274,49 @@ public class ProfileOtherUserActivity extends AppCompatActivity {
     }
 
     private void saveStatusRequest() {
-        mFriendRequestData.child(mSenderUserID).addValueEventListener(new ValueEventListener() {
+        mFriendRequestData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    String request_type = dataSnapshot.child(mReceiverUserID).child("request_type").getValue().toString();
-                    if (request_type.equals("Sent")) {
-                        CURRENT_STATE = "request_sent";
-                        mTxtSendRequest.setText("Hủy yêu cầu kết bạn");
-                        mLayoutCancelRequest.setVisibility(View.INVISIBLE);
-                        mLayoutCancelRequest.setEnabled(false);
-                    } else if (request_type.equals("Received")) {
-                        CURRENT_STATE = "request_received";
-                        mTxtSendRequest.setText("Chấp nhận yêu cầu kết bạn");
-                        mLayoutCancelRequest.setVisibility(View.VISIBLE);
-                        mLayoutCancelRequest.setEnabled(true);
-                        mLayoutCancelRequest.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                cancelRequestFriend();
-                            }
-                        });
-                    }
-                } else {
-                    mFriendData.child(mSenderUserID).addValueEventListener(new ValueEventListener() {
+                if (dataSnapshot.child(mReceiverUserID).exists()){
+                    mFriendRequestData.child(mSenderUserID).child(mReceiverUserID).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.hasChild(mReceiverUserID)) {
-                                CURRENT_STATE = "friend";
-                                mTxtSendRequest.setText("Hủy kết bạn");
-                                mLayoutCancelRequest.setVisibility(View.INVISIBLE);
-                                mLayoutCancelRequest.setEnabled(false);
+                            if (dataSnapshot.exists()) {
+                                String request_type = dataSnapshot.child("request_type").getValue().toString();
+                                if (request_type.equals("Sent")) {
+                                    CURRENT_STATE = "request_sent";
+                                    mTxtSendRequest.setText("Hủy yêu cầu kết bạn");
+                                    mLayoutCancelRequest.setVisibility(View.INVISIBLE);
+                                    mLayoutCancelRequest.setEnabled(false);
+                                } else if (request_type.equals("Received")) {
+                                    CURRENT_STATE = "request_received";
+                                    mTxtSendRequest.setText("Chấp nhận yêu cầu kết bạn");
+                                    mLayoutCancelRequest.setVisibility(View.VISIBLE);
+                                    mLayoutCancelRequest.setEnabled(true);
+                                    mLayoutCancelRequest.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            cancelRequestFriend();
+                                        }
+                                    });
+                                }
+                            } else {
+                                mFriendData.child(mSenderUserID).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.hasChild(mReceiverUserID)) {
+                                            CURRENT_STATE = "friend";
+                                            mTxtSendRequest.setText("Hủy kết bạn");
+                                            mLayoutCancelRequest.setVisibility(View.INVISIBLE);
+                                            mLayoutCancelRequest.setEnabled(false);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
                             }
                         }
 
@@ -311,6 +325,7 @@ public class ProfileOtherUserActivity extends AppCompatActivity {
 
                         }
                     });
+
                 }
             }
 
@@ -331,6 +346,7 @@ public class ProfileOtherUserActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        mTxtRoom = findViewById(R.id.txt_room_user_other);
         mTxtPhoneNumber = findViewById(R.id.txt_phone_number_profile_user_other);
         mTxtDateBirth = findViewById(R.id.txt_date_birth_user_other);
         mTxtGender = findViewById(R.id.txt_gender_user_other);

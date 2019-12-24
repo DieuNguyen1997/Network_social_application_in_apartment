@@ -4,6 +4,7 @@
     android:id="@+id/layout_fragment_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_pink"
     tools:context=".resident.homeapp.home.HomeFragment">
 
     <LinearLayout
@@ -15,6 +16,26 @@
             android:id="@+id/layout_post"
             layout="@layout/layout_add_post" />
 
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/layout_message_no_post"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_width="@dimen/profile_cover_image_height"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/ic_sticker_happy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textStyle="bold|italic"
+                android:gravity="center"
+                android:maxLines="2"
+                android:text="Bạn chưa có bài viết nào. Hãy tạo bài viết cho riêng mình!!!"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_post_fragment_home"
             android:layout_width="match_parent"

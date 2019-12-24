@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".resident.homeapp.profile_other_user.ProfileOtherUserActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -198,6 +199,20 @@
                             <TextView
                                 android:layout_marginStart="@dimen/margin_20dp"
                                 android:id="@+id/txt_date_birth_user_other"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold" />
+                        </TableRow>
+
+                        <TableRow android:padding="@dimen/margin_5dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/label_room_setting_information"
+                                android:textStyle="bold" />
+                            <TextView
+                                android:layout_marginStart="@dimen/margin_20dp"
+                                android:id="@+id/txt_room_user_other"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textStyle="bold" />

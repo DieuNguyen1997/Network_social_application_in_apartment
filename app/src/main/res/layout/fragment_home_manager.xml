@@ -8,6 +8,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <FrameLayout
+        android:background="@color/color_pink"
         android:layout_above="@+id/bottom_nav_home_fragment_manager"
         android:id="@+id/container_home_fragment_manager"
         android:layout_width="match_parent"

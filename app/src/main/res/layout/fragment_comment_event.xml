@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_pink"
     tools:context=".CommentEventFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -89,7 +90,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/add_comment"
+            android:layout_below="@+id/layout_image_comment_event"
             android:fillViewport="true">
 
             <androidx.recyclerview.widget.RecyclerView

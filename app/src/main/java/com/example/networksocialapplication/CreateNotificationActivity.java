@@ -89,11 +89,10 @@ public class CreateNotificationActivity extends AppCompatActivity {
     private void createNotification() {
         String title = mTitle.getText().toString();
         String content = mContent.getText().toString();
-        String notifyId =  mNotificationRef.push().getKey();
+        final String notifyId =  mNotificationRef.push().getKey();
         String date = mTime.getDateCurrent();
         String time = mTime.getTimeHourCurrent();
 
-        saveImageToFirebase(notifyId);
 
         if (TextUtils.isEmpty(title)){
             mTitle.setError("Hãy nhập tiêu đề!!!");
@@ -106,7 +105,8 @@ public class CreateNotificationActivity extends AppCompatActivity {
             mNotificationRef.child(notifyId).setValue(notification).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
-                   Toast.makeText(getApplicationContext(), "Tao thông báo thành công", Toast.LENGTH_SHORT).show();
+                    saveImageToFirebase(notifyId);
+                    Toast.makeText(getApplicationContext(), "Tao thông báo thành công", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -114,15 +114,14 @@ public class CreateNotificationActivity extends AppCompatActivity {
 
     private void saveImageToFirebase(final String notifyId) {
         if (mImageUri != null) {
-            mImageRef.child(notifyId).putFile(mImageUri);
-            mUploadTask = mImageRef.putFile(mImageUri);
+            mUploadTask = mImageRef.child(notifyId).putFile(mImageUri);
             mUploadTask.continueWithTask(new Continuation() {
                 @Override
                 public Object then(@NonNull Task task) throws Exception {
                     if (!task.isSuccessful()) {
                         throw task.getException();
                     } else {
-                        return mImageRef.getDownloadUrl();
+                        return mImageRef.child(notifyId).getDownloadUrl();
                     }
                 }
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {

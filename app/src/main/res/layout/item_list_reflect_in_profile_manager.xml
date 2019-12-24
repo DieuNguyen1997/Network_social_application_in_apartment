@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/margin_5dp"
     android:background="@drawable/background_item_reflect"
     android:orientation="vertical">
@@ -96,58 +96,21 @@
         android:textSize="@dimen/txt_size_15sp"
         android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/btn_set_status_item_reflect_manager"
-        android:layout_width="@dimen/margin_100dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txt_count_comment_item_reflect_profile_manager"
-        android:layout_alignParentRight="true"
-        android:layout_margin="@dimen/margin_8dp"
-        android:background="@drawable/background_btn_interest"
-        android:padding="@dimen/margin_5dp"
-        android:text="Đã tiếp nhận"
-        android:textAllCaps="false" />
 
     <RelativeLayout
         android:id="@+id/rela_like_item_reflect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_set_status_item_reflect_manager"
+        android:layout_below="@+id/txt_status_item_reflect_profile_manager"
         android:layout_marginTop="@dimen/margin_5dp">
-
-        <LinearLayout
-            android:id="@+id/layout_like_item_reflect_profile_manager"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/size_50dp"
-            android:orientation="horizontal"
-            android:padding="@dimen/margin_5dp">
-
-            <ImageView
-                android:id="@+id/img_icon_like_item_post"
-                android:layout_width="@dimen/size_20dp"
-                android:layout_height="@dimen/size_20dp"
-                android:src="@drawable/ic_love_white" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/margin_5dp"
-                android:text="@string/txt_like_item_post"
-                android:textSize="@dimen/txt_size_15sp" />
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layout_comment_item_reflect_manager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:layout_marginEnd="@dimen/size_50dp"
+            android:layout_marginStart="@dimen/size_50dp"
             android:orientation="horizontal"
             android:padding="@dimen/margin_5dp">
 
@@ -165,13 +128,27 @@
                 android:text="@string/txt_comment_item_post"
                 android:textSize="@dimen/txt_size_15sp" />
         </LinearLayout>
+
+        <Button
+            android:textColor="@color/color_red"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/margin_5dp"
+            android:id="@+id/btn_set_status_item_reflect_manager"
+            android:layout_width="@dimen/margin_100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@color/colorWhite"
+            android:padding="@dimen/margin_5dp"
+            android:text="Đã tiếp nhận"
+            android:textAllCaps="false" />
+
     </RelativeLayout>
 
 
     <LinearLayout
         android:id="@+id/container_comment_reflect_manager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/rela_like_item_reflect"
         android:orientation="vertical"
         android:visibility="gone">

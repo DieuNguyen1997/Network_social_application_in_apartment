@@ -133,7 +133,6 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
         final String dateFinish = mDateFinish.getText().toString();
         final String timeFinish = mTimeFinish.getText().toString();
         final String idEvent = mEventRef.push().getKey();
-        saveImageToFirebase(idEvent);
 
         if (TextUtils.isEmpty(name)) {
             mNameEvent.setError("Tên sự kiện không được bỏ trống");
@@ -148,6 +147,7 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
             mEventRef.child(idEvent).setValue(notification).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
+                    saveImageToFirebase(idEvent);
                     Toast.makeText(getApplicationContext(), "Tao sự kiện thành công", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -171,15 +171,14 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
     }
     private void saveImageToFirebase(final String eventId) {
         if (mImageUri != null) {
-            mImageRef.child(eventId).putFile(mImageUri);
-            mUploadTask = mImageRef.putFile(mImageUri);
+            mUploadTask = mImageRef.child(eventId).putFile(mImageUri);
             mUploadTask.continueWithTask(new Continuation() {
                 @Override
                 public Object then(@NonNull Task task) throws Exception {
                     if (!task.isSuccessful()) {
                         throw task.getException();
                     } else {
-                        return mImageRef.getDownloadUrl();
+                        return mImageRef.child(eventId).getDownloadUrl();
                     }
                 }
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -192,7 +191,6 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
                         mEventRef.child(eventId).child("imagePost").setValue(imageUrl).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(getApplicationContext(), "Lưu ảnh thành công", Toast.LENGTH_SHORT).show();
 
                             }
                         });
@@ -201,7 +199,7 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
                     }
                 }
             });
-        }
+        }else   Toast.makeText(getApplicationContext(), "Ảnh không được để trống", Toast.LENGTH_SHORT).show();
     }
 
     @Override

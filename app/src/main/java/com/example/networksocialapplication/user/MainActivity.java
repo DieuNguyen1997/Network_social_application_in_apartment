@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.user.login.LoginActivity;
 import com.example.networksocialapplication.user.register.RegisterActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button mBtnLogin;
@@ -45,4 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
+
+
 }

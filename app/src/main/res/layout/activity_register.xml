@@ -8,13 +8,14 @@
     tools:context=".user.register.RegisterActivity">
 
     <TextView
+        android:textColor="@color/color_btn_login"
         android:textStyle="bold"
         android:layout_marginTop="@dimen/size_50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Đăng ký"
-        android:textSize="30sp" />
+        android:textSize="@dimen/txt_size_40sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -62,7 +63,7 @@
                 android:id="@+id/edt_password_rs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_perm_identity_black_24dp"
+                android:drawableLeft="@drawable/ic_vpn_key_gray_24dp"
                 android:inputType="textPassword"  />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,13 +85,14 @@
                 android:id="@+id/edt_repassword_rs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_perm_identity_black_24dp"
+                android:drawableLeft="@drawable/ic_vpn_key_gray_24dp"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginTop="@dimen/margin_10dp"
         android:layout_marginRight="@dimen/size_50dp"
         android:layout_marginLeft="@dimen/size_50dp"
         android:layout_width="match_parent"
@@ -107,16 +109,19 @@
             android:text="Đăng ký" />
 
         <Button
+            android:drawablePadding="@dimen/margin_15dp"
+            android:padding="@dimen/margin_5dp"
+            android:background="@color/colorWhite"
+            android:drawableLeft="@drawable/ic_google"
             android:id="@+id/btn_signup_google"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/margin_10dp"
-            android:background="@drawable/bg_btn"
+            android:layout_marginTop="@dimen/margin_20dp"
             android:text="@string/activity_register_signup_with_google" />
 
         <TextView
-            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_marginTop="@dimen/margin_15dp"
             android:id="@+id/txt_signin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

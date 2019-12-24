@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.EventDetailActivity;
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.models.Event;
+import com.example.networksocialapplication.models.Manager;
 import com.example.networksocialapplication.models.Reflect;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -59,6 +60,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             holder.mLocation.setText(event.getLocation());
             Glide.with(mContext).load(event.getImagePost()).into(holder.mImage);
             getCountCareEvent(idEvent,holder.mCountInterest);
+
+            checkIsManager(holder.mBtnJoin, holder.mBtntCare);
             holder.mBtntCare.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -83,6 +86,27 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                 }
             });
         }
+    }
+
+    private void checkIsManager(final View join, final View care) {
+        DatabaseReference managerRef = FirebaseDatabase.getInstance().getReference().child("Manager");
+        managerRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()){
+                    Manager manager = data.getValue(Manager.class);
+                    if (mCurrentUserId.equals(manager.getManagerId())){
+                        join.setVisibility(View.GONE);
+                        care.setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void initFirebase() {

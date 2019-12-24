@@ -109,7 +109,12 @@ public class PostDetailActivity extends AppCompatActivity implements OnClickList
                 Post post = dataSnapshot.getValue(Post.class);
                 mTimePosted.setText("Đã đăng bài viết" + post.getDatePosted() + " lúc " + post.getTimePosted());
                 mContentPost.setText(post.getContentPost());
-                Glide.with(getApplicationContext()).load(post.getImagePost()).into(mImagePost);
+                if (post.getImagePost() != null){
+                    mImagePost.setVisibility(View.VISIBLE);
+                    Glide.with(getApplicationContext()).load(post.getImagePost()).into(mImagePost);
+                }else {
+                    mImagePost.setVisibility(View.GONE);
+                }
                 displayInforUser(post.getUserID());
                 isLike(mPostId);
                 numberLike(mPostId);

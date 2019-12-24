@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.networksocialapplication.R;
@@ -32,6 +33,7 @@ public class ListRequestFriendFragment extends Fragment {
     private RequestFriendAdapter mAdapter;
     private List<Resident> mUsers;
     private RecyclerView mRecyclerView;
+    private TextView mTextView;
 
     private DatabaseReference mRequestFriendRef;
     private String mCurrentUserId;
@@ -43,6 +45,7 @@ public class ListRequestFriendFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_list_request_friend, container, false);
         mRecyclerView = view.findViewById(R.id.recycler_view_list_request_friend);
+        mTextView = view.findViewById(R.id.txt_list_request_friend);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         mUsers = new ArrayList<>();
@@ -76,9 +79,12 @@ public class ListRequestFriendFragment extends Fragment {
                                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                 Resident user = dataSnapshot.getValue(Resident.class);
                                                 mUsers.add(user);
+
                                                 mAdapter = new RequestFriendAdapter(getActivity(), mUsers);
                                                 mAdapter.notifyDataSetChanged();
                                                 mRecyclerView.setAdapter(mAdapter);
+
+
                                             }
 
                                             @Override
@@ -87,8 +93,7 @@ public class ListRequestFriendFragment extends Fragment {
                                             }
                                         });
                                     }
-                                } else
-                                    Toast.makeText(getActivity(), "Không có lời mời kết bạn nào", Toast.LENGTH_SHORT).show();
+                                }
                             }
 
                             @Override
@@ -98,8 +103,7 @@ public class ListRequestFriendFragment extends Fragment {
                         });
 
                     }
-                } else
-                    Toast.makeText(getActivity(), "Không có lời mời kết bạn nào", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override

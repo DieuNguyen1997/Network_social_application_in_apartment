@@ -92,18 +92,18 @@ public class ProfileManagerFragment extends Fragment implements View.OnClickList
         View view = inflater.inflate(R.layout.fragment_profile_manager, container, false);
         initView(view);
         initFirebase();
-        initRecyclerview(view);
+//        initRecyclerview(view);
         displayInformationBasic();
 //        displayListReflectFromResident();
         return view;
     }
 
-    private void initRecyclerview(View view) {
-        mReflects = new ArrayList<>();
-        mRecyclerView = view.findViewById(R.id.recycler_view_list_reflect_profile_manager);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
-    }
+//    private void initRecyclerview(View view) {
+//        mReflects = new ArrayList<>();
+//        mRecyclerView = view.findViewById(R.id.recycler_view_list_reflect_profile_manager);
+//        mRecyclerView.setHasFixedSize(true);
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
+//    }
 
 //    private void displayListReflectFromResident() {
 //        mReflectRef.addValueEventListener(new ValueEventListener() {

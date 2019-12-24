@@ -1,10 +1,13 @@
 package com.example.networksocialapplication.resident.homeapp;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,8 +25,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.CreateReflectActivity;
+import com.example.networksocialapplication.HotlineActivity;
 import com.example.networksocialapplication.ReflectActivity;
+import com.example.networksocialapplication.VoteCandidateOfResidentActivity;
 import com.example.networksocialapplication.admin.profile_manager.ProfileManagerFragment;
+import com.example.networksocialapplication.models.Resident;
+import com.example.networksocialapplication.resident.homeapp.setting_image_profile.SettingImageProfileActivity;
+import com.example.networksocialapplication.resident.homeapp.setting_info_profile.SettingInformationProfileActivity;
 import com.example.networksocialapplication.resident.homeapp.view_profile_manager.ProfileManagerFromUserActivity;
 import com.example.networksocialapplication.user.list_chat_activity.ListChatActivity;
 import com.example.networksocialapplication.R;
@@ -64,9 +72,42 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
         setContentView(R.layout.activity_home);
 
         initFirebase();
+        checkUser();
         initToolbar();
         initNavigationView();
         initViewPager();
+
+    }
+
+
+
+    private void checkUser() {
+        mUserData.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Resident resident = dataSnapshot.getValue(Resident.class);
+                String avatar = resident.getAvatar();
+                String coverPhoto = resident.getCoverPhoto();
+                String des = resident.getDes();
+                String dateBirth = resident.getDateOfBirth();
+                String gender = resident.getGender();
+                String phoneNumber = resident.getPhoneNumber();
+                String username = resident.getUsername();
+
+                if (TextUtils.isEmpty(avatar) || TextUtils.isEmpty(coverPhoto) || TextUtils.isEmpty(username) || TextUtils.isEmpty(des) || TextUtils.isEmpty(resident.getResidentId())) {
+                    Toast.makeText(getApplicationContext(), "Bạn chưa cài đặt thông tin cá nhân", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), SettingImageProfileActivity.class));
+                } else if (TextUtils.isEmpty(dateBirth) || TextUtils.isEmpty(gender) || TextUtils.isEmpty(phoneNumber) || TextUtils.isEmpty(des)) {
+                    Toast.makeText(getApplicationContext(), "Bạn chưa cài đặt thông tin cá nhân", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), SettingInformationProfileActivity.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 
@@ -102,26 +143,26 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
                         transaction.commit();
                         break;
                     case R.id.nav_item_apartment:
-
+                        startActivity(new Intent(getApplicationContext(), VoteCandidateOfResidentActivity.class));
                         break;
                     case R.id.nav_item_event:
-                        EventFragment eventFragment= new EventFragment();
+                        EventFragment eventFragment = new EventFragment();
                         FragmentTransaction transaction1 = getSupportFragmentManager().beginTransaction();
                         transaction1.replace(R.id.container_home, eventFragment);
                         transaction1.commit();
                         break;
                     case R.id.nav_item_hotline:
+                        startActivity(new Intent(getApplicationContext(), HotlineActivity.class));
                         break;
                     case R.id.nav_item_logout:
                         mAuth.signOut();
                         updateUI(null);
                         break;
                     case R.id.nav_item_manager:
-                        Intent intent = new Intent(getApplicationContext(), ProfileManagerFromUserActivity.class);
-                        startActivity(intent);
+                        startActivity(new Intent(getApplicationContext(), ProfileManagerFromUserActivity.class));
                         break;
                     case R.id.nav_item_notification:
-                        NotificationFragment notificationFragment= new NotificationFragment();
+                        NotificationFragment notificationFragment = new NotificationFragment();
                         FragmentTransaction notifyFragment = getSupportFragmentManager().beginTransaction();
                         notifyFragment.replace(R.id.container_home, notificationFragment);
                         notifyFragment.commit();
@@ -140,11 +181,19 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
         mUserData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
-                    String username = dataSnapshot.child("username").getValue().toString();
-                    String avatar = dataSnapshot.child("avatar").getValue().toString();
-                    mTxtUsername.setText(username);
-                    Glide.with(HomeActivity.this).load(avatar).into(mAvatar);
+                if (dataSnapshot.exists()) {
+                    Resident resident = dataSnapshot.getValue(Resident.class);
+                    String username = resident.getUsername();
+                    String avatar = resident.getAvatar();
+                    if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(avatar)) {
+                        mTxtUsername.setText(username);
+                        if (isValidContextForGlide(HomeActivity.this)) {
+                            Glide.with(HomeActivity.this).load(avatar).into(mAvatar);
+                        }
+                    }
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "Không có thông tin của người dùng này", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -153,6 +202,19 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
 
             }
         });
+    }
+
+    public static boolean isValidContextForGlide(final Context context) {
+        if (context == null) {
+            return false;
+        }
+        if (context instanceof Activity) {
+            final Activity activity = (Activity) context;
+            if (activity.isDestroyed() || activity.isFinishing()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void initToolbar() {
@@ -199,7 +261,7 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
             }
         });
         //change color icon in tablayout when select view pager
-        tabLayout.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager){
+        tabLayout.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager) {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 super.onTabSelected(tab);
@@ -252,7 +314,7 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
 
     }
 
-    private void status(String status){
+    private void status(String status) {
         mUserData.child("status").setValue(status);
     }
 

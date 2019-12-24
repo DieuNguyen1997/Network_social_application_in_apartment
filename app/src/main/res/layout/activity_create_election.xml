@@ -10,173 +10,115 @@
         android:id="@+id/toolbar_create_election"
         layout="@layout/layout_app_bar" />
 
-    <LinearLayout
-        android:id="@+id/linearlayout_year"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar_create_election"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="@dimen/size_50dp"
-        android:layout_marginTop="@dimen/margin_15dp"
-        android:background="@drawable/background_btn_add_comment"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_15dp"
-            android:text="@string/year"
-            android:textSize="@dimen/txt_size_20sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_30dp"
-            android:layout_margin="@dimen/margin_15dp"
-            android:background="@android:color/transparent"
-            android:hint="2018" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/label_create_candicate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearlayout_year"
-        android:layout_margin="@dimen/margin_15dp"
-        android:padding="5dp"
-        android:text="@string/label_create_candidate"
-        android:textColor="@color/color_Background"
-        android:textSize="@dimen/txt_size_18sp"
-        android:textStyle="bold" />
-
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:visibility="gone"
+        android:id="@+id/layout_create_candidate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/label_create_candicate"
-        android:layout_marginLeft="@dimen/margin_15dp"
-        android:layout_marginRight="@dimen/margin_15dp">
+        android:layout_below="@id/toolbar_create_election"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_10dp"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="62dp">
+
 
         <ImageView
-            android:id="@+id/img_avatar_create_cadicate"
-            android:layout_width="@dimen/margin_120dp"
-            android:layout_height="@dimen/margin_120dp"
-            android:scaleType="centerCrop"/>
-
-        <ImageButton
-            android:layout_above="@id/txt_layout_adress_apartment_create_candicate"
-            android:layout_toLeftOf="@+id/txt_layout_datebirth_create_candicate"
-            android:id="@+id/btn_camera_create_cadicate"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_photo_camera_black_24dp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txt_layout_name_create_cadicate"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_10dp"
-            android:layout_toRightOf="@+id/img_avatar_create_cadicate"
-            app:boxStrokeColor="@color/color_Background">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_name_create_candicate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/lable_name" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txt_layout_datebirth_create_candicate"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txt_layout_name_create_cadicate"
-            android:layout_marginLeft="@dimen/margin_10dp"
-            android:layout_toRightOf="@+id/img_avatar_create_cadicate"
-            app:boxStrokeColor="@color/color_Background">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_datebirth_create_candicate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/ic_event_black_24dp"
-                android:hint="@string/label_date_setting_information" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txt_layout_adress_apartment_create_candicate"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/img_avatar_create_cadicate"
-            android:layout_marginTop="@dimen/margin_5dp"
-            app:boxStrokeColor="@color/color_Background">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_address_apartment_create_cadicate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/label_address_apartment_create_cadicate" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txt_layout_job_create_candicate"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txt_layout_adress_apartment_create_candicate"
-            app:boxStrokeColor="@color/color_Background">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_job_create_cadicate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/label_job_create_cadicate" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txt_layout_year_start_create_candicate"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txt_layout_job_create_candicate"
-            android:layout_marginTop="@dimen/margin_5dp"
-            app:boxStrokeColor="@color/color_Background">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_year_start_create_cadicate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/label_year_start_create_cadicate" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txt_layout_slogan_create_candicate"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/txt_layout_year_start_create_candicate"
-            android:layout_marginTop="@dimen/margin_5dp"
-            app:boxStrokeColor="@color/color_Background">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_slogan_create_cadicate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/label_slogan_create_cadicate" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
+            android:id="@+id/btn_create_list_candidate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/badge_yelllow"
+            android:src="@drawable/ic_add_white_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.101"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_create_candidate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:text="Tạo ứng cử viên"
+            android:textColor="@color/color_Background"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_create_list_candidate" />
+
+        <TextView
+            android:id="@+id/txt_count_candidate"
+            android:layout_width="@dimen/size_20dp"
+            android:layout_height="@dimen/size_20dp"
+            android:layout_above="@+id/txt_create_candidate"
+            android:layout_marginStart="28dp"
+            android:layout_marginBottom="36dp"
+            android:background="@drawable/circle_red"
+            android:gravity="center"
+            android:text="5"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/txt_size_15sp"
+            app:layout_constraintBottom_toTopOf="@+id/txt_create_candidate"
+            app:layout_constraintStart_toStartOf="@+id/btn_create_list_candidate"
+            app:layout_constraintTop_toTopOf="@+id/btn_create_list_candidate" />
+
+        <Button
+            android:id="@+id/btn_create_notify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/background_item_reflect"
+            android:padding="@dimen/margin_10dp"
+            android:text="@string/txt_creat_election"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.7"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:padding="@dimen/margin_5dp"
+        android:orientation="vertical"
+        android:id="@+id/layout_follow_vote_candidate"
+        android:layout_below="@id/layout_create_candidate"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/label_follow_list_vote"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"
+            android:text="Theo dõi bình chọn ban quản lý của cư dân"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_list_follow_vote_candidate"
+            android:layout_below="@+id/label_follow_list_vote"
+            android:layout_margin="@dimen/margin_5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <Button
+            android:layout_marginBottom="@dimen/margin_10dp"
+            android:background="@drawable/bg_btn"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginEnd="@dimen/margin_15dp"
-            android:background="@color/color_Background"
-            android:padding="@dimen/margin_5dp"
-            android:text="@string/txt_create_candicate"
-            android:textColor="@color/colorWhite" />
+            android:id="@+id/btn_stop_vote_candidate"
+            android:layout_gravity="center"
+            android:text="Dừng bình chọn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
+
 </RelativeLayout>
+
