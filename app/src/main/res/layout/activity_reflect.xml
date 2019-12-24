@@ -16,7 +16,6 @@
         android:layout_height="@dimen/margin_150dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/color_Background"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@+id/include"
@@ -27,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/margin_10dp"
-        android:layout_marginTop="@dimen/size_50dp"
+        android:layout_marginTop="@dimen/size_70dp"
         android:layout_marginRight="@dimen/margin_10dp"
         android:layout_marginBottom="@dimen/margin_10dp"
         android:background="@color/colorWhite"
@@ -37,7 +36,6 @@
         tools:layout_editor_absoluteX="0dp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:background="@color/color_bg_toolbar"
             android:id="@+id/recycler_view_list_reflect_of_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>

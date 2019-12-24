@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_5dp"
+    android:elevation="@dimen/margin_10dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:background="#FAF0E6"
+            android:id="@+id/layout_infor_basic_item_candidate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_10dp">
+
+            <ImageView
+                android:id="@+id/img_avatar_item_vote_candidate"
+                android:layout_width="@dimen/size_70dp"
+                android:layout_height="@dimen/size_70dp"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:id="@+id/txt_name_item_vote_candidate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_15dp"
+                android:layout_marginTop="@dimen/margin_5dp"
+                android:layout_toRightOf="@id/img_avatar_item_vote_candidate"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/txt_size_20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_date_birth_item_vote_candidate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_name_item_vote_candidate"
+                android:layout_marginStart="@dimen/margin_15dp"
+                android:layout_marginTop="@dimen/margin_10dp"
+                android:layout_toRightOf="@id/img_avatar_item_vote_candidate"
+                android:textSize="@dimen/txt_size_15sp" />
+
+            <CheckBox
+                android:id="@+id/checkbox_item_vote_candidate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:shadowColor="@color/color_yellow" />
+
+
+        </RelativeLayout>
+
+        <TableLayout
+            android:id="@+id/layout_infor_candidate"
+            android:visibility="gone"
+            android:layout_marginStart="@dimen/margin_top_20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_10dp">
+
+            <TableRow android:padding="@dimen/margin_5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_job_create_cadicate"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_job_item_vote_andidate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_20dp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow android:padding="@dimen/margin_5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_address_apartment_create_cadicate"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_address_item_vote_candidate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_20dp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow android:padding="@dimen/margin_5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_year_start_create_cadicate"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_year_start_item_vote_candidate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_20dp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow android:padding="@dimen/margin_5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_slogan_create_cadicate"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:maxLines="5"
+                    android:id="@+id/txt_slogan_item_vote_candidate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_20dp"
+                    android:textStyle="bold" />
+            </TableRow>
+        </TableLayout>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

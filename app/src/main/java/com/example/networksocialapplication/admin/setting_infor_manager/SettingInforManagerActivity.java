@@ -82,8 +82,8 @@ public class SettingInforManagerActivity extends AppCompatActivity implements Vi
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Manager").child(currentUserID);
-        mAvatarDatabase = FirebaseStorage.getInstance().getReference().child("Avatar");
-        mCoverPhotoDatabase = FirebaseStorage.getInstance().getReference().child("CoverPhoto");
+        mAvatarDatabase = FirebaseStorage.getInstance().getReference().child("Avatar").child(currentUserID);
+        mCoverPhotoDatabase = FirebaseStorage.getInstance().getReference().child("CoverPhoto").child(currentUserID);
     }
 
     private void initView() {
@@ -130,7 +130,6 @@ public class SettingInforManagerActivity extends AppCompatActivity implements Vi
 
     private void saveAvatarProfileToFirebase() {
         if (mImageUri != null) {
-                        mAvatarDatabase.child(currentUserID).putFile(mImageUri);
                         mUploadTask = mAvatarDatabase.putFile(mImageUri);
                         mUploadTask.continueWithTask(new Continuation() {
                             @Override
@@ -242,7 +241,6 @@ public class SettingInforManagerActivity extends AppCompatActivity implements Vi
 
     private void saveCoverProfileToFirebase() {
         if (mImageUri != null) {
-            mCoverPhotoDatabase.child(currentUserID).putFile(mImageUri);
             mUploadTask = mCoverPhotoDatabase.putFile(mImageUri);
             mUploadTask.continueWithTask(new Continuation() {
                 @Override

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.networksocialapplication.adapters.ReflectInManagerAdapter;
 import com.example.networksocialapplication.models.Reflect;
@@ -62,12 +63,13 @@ public class ReflectReceivedFragment extends Fragment implements StatusReflect {
                     Reflect reflect = item.getValue(Reflect.class);
                     if (reflect.getStatus().equals(RECEIVED)) {
                         mReflects.add(reflect);
-
                     }
                 }
+
                 mReflectAdapter = new ReflectInManagerAdapter(getActivity(), mReflects);
                 mReflectAdapter.notifyDataSetChanged();
                 mRecyclerView.setAdapter(mReflectAdapter);
+
             }
 
             @Override

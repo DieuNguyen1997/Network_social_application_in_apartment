@@ -83,10 +83,8 @@ public class SearchUserActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mUsers.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
                     Resident user = snapshot.getValue(Resident.class);
-                    Log.d("search", user.toString());
-                    if (!user.getResidentId().equals(mCurrentUserID)) {
+                    if (!mCurrentUserID.equals(user.getResidentId())) {
                         if (user.getUsername().toLowerCase().contains(query.toLowerCase())) {
                             mUsers.add(user);
                         }
@@ -99,7 +97,7 @@ public class SearchUserActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(),"Không tìm thấy người dùng này", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Không tìm thấy người dùng này", Toast.LENGTH_SHORT).show();
             }
         });
     }

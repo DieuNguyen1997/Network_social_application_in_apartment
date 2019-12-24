@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.models.Comment;
+import com.example.networksocialapplication.models.Manager;
 import com.example.networksocialapplication.resident.homeapp.profile_other_user.ProfileOtherUserActivity;
 import com.example.networksocialapplication.user.comment.CommentActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -111,21 +112,62 @@ public class CommentEventAdapter extends RecyclerView.Adapter<CommentViewHolder>
     }
 
 
-    private void displayInforUser(final CircleImageView mImgAvatar, final TextView txtUsername, String userId) {
-        DatabaseReference mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
-        mUserRef.addValueEventListener(new ValueEventListener() {
+    private void displayInforUser(final CircleImageView mImgAvatar, final TextView txtUsername, final String userId) {
+//        DatabaseReference mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
+//        mUserRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                if (dataSnapshot.exists()) {
+//                    String avatar = dataSnapshot.child("avatar").getValue().toString();
+//                    String username = dataSnapshot.child("username").getValue().toString();
+//                    if (isValidContextForGlide(mContext)) {
+//                        // Load image via Glide lib using context
+//                        Glide.with(mContext).load(avatar).into(mImgAvatar);
+//
+//                    }
+//                    txtUsername.setText(username);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+        DatabaseReference managerRef = FirebaseDatabase.getInstance().getReference().child("Manager");
+        managerRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    String avatar = dataSnapshot.child("avatar").getValue().toString();
-                    String username = dataSnapshot.child("username").getValue().toString();
-                    if (isValidContextForGlide(mContext)) {
-                        // Load image via Glide lib using context
-                        Glide.with(mContext).load(avatar).into(mImgAvatar);
+                for (DataSnapshot data: dataSnapshot.getChildren()){
+                    Manager manager= data.getValue(Manager.class);
+                    if (manager.getManagerId().equals(userId)){
+                        if (isValidContextForGlide(mContext)) {
+                            // Load image via Glide lib using context
+                            Glide.with(mContext).load(manager.getAvatar()).into(mImgAvatar);
+                        }
+                        txtUsername.setText(manager.getUsername());
+                    }else {
+                        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
+                        userRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                String avatar = dataSnapshot.child("avatar").getValue().toString();
+                                String username = dataSnapshot.child("username").getValue().toString();
+                                if (isValidContextForGlide(mContext)) {
+                                    // Load image via Glide lib using context
+                                    Glide.with(mContext).load(avatar).into(mImgAvatar);
+                                }
+                                txtUsername.setText(username);
+                            }
 
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
                     }
-                    txtUsername.setText(username);
                 }
+
             }
 
             @Override

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".VoteCandidateOfResidentActivity">
+
+    <include layout="@layout/layout_app_bar"/>
+    <TextView
+        android:id="@+id/txt_no_have_election"
+        android:visibility="gone"
+        android:textColor="@color/color_yellow"
+        android:textStyle="bold|italic"
+        android:textSize="@dimen/txt_size_20sp"
+        android:text="Không có cuộc bầu cử nào"
+        android:layout_margin="@dimen/margin_20dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:visibility="gone"
+        android:padding="@dimen/margin_10dp"
+        android:id="@+id/layout_vote_candidate_resident"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_guide_vote_election"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_btn_add_comment"
+            android:padding="@dimen/margin_10dp"
+            android:text="Hướng dẫn bình chọn ban quản lý trong khu chung cư" />
+
+        <LinearLayout
+            android:id="@+id/layout_des_vote_election"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_50dp"
+            android:background="@drawable/background_item_reflect"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_10dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_5dp"
+                android:text="Cứ 3 năm một lần, khu chung cư lại tổ chức cuộc bầu cử ban quản lý khu chung cư. Mỗi cư dân hãy chọn ra 5 người bạn thấy phù hợp nhất.Đây là quyền lợi và trách nhiệm vói mỗi người đang là cư dân trong khu chung cư. Xin chân trọng cảm ơn."
+                android:textStyle="italic" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:text="Dưới đây là danh sách các ứng cử viên: "
+            android:textColor="@color/color_red"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_list_candidate_in_resident"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10dp"></androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+
+</LinearLayout>

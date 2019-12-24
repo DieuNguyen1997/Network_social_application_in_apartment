@@ -78,7 +78,7 @@ public class ProfileManagerFromUserActivity extends AppCompatActivity implements
 
     private void initRecyclerview() {
         mReflects = new ArrayList<>();
-        mRecyclerView = findViewById(R.id.recycler_view_list_reflect_profile_manager);
+        mRecyclerView = findViewById(R.id.recycler_view_list_refflect_profile_manager_from_user);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false));
     }

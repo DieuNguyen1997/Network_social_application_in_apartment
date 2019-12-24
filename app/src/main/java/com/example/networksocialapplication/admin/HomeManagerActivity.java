@@ -10,7 +10,6 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.graphics.PorterDuff;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,19 +20,17 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.ChatManagerActivity;
+import com.example.networksocialapplication.HotlineActivity;
 import com.example.networksocialapplication.R;
-import com.example.networksocialapplication.adapters.PagerAdapter;
 import com.example.networksocialapplication.adapters.PagerHomeAdapter;
+import com.example.networksocialapplication.admin.create_election.CreateElectionActivity;
 import com.example.networksocialapplication.admin.event_manager_fragment.EventMangerFragment;
 import com.example.networksocialapplication.admin.home_manager_fragment.HomeManagerFragment;
 import com.example.networksocialapplication.admin.notification_manager_fragment.NotificationManagerFragment;
-import com.example.networksocialapplication.resident.homeapp.HomeActivity;
-import com.example.networksocialapplication.resident.homeapp.event.EventFragment;
-import com.example.networksocialapplication.resident.homeapp.home.HomeFragment;
-import com.example.networksocialapplication.resident.homeapp.notifications.NotificationFragment;
-import com.example.networksocialapplication.resident.homeapp.search.SearchUserActivity;
-import com.example.networksocialapplication.user.list_chat_activity.ListChatActivity;
+import com.example.networksocialapplication.models.Room;
 import com.example.networksocialapplication.user.login.LoginActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -57,6 +54,9 @@ public class HomeManagerActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String mCurrentUserId;
     private DatabaseReference mUserData;
+    private DatabaseReference mRoomRef;
+    private String mNameRoom;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,30 +100,27 @@ public class HomeManagerActivity extends AppCompatActivity {
                         transaction.replace(R.id.container_home_manager, fragment);
                         transaction.commit();
                         break;
-                    case R.id.nav_item_apartment:
-                        break;
                     case R.id.nav_item_event:
-                        EventMangerFragment eventFragment= new EventMangerFragment();
+                        EventMangerFragment eventFragment = new EventMangerFragment();
                         FragmentTransaction transaction1 = getSupportFragmentManager().beginTransaction();
                         transaction1.replace(R.id.container_home_manager, eventFragment);
                         transaction1.commit();
                         break;
                     case R.id.nav_item_hotline:
+                        startActivity(new Intent(getApplicationContext(), HotlineActivity.class));
                         break;
                     case R.id.nav_item_logout:
                         mAuth.signOut();
                         updateUI(null);
                         break;
-                    case R.id.nav_item_manager:
-                        break;
                     case R.id.nav_item_notification:
-                        NotificationManagerFragment notificationFragment= new NotificationManagerFragment();
+                        NotificationManagerFragment notificationFragment = new NotificationManagerFragment();
                         FragmentTransaction notifyFragment = getSupportFragmentManager().beginTransaction();
                         notifyFragment.replace(R.id.container_home_manager, notificationFragment);
                         notifyFragment.commit();
                         break;
-                    case R.id.nav_item_reflect:
-
+                    case R.id.nav_item_election:
+                        startActivity(new Intent(getApplicationContext(), CreateElectionActivity.class));
                         break;
                 }
                 return false;
@@ -136,7 +133,7 @@ public class HomeManagerActivity extends AppCompatActivity {
         mUserData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     String username = dataSnapshot.child("username").getValue().toString();
                     String avatar = dataSnapshot.child("avatar").getValue().toString();
                     mTxtUsername.setText(username);
@@ -194,7 +191,7 @@ public class HomeManagerActivity extends AppCompatActivity {
             }
         });
         //change color icon in tablayout when select view pager
-        tabLayout.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager){
+        tabLayout.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager) {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 super.onTabSelected(tab);
@@ -237,21 +234,5 @@ public class HomeManagerActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
 
-    }
-
-    private void status(String status){
-        mUserData.child("status").setValue(status);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        status("online");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        status("offline");
     }
 }

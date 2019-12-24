@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -78,6 +79,10 @@ public class RequestFriendAdapter extends RecyclerView.Adapter<RequestFriendAdap
                     intentToProfileOther(sendId);
                 }
             });
+        }
+        else {
+            Toast.makeText(mContext,"Không có lời mời kết bạn nào.Đừng chờ họ kết bạn với mình. Hãy chủ động nhé!", Toast.LENGTH_SHORT).show();
+
         }
     }
 

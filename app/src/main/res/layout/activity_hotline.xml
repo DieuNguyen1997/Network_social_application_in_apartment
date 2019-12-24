@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_pink"
+    tools:context=".HotlineActivity">
+
+    <include
+        android:id="@+id/toolbar_hotline"
+        layout="@layout/layout_app_bar"/>
+
+    <LinearLayout
+        android:padding="@dimen/margin_20dp"
+        android:layout_below="@+id/toolbar_hotline"
+        android:layout_margin="@dimen/size_50dp"
+        android:background="@color/colorWhite"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textColor="@color/color_btn_login"
+            android:textSize="@dimen/txt_size_20sp"
+            android:text="Để liên lạc với ban quản lý bạn có thế nhắn tin trực tiếp bằng cách vào trang cá nhân của ban quản lý và chọn nhắn tin.
+Ngoài ra bạn có thể liên hệ trực tiếp qua số điện thoại:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="@dimen/margin_15dp"
+            android:textSize="@dimen/txt_size_20sp"
+            android:textColor="@color/color_red"
+            android:layout_gravity="center"
+            android:id="@+id/txt_phonenumber_hotline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="@color/color_btn_login"
+            android:textSize="@dimen/txt_size_20sp"
+            android:text="Hoặc đến trực tiếp văn phòng ban quản lý tại "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textSize="@dimen/txt_size_20sp"
+            android:textColor="@color/color_red"
+            android:layout_marginTop="@dimen/margin_15dp"
+            android:layout_gravity="center"
+            android:id="@+id/tzt_room_hotline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="@dimen/margin_15dp"
+            android:textColor="@color/color_btn_login"
+            android:text="Trân trọng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>

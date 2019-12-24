@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_pink"
     tools:context=".admin.event_manager_fragment.EventMangerFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -18,20 +19,11 @@
             android:orientation="vertical"
             android:text="@string/hello_blank_fragment">
 
-            <Button
-                android:background="@drawable/background_item_reflect"
-                android:layout_margin="@dimen/margin_10dp"
-                android:layout_alignParentRight="true"
-                android:id="@+id/btn_add_bau_cu"
-                android:layout_width="@dimen/margin_150dp"
-                android:layout_height="wrap_content"
-                android:text="@string/txt_creat_election" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_list_fragment_event_manager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/btn_add_bau_cu"></androidx.recyclerview.widget.RecyclerView>
+                android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
         </RelativeLayout>
     </ScrollView>
 

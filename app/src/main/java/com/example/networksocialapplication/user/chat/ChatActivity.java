@@ -16,6 +16,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -95,7 +96,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     private StorageReference mImageChatRef;
     private CoordinatorLayout mLayoutImage;
     private ImageView mImgChat;
-    private ImageView mDelete;
+    private ImageButton mDelete;
     private String mManagerId;
     private DatabaseReference mManagerRef;
 
@@ -215,6 +216,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         mChoosePhoto.setOnClickListener(this);
         mChooseSticker.setOnClickListener(this);
         mSendChat.setOnClickListener(this);
+        mDelete.setOnClickListener(this);
     }
 
     private void initFirebase() {
@@ -400,17 +402,15 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
     private void sendImage(final String chatId) {
         if (mImageUri != null) {
-            mImageChatRef.child(chatId).child(mImageUri.getLastPathSegment() + ".jpg").putFile(mImageUri);
-
-            UploadTask uploadTask = mImageChatRef.putFile(mImageUri);
-
+            final StorageReference database = mImageChatRef.child(chatId).child(mImageUri.getLastPathSegment() + ".jpg");
+            UploadTask uploadTask = database.putFile(mImageUri);
             uploadTask.continueWithTask(new Continuation() {
                 @Override
                 public Object then(@NonNull Task task) throws Exception {
                     if (!task.isSuccessful()) {
                         throw task.getException();
                     } else
-                        return mImageChatRef.getDownloadUrl();
+                        return database.getDownloadUrl();
                 }
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override

@@ -99,7 +99,7 @@ public class ReflectActivity extends AppCompatActivity {
         mReflects = new ArrayList<>();
         mRecyclerView = findViewById(R.id.recycler_view_list_reflect_of_user);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
     }
 
     private void initToolbar() {

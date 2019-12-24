@@ -4,7 +4,5 @@
     <item android:title="@string/txt_delete_post"
          android:id="@+id/item_delete_post"
         android:icon="@drawable/ic_delete_bin"/>
-    <item android:title="@string/txt_edit_post"
-        android:id="@+id/item_edit_post"
-        android:icon="@drawable/ic_edit"/>
+
 </menu>

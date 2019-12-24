@@ -27,6 +27,7 @@ import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.adapters.CommentAdapter;
 import com.example.networksocialapplication.adapters.CommentEventAdapter;
 import com.example.networksocialapplication.models.Comment;
+import com.example.networksocialapplication.models.Manager;
 import com.example.networksocialapplication.time_current.Time;
 import com.example.networksocialapplication.user.comment.CommentActivity;
 import com.google.android.gms.tasks.Continuation;
@@ -73,6 +74,7 @@ public class CommentEventFragment extends Fragment implements View.OnClickListen
     private Uri mImageUri;
     private Time mTime;
     private boolean mIsAttached;
+    private DatabaseReference mManagerRef;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -108,13 +110,32 @@ public class CommentEventFragment extends Fragment implements View.OnClickListen
     }
 
     private void displayAvatar() {
-        mUserRef.child(mCurrentUserId).addValueEventListener(new ValueEventListener() {
+        mManagerRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    String avatar = dataSnapshot.child("avatar").getValue().toString();
-                    if (mIsAttached){
-                        Glide.with(getActivity()).load(avatar).into(mAvatar);
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    Manager manager = data.getValue(Manager.class);
+                    if (mCurrentUserId.equals(manager.getManagerId())) {
+                        if (mIsAttached) {
+                            Glide.with(getActivity()).load(manager.getAvatar()).into(mAvatar);
+                        }
+                    } else {
+                        mUserRef.child(mCurrentUserId).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    String avatar = dataSnapshot.child("avatar").getValue().toString();
+                                    if (mIsAttached) {
+                                        Glide.with(getActivity()).load(avatar).into(mAvatar);
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
                     }
                 }
             }
@@ -124,6 +145,7 @@ public class CommentEventFragment extends Fragment implements View.OnClickListen
 
             }
         });
+
     }
 
     private void initView(View view) {
@@ -147,8 +169,9 @@ public class CommentEventFragment extends Fragment implements View.OnClickListen
     }
 
     private void initFirebase() {
-        mCurrentUserId= FirebaseAuth.getInstance().getCurrentUser().getUid();
+        mCurrentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         mUserRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        mManagerRef = FirebaseDatabase.getInstance().getReference().child("Manager");
         mCommentRef = FirebaseDatabase.getInstance().getReference().child("Comments").child(mEventId);
         mImageCommentRef = FirebaseStorage.getInstance().getReference().child("Image_Comments");
     }
@@ -232,44 +255,49 @@ public class CommentEventFragment extends Fragment implements View.OnClickListen
                 }
             });
 
-            if (mImageUri != null) {
-                mImageCommentRef.child(commentId).child(mImageUri.getLastPathSegment() + ".jpg").putFile(mImageUri);
-
-                UploadTask uploadTask = mImageCommentRef.putFile(mImageUri);
-
-                uploadTask.continueWithTask(new Continuation() {
-                    @Override
-                    public Object then(@NonNull Task task) throws Exception {
-                        if (!task.isSuccessful()) {
-                            throw task.getException();
-                        } else
-                            return mImageCommentRef.getDownloadUrl();
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()) {
-
-                            Uri downLoadUri = task.getResult();
-                            String imageUrl = downLoadUri.toString();
-
-                            mCommentRef.child(commentId).child("imageComment").setValue(imageUrl).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    mLayout.setVisibility(View.GONE);
-                                }
-                            });
-
-                        } else {
-                            String mesasge = task.getException().getMessage();
-                            Log.d(TAG, mesasge);
-                            Toast.makeText(getActivity(), "Luu anh ko thanh cong", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
+            saveImageInFirebase(commentId);
 
         }
+    }
+
+    private void saveImageInFirebase(final String commentId) {
+        if (mImageUri != null) {
+            final StorageReference database = mImageCommentRef.child(commentId).child(mImageUri.getLastPathSegment() + ".jpg");
+
+            UploadTask uploadTask = database.putFile(mImageUri);
+
+            uploadTask.continueWithTask(new Continuation() {
+                @Override
+                public Object then(@NonNull Task task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    } else
+                        return database.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+
+                        Uri downLoadUri = task.getResult();
+                        String imageUrl = downLoadUri.toString();
+
+                        mCommentRef.child(commentId).child("imageComment").setValue(imageUrl).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                mLayout.setVisibility(View.GONE);
+                            }
+                        });
+
+                    } else {
+                        String mesasge = task.getException().getMessage();
+                        Log.d(TAG, mesasge);
+                        Toast.makeText(getActivity(), "Luu anh ko thanh cong", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+
     }
 
 

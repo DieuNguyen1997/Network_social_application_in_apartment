@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_pink"
     android:orientation="vertical"
     tools:context=".resident.homeapp.add_post.AddPostActivity">
 
@@ -42,11 +43,13 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="@dimen/margin_150dp"
             android:layout_margin="5dp"
             android:orientation="vertical">
 
             <EditText
+                android:layout_marginTop="@dimen/margin_20dp"
+                android:gravity="center"
                 android:background="@android:color/transparent"
                 android:id="@+id/activity_add_post_edt_content"
                 android:layout_width="match_parent"
@@ -70,26 +73,26 @@
                 android:id="@+id/btn_choose_image_add_post"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_photo_camera_black_24dp"
+                android:drawableLeft="@drawable/ic_add_image_30dp"
                 android:text="@string/text_btn_choose_image_add_post" />
 
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:layout_marginTop="@dimen/margin_10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <!--<androidx.cardview.widget.CardView-->
+            <!--android:layout_marginTop="@dimen/margin_10dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
 
-            <Button
-                android:paddingLeft="@dimen/margin_15dp"
-                android:background="@drawable/background_btn_interest"
-                android:id="@+id/btn_take_image_add_post"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_add_image_30dp"
-                android:text="@string/text_btn_take_image_add_photo" />
+            <!--<Button-->
+                <!--android:paddingLeft="@dimen/margin_15dp"-->
+                <!--android:background="@drawable/background_btn_interest"-->
+                <!--android:id="@+id/btn_take_image_add_post"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:drawableLeft="@drawable/ic_photo_camera_black_24dp"-->
+                <!--android:text="@string/text_btn_take_image_add_photo" />-->
 
-        </androidx.cardview.widget.CardView>
+        <!--</androidx.cardview.widget.CardView>-->
 
         <!--<androidx.cardview.widget.CardView-->
             <!--android:layout_width="match_parent"-->
@@ -109,7 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/margin_top_10dp"
+            android:layout_marginTop="@dimen/margin_15dp"
             android:background="@drawable/bg_btn"
             android:text="@string/activity_add_post_btn_post" />
     </LinearLayout>

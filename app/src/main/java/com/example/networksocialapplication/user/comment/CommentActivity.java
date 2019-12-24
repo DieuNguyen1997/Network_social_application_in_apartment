@@ -191,6 +191,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
             mImageUri = data.getData();
             mImgComment.setImageURI(mImageUri);
             mLayout.setVisibility(View.VISIBLE);
+            mDelete.setVisibility(View.VISIBLE);
         }
     }
 
@@ -229,64 +230,68 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
                 @Override
                 public void onSuccess(Void aVoid) {
                     mContentComment.setText("");
+                    saveImageInFirebase(commentId);
                     mLayout.setVisibility(View.GONE);
                     Log.d(TAG, "Add comment success");
                 }
             });
-
-            if (mImageUri != null){
-                mImageCommentRef.child(commentId).child(mImageUri.getLastPathSegment()+".jpg").putFile(mImageUri);
-
-                UploadTask uploadTask = mImageCommentRef.putFile(mImageUri);
-
-                uploadTask.continueWithTask(new Continuation() {
-                    @Override
-                    public Object then(@NonNull Task task) throws Exception {
-                        if (!task.isSuccessful()) {
-                            throw task.getException();
-                        } else
-                            return mImageCommentRef.getDownloadUrl();
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()) {
-
-                            Uri downLoadUri = task.getResult();
-                            String imageUrl = downLoadUri.toString();
-
-                            mCommentRef.child(commentId).child("imageComment").setValue(imageUrl).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    mLayout.setVisibility(View.GONE);
-                                }
-                            });
-
-                        } else {
-                            String mesasge = task.getException().getMessage();
-                            Log.d(TAG, mesasge);
-                            Toast.makeText(CommentActivity.this, "Luu anh ko thanh cong", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
             if (!mCurrentUserId.equals(mUserPost)){
                 addNotification(mCurrentUserId, mPostId, mUserPost);
             }
-
-
         }
+    }
+    private  void saveImageInFirebase(final String commentId){
+        if (mImageUri != null){
+            final StorageReference databasse = mImageCommentRef.child(commentId).child(mImageUri.getLastPathSegment()+".jpg");
+
+            UploadTask uploadTask = databasse.putFile(mImageUri);
+
+            uploadTask.continueWithTask(new Continuation() {
+                @Override
+                public Object then(@NonNull Task task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    } else
+                        return databasse.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+
+                        Uri downLoadUri = task.getResult();
+                        String imageUrl = downLoadUri.toString();
+
+                        mCommentRef.child(commentId).child("imageComment").setValue(imageUrl).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                mLayout.setVisibility(View.GONE);
+                            }
+                        });
+
+                    } else {
+                        String mesasge = task.getException().getMessage();
+                        Log.d(TAG, mesasge);
+                        Toast.makeText(CommentActivity.this, "Luu anh ko thanh cong", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+
     }
 
     public void addNotification(String userID, String postID, String userPost){
-        DatabaseReference notiRef = FirebaseDatabase.getInstance().getReference().child("Notifications").child(userPost);
-        String notifyId = notiRef.push().getKey();
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("userID", userID);
-        hashMap.put("text", "Đã bình luận bài viết của bạn");
-        hashMap.put("postID", postID);
-        hashMap.put("isPost", true);
-        hashMap.put("notifyID", notifyId);
-        notiRef.child(notifyId).setValue(hashMap);
+        if (userPost!= null && !mCurrentUserId.equals(userPost)){
+            DatabaseReference notiRef = FirebaseDatabase.getInstance().getReference().child("Notifications").child(userPost);
+            String notifyId = notiRef.push().getKey();
+            HashMap<String, Object> hashMap = new HashMap<>();
+            hashMap.put("userID", userID);
+            hashMap.put("text", "Đã bình luận bài viết của bạn");
+            hashMap.put("postID", postID);
+            hashMap.put("isPost", true);
+            hashMap.put("notifyID", notifyId);
+            notiRef.child(notifyId).setValue(hashMap);
+        }
+
     }
 }

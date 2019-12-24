@@ -40,31 +40,12 @@
                     android:textSize="@dimen/txt_size_18sp"
                     android:textStyle="bold" />
 
-                <LinearLayout
+
+                <TextView
+                    android:id="@+id/txt_number_room_item_search"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_5dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:maxLines="1"
-                        android:text="@string/txt_nameroom" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:maxLines="1"
-                        android:text=" " />
-
-                    <TextView
-                        android:id="@+id/txt_number_room_item_search"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:maxLines="1"
-                        android:text="@string/txt_numberoom" />
-                </LinearLayout>
+                    android:maxLines="1"/>
 
             </LinearLayout>
         </RelativeLayout>

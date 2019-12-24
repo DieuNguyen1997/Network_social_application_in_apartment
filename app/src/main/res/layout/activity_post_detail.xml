@@ -73,26 +73,14 @@
                     android:textSize="@dimen/txt_size_15sp" />
 
                 <ImageView
+                    android:visibility="gone"
                     android:id="@+id/img_post_post_detail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/profile_cover_image_height"
                     android:layout_below="@+id/txt_content_post_detail"
                     android:layout_marginTop="@dimen/margin_10dp"
                     android:scaleType="centerCrop" />
-                <!--<GridView-->
-                <!--android:layout_below="@+id/img_post_item_post"-->
-                <!--android:id="@+id/gridView_list_image_post"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_margin="5dp"-->
-                <!--android:columnWidth="100dp"-->
-                <!--android:drawSelectorOnTop="true"-->
-                <!--android:gravity="center"-->
-                <!--android:numColumns="auto_fit"-->
-                <!--android:stretchMode="columnWidth"-->
-                <!--android:verticalSpacing="5dp"-->
-                <!--android:focusable="true"-->
-                <!--android:clickable="true"/>-->
+
             </RelativeLayout>
 
             <RelativeLayout

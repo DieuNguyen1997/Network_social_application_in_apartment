@@ -1,5 +1,6 @@
 package com.example.networksocialapplication.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -99,6 +100,18 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
                 }
             });
         }
+    }
+    public static boolean isValidContextForGlide(final Context context) {
+        if (context == null) {
+            return false;
+        }
+        if (context instanceof Activity) {
+            final Activity activity = (Activity) context;
+            if (activity.isDestroyed() || activity.isFinishing()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

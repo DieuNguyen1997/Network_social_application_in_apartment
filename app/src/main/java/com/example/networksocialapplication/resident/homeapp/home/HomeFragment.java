@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -18,7 +20,10 @@ import com.bumptech.glide.Glide;
 import com.example.networksocialapplication.R;
 import com.example.networksocialapplication.adapters.PostAdapter;
 import com.example.networksocialapplication.models.Post;
+import com.example.networksocialapplication.models.Resident;
+import com.example.networksocialapplication.resident.homeapp.HomeActivity;
 import com.example.networksocialapplication.resident.homeapp.add_post.AddPostActivity;
+import com.example.networksocialapplication.resident.homeapp.setting_image_profile.SettingImageProfileActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,6 +45,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private PostAdapter mPostAdapter;
     private ArrayList<Post> mListPost;
+    private View mLayout;
 
     private OnFragmentInteractionListener mListener;
 
@@ -52,6 +58,7 @@ public class HomeFragment extends Fragment {
     private DatabaseReference mFriendRef;
 
     private Context mContext;
+    private boolean mIsAttach;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -64,6 +71,7 @@ public class HomeFragment extends Fragment {
         mContext = getActivity();
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         mAvatar = view.findViewById(R.id.img_avatar_fragment_home);
+        mLayout = view.findViewById(R.id.layout_message_no_post);
         mBtnAddPost = view.findViewById(R.id.btn_add_main);
         mBtnAddPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,26 +81,49 @@ public class HomeFragment extends Fragment {
             }
         });
         initFirebase();
+        setUpLayout();
         diplayAvatar();
         initRecyclerview(view);
         getDataFromFirebase();
         return view;
     }
 
+    private void setUpLayout() {
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mIsAttach = true;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mIsAttach =  false;
+    }
+
+
 
     private void diplayAvatar() {
         //get all post from firebase
         mUserDatabase.child(mCurrentUserId).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.child("avatar").exists()) {
                     String avatar = dataSnapshot.child("avatar").getValue().toString();
-                    Glide.with(mContext).load(avatar).error(R.drawable.ic_load_image_erroe).into(mAvatar);
-                }
+                    if (mIsAttach){
+                        Glide.with(mContext).load(avatar).error(R.drawable.ic_load_image_erroe).into(mAvatar);
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                    }
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
         });
     }
 
@@ -124,11 +155,14 @@ public class HomeFragment extends Fragment {
                     mFriendRef.child(mCurrentUserId).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.child(userID).exists()||userID.equals(mCurrentUserId)){
+                            if (dataSnapshot.child(userID).exists() || userID.equals(mCurrentUserId)) {
+                                mLayout.setVisibility(View.GONE);
                                 mListPost.add(post);
                                 mPostAdapter = new PostAdapter(getContext(), mListPost);
                                 mPostAdapter.notifyDataSetChanged();
                                 mRecyclerView.setAdapter(mPostAdapter);
+                            }else {
+                                mLayout.setVisibility(View.VISIBLE);
                             }
                         }
 

@@ -3,9 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".NotificationDetailActivity">
 
     <RelativeLayout
+        android:background="@color/color_pink"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -14,19 +16,21 @@
             layout="@layout/layout_app_bar" />
 
         <TextView
+            android:textSize="@dimen/txt_size_20sp"
+            android:layout_margin="@dimen/margin_10dp"
             android:id="@+id/txt_time_notification_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/toolbar" />
 
         <TextView
-            android:textColor="@color/color_Background"
+            android:textColor="@color/color_btn_login"
             android:id="@+id/txt_title_notification_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txt_time_notification_detail"
-            android:layout_margin="@dimen/margin_10dp"
-            android:textSize="@dimen/txt_size_20sp"
+            android:layout_marginLeft="@dimen/margin_15dp"
+            android:textSize="@dimen/txt_size_25sp"
             android:textStyle="bold" />
 
         <ImageView
@@ -38,6 +42,8 @@
             android:visibility="gone" />
 
         <TextView
+            android:textSize="@dimen/txt_size_20sp"
+            android:textColor="@color/colorBlack"
             android:id="@+id/txt_content_notification_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

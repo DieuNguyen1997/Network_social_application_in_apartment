@@ -4,20 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/color_pink"
     tools:context=".resident.homeapp.list_request_friend.ListRequestFriendFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:textSize="@dimen/txt_size_20sp"
-        android:textStyle="bold"
-        android:layout_margin="@dimen/margin_10dp"
+        android:textColor="@color/colorBlack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/title_list_request_friend" />
+        android:layout_margin="@dimen/margin_10dp"
+        android:text="@string/title_list_request_friend"
+        android:textSize="@dimen/txt_size_20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txt_list_request_friend"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_10dp"
+        android:textSize="@dimen/txt_size_15sp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_margin="@dimen/margin_10dp"
         android:id="@+id/recycler_view_list_request_friend"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_10dp"></androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>
