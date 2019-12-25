@@ -26,6 +26,7 @@
         android:textStyle="bold" />
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:visibility="gone"
         android:layout_marginTop="@dimen/margin_20dp"
         android:id="@+id/img_status_on_item_user_status"
         android:layout_width="@dimen/margin_20dp"

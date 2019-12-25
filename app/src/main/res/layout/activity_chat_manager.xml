@@ -41,6 +41,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
+        android:background="@color/color_pink"
         android:id="@+id/container_list_chat_manager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -31,6 +31,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.Calendar;
+
 public class AddCandidateActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final int REQUEST_CODE_CHOOSE_AVATAR = 111;
@@ -124,6 +126,8 @@ public class AddCandidateActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void checkAddCandidate() {
+        Calendar calendar = Calendar.getInstance();
+        int currentyear = calendar.get(Calendar.YEAR);
         final String electionId = getIntent().getStringExtra("electionId");
         String name = mName.getText().toString();
         String job = mJob.getText().toString();
@@ -136,23 +140,27 @@ public class AddCandidateActivity extends AppCompatActivity implements View.OnCl
             mName.setError("Hãy nhập tên");
         }
         if (TextUtils.isEmpty(job)) {
-            mName.setError("Hãy nhập nghề nghiệp hiện tại");
+            mJob.setError("Hãy nhập nghề nghiệp hiện tại");
         }
         if (TextUtils.isEmpty(address)) {
-            mName.setError("Hãy nhập địa chỉ phòng");
+            mAddressApartment.setError("Hãy nhập địa chỉ phòng");
         }
         if (TextUtils.isEmpty(birthday)) {
-            mName.setError("Hãy nhập ngày sinh");
+            mDateBirth.setError("Hãy nhập ngày sinh");
         }
         if (TextUtils.isEmpty(yearStar)) {
-            mName.setError("Hãy nhập năm bắt đầu sống tại khu chung cư");
+            mYearStart.setError("Hãy nhập năm bắt đầu sống tại khu chung cư");
         }
         if (TextUtils.isEmpty(slogan)) {
-            mName.setError("Hãy nhập tiêu chí hành động sau khi được bầu");
+            mSlogan.setError("Hãy nhập tiêu chí hành động sau khi được bầu");
         }
         if (mImageUri == null) {
-            Toast.makeText(getApplicationContext(), "Hãy chon ảnh đại diện", Toast.LENGTH_SHORT).show();
-        } else {
+            Toast.makeText(getApplicationContext(), "Hãy chon ảnh sự kiện", Toast.LENGTH_SHORT).show();
+        }
+        if (Integer.parseInt(yearStar) >= currentyear){
+            mYearStart.setError("Năm bắt đầu ở chung cư phải nhỏ hơn năm hiện tại");
+        }
+        else {
             String candateId = mCandidateRef.push().getKey();
             Candidate candidate = new Candidate(candateId, electionId, name, birthday, address, job, yearStar, slogan);
             addCandidate(candidate);
@@ -211,7 +219,7 @@ public class AddCandidateActivity extends AppCompatActivity implements View.OnCl
                     }
                 }
             });
-        }
+        }Toast.makeText(getApplicationContext(), "hãy chọn ảnh sự kiện", Toast.LENGTH_SHORT).show();
     }
 
     private void chooseAvatar() {

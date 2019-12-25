@@ -82,7 +82,7 @@
     <string name="txt_nameroom">Phòng </string>
     <string name="txt_numberoom">201</string>
     <string name="title_cancel_requestfriend_profile_other">Hủy kết bạn</string>
-    <string name="title_list_request_friend">Lời mới kết bạn</string>
+    <string name="title_list_request_friend">Lời mời kết bạn</string>
     <string name="title_list_friend">Bạn bè</string>
     <string name="txt_unfriend">Hủy kết bạn</string>
     <string name="txt_add_comment">Thêm bình luận ...</string>

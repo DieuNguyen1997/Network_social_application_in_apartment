@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/color_pink"
+    android:orientation="vertical"
     tools:context=".resident.homeapp.list_friend.ListFriendFragment">
 
     <TextView
@@ -19,6 +19,5 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_list_friend"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/margin_20dp"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

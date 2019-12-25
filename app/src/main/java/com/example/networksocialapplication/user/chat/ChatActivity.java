@@ -140,6 +140,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             mChatRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    mMessages.clear();
                     for (DataSnapshot data : dataSnapshot.getChildren()) {
                         Message message = data.getValue(Message.class);
                         if (message.getReceivedId().equals(mCurrentUserId) && message.getSenderId().equals(mUserReceiveid) ||
@@ -199,7 +200,6 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         mImgOff = findViewById(R.id.img_status_off_chat_activity);
         mAvatar = findViewById(R.id.img_avatar_toolbar_chat);
         mUsername = findViewById(R.id.txt_username_toolbar_chat);
-        mTakePhoto = findViewById(R.id.img_take_photo_chat_activity);
         mChoosePhoto = findViewById(R.id.img_choose_photo_chat_activity);
         mChooseSticker = findViewById(R.id.img_choose_sticker_chat_activity);
         mContentChat = findViewById(R.id.edt_content_chat);
@@ -212,7 +212,6 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
         mManagerId = getIntent().getStringExtra("managerId");
 
-        mTakePhoto.setOnClickListener(this);
         mChoosePhoto.setOnClickListener(this);
         mChooseSticker.setOnClickListener(this);
         mSendChat.setOnClickListener(this);
@@ -308,8 +307,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.img_choose_photo_chat_activity:
                 chooseImageFromGallery();
                 break;
-            case R.id.img_take_photo_chat_activity:
-                break;
+
             case R.id.img_send_chat:
                 mNotify = true;
                 sendMessage();

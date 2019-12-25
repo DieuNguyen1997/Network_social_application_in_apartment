@@ -16,7 +16,7 @@
             android:id="@+id/toolbar_search_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/color_Background"
+            android:background="@color/color_btn_login"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <androidx.appcompat.widget.SearchView

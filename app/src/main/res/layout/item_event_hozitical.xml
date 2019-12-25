@@ -24,7 +24,6 @@
             android:layout_marginLeft="@dimen/margin_15dp"
             android:layout_marginTop="@dimen/margin_15dp"
             android:maxLines="1"
-            android:text="@string/txt_name_event"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/txt_size_20sp"
             android:textStyle="bold" />
@@ -35,8 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/txt_name_item_event_horizontal"
             android:layout_marginLeft="@dimen/margin_15dp"
-            android:maxLines="1"
-            android:text="@string/txt_name_event" />
+            android:maxLines="1"/>
 
         <TextView
             android:textColor="@color/color_red"
@@ -45,8 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/txt_location_item_event_horizontal"
             android:layout_marginLeft="@dimen/margin_15dp"
-            android:maxLines="1"
-            android:text="Bắt đầu : 12/9/2019 12:30 - Kết thúc : 13/9/2019 12:30" />
+            android:maxLines="1"/>
 
         <TextView
             android:id="@+id/txt_count_interest_item_event_horizontal"
@@ -54,24 +51,21 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/txt_time_item_event_horizontal"
             android:layout_marginLeft="@dimen/margin_15dp"
-            android:maxLines="1"
-            android:text="100 người quan tâm" />
+            android:maxLines="1"/>
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginLeft="@dimen/margin_5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txt_count_interest_item_event_horizontal"
             android:layout_marginTop="@dimen/margin_15dp">
 
             <RelativeLayout
-
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/margin_10dp">
 
                 <Button
-                    android:layout_centerHorizontal="true"
                     android:padding="@dimen/margin_10dp"
                     android:background="@drawable/background_btn_interest"
                     android:id="@+id/btn_care_item_event_horizontal"

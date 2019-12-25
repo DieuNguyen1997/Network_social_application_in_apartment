@@ -10,8 +10,7 @@
         android:id="@+id/img_avatar_item_request_friend"
         android:layout_width="@dimen/size_100dp"
         android:layout_height="@dimen/size_100dp"
-        android:layout_centerVertical="true"
-        android:src="@mipmap/ic_launcher" />
+        android:layout_centerVertical="true"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +25,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:text="@string/txt_username"
             android:textColor="@color/color_Background"
             android:textSize="@dimen/txt_size_20sp"
             android:textStyle="bold" />

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,7 +59,7 @@ public class UserStatusAdapter extends RecyclerView.Adapter<UserStatusAdapter.Vi
             } else {
                 mUsers.remove(user);
             }
-        }
+        }else Toast.makeText(mContext,"Không có ai hoạt động",Toast.LENGTH_LONG).show();
     }
 
     private void initFirebase() {

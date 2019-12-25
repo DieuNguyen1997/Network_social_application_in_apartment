@@ -72,7 +72,7 @@
 
                 <LinearLayout
                     android:id="@+id/root_request_friend"
-                    android:layout_margin="@dimen/margin_10dp"
+                    android:layout_margin="@dimen/margin_5dp"
                     android:layout_width="@dimen/margin_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -85,6 +85,7 @@
                         android:src="@drawable/ic_add_friend" />
 
                     <TextView
+                        android:gravity="center"
                         android:id="@+id/txt_request_friend"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -96,7 +97,7 @@
 
                 <LinearLayout
                     android:id="@+id/root_cancel_request_friend"
-                    android:layout_margin="@dimen/margin_10dp"
+                    android:layout_margin="@dimen/margin_5dp"
                     android:layout_width="@dimen/margin_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -119,7 +120,7 @@
                 <LinearLayout
                     android:onClick="onClickRootChatprofileOther"
                     android:id="@+id/root_chat_profile_other"
-                    android:layout_margin="@dimen/margin_10dp"
+                    android:layout_margin="@dimen/margin_5dp"
                     android:layout_width="@dimen/margin_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

@@ -73,6 +73,7 @@ public class ReflectAdapter extends RecyclerView.Adapter<ReflectAdapter.ViewHold
             final Reflect reflect = mReflects.get(position);
             final String reflectId = reflect.getReflectId();
             holder.mTitle.setText(reflect.getTitle());
+            holder.mField.setText(reflect.getField());
             holder.mTime.setText("Tới: Ban quản lý lúc " + reflect.getDatePosted() + " | " + reflect.getTimePosted());
             holder.mContent.setText(reflect.getContentPost());
             holder.mStatus.setText(reflect.getStatus());
@@ -167,6 +168,7 @@ public class ReflectAdapter extends RecyclerView.Adapter<ReflectAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView mTime;
         public TextView mTitle;
+        public TextView mField;
         public ImageView mImage;
         public TextView mContent;
         public TextView mCountComment;
@@ -192,6 +194,7 @@ public class ReflectAdapter extends RecyclerView.Adapter<ReflectAdapter.ViewHold
             mRootCommnet = itemView.findViewById(R.id.layout_comment_item_reflect_user);
             mRootCommentFragment = itemView.findViewById(R.id.container_comment_reflect);
             mRecyclerView = itemView.findViewById(R.id.recycler_view_list_comment_item_reflect);
+            mField = itemView.findViewById(R.id.txt_field_item_reflect_user);
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false));
             initView(itemView);

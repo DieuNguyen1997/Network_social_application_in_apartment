@@ -81,7 +81,6 @@ public class HomeFragment extends Fragment {
             }
         });
         initFirebase();
-        setUpLayout();
         diplayAvatar();
         initRecyclerview(view);
         getDataFromFirebase();
@@ -89,6 +88,11 @@ public class HomeFragment extends Fragment {
     }
 
     private void setUpLayout() {
+        if (mRecyclerView.isShown()){
+            mLayout.setVisibility(View.GONE);
+        }else {
+            mLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -145,10 +149,12 @@ public class HomeFragment extends Fragment {
 
     }
 
+    //sưa code
     private void getDataFromFirebase() {
         mPostData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mListPost.clear();
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
                     final Post post = item.getValue(Post.class);
                     final String userID = post.getUserID();
@@ -156,13 +162,10 @@ public class HomeFragment extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.child(userID).exists() || userID.equals(mCurrentUserId)) {
-                                mLayout.setVisibility(View.GONE);
                                 mListPost.add(post);
                                 mPostAdapter = new PostAdapter(getContext(), mListPost);
                                 mPostAdapter.notifyDataSetChanged();
                                 mRecyclerView.setAdapter(mPostAdapter);
-                            }else {
-                                mLayout.setVisibility(View.VISIBLE);
                             }
                         }
 

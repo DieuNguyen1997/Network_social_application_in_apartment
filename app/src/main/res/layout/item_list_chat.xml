@@ -10,8 +10,7 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_avatar_item_list_chat"
         android:layout_width="@dimen/size_70dp"
-        android:layout_height="@dimen/size_70dp"
-        android:src="@mipmap/ic_launcher" />
+        android:layout_height="@dimen/size_70dp"/>
 
     <LinearLayout
         android:id="@+id/layout_txt"

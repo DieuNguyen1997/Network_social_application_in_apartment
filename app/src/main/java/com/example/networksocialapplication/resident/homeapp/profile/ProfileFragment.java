@@ -88,6 +88,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
     private StorageReference mImageCoverDatabase;
     private UploadTask mUploadTask;
     private boolean mIsAttach;
+    private Uri mImageUriCover;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -353,15 +354,15 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
             mImageUri = data.getData();
             updateAvatarProfileToFirebase();
         }else if (requestCode == GALLERY_PICK_COVER && resultCode == getActivity().RESULT_OK && data != null){
-            mImageUri = data.getData();
+            mImageUriCover = data.getData();
             updateCoverProfileToFirebase();
         }
     }
 
     private void updateCoverProfileToFirebase() {
-        if (mImageUri != null) {
-            mImageCoverDatabase.putFile(mImageUri);
-            mUploadTask = mImageCoverDatabase.putFile(mImageUri);
+        if (mImageUriCover != null) {
+            mImageCoverDatabase.putFile(mImageUriCover);
+            mUploadTask = mImageCoverDatabase.putFile(mImageUriCover);
             mUploadTask.continueWithTask(new Continuation() {
                 @Override
                 public Object then(@NonNull Task task) throws Exception {

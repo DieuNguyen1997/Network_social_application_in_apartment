@@ -58,7 +58,7 @@ public class HotlineActivity extends AppCompatActivity {
     private void initToolbar() {
         mToolbar = findViewById(R.id.toolbar_layout);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Bình luận");
+        getSupportActionBar().setTitle("Hotline");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
