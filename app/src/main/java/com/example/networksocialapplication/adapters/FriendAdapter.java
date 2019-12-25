@@ -62,6 +62,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
             final Resident user = mUserList.get(position);
             Glide.with(mContext).load(user.getAvatar()).into(holder.imgAvatar);
             holder.txtUsername.setText(user.getUsername());
+            holder.txtNameRoom.setText(user.getRoom());
             final String mReceiverUserID = user.getResidentId();
 
             mFriendData = FirebaseDatabase.getInstance().getReference().child("Friends");

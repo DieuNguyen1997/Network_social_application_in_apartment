@@ -91,7 +91,7 @@ public class ListFriendFragment extends Fragment {
                         });
                     }
 
-                }
+                }else Toast.makeText(getActivity(),"Không có ban bè.", Toast.LENGTH_LONG).show();
 
             }
 

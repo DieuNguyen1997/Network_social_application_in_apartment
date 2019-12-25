@@ -17,7 +17,7 @@
             android:id="@+id/toolbar_chat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/color_Background"
+            android:background="@color/color_btn_login"
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
@@ -108,6 +108,7 @@
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <RelativeLayout
+        android:background="@color/colorWhite"
         android:id="@+id/add_chat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -115,14 +116,14 @@
         android:minHeight="?attr/actionBarSize"
         android:padding="@dimen/margin_5dp">
 
-        <ImageView
-            android:id="@+id/img_take_photo_chat_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/margin_10dp"
-            android:src="@drawable/ic_camera_alt_background_24dp" />
+        <!--<ImageView-->
+            <!--android:id="@+id/img_take_photo_chat_activity"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginRight="@dimen/margin_10dp"-->
+            <!--android:src="@drawable/ic_camera_alt_background_24dp" />-->
 
         <ImageView
             android:id="@+id/img_choose_photo_chat_activity"
@@ -130,7 +131,6 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/margin_10dp"
-            android:layout_toRightOf="@+id/img_take_photo_chat_activity"
             android:src="@drawable/ic_choose_image" />
 
         <RelativeLayout

@@ -131,11 +131,10 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
         mUsername = findViewById(R.id.txt_username_add_post);
         mEdtContent = findViewById(R.id.activity_add_post_edt_content);
         mBtnChooseImage = findViewById(R.id.btn_choose_image_add_post);
-        mBtnTakeImage = findViewById(R.id.btn_take_image_add_post);
         mBtnPost = findViewById(R.id.btn_post_add_post);
 
         mBtnChooseImage.setOnClickListener(this);
-        mBtnTakeImage.setOnClickListener(this);
+//        mBtnTakeImage.setOnClickListener(this);
         mBtnPost.setOnClickListener(this);
     }
 
@@ -170,6 +169,10 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void saveInformationToDatabase() {
+        mSaveCurrentDate = mTime.getDateCurrent();
+        mSaveCurrentTime = mTime.getTimeHourCurrent();
+        mPostRandomName = mTime.getTimeCurrent();
+
         final String content = mEdtContent.getText().toString();
         if (TextUtils.isEmpty(content)) {
             Toast.makeText(AddPostActivity.this, "Vui lòng không để trống", Toast.LENGTH_SHORT).show();
@@ -180,7 +183,7 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
                 public void onComplete(@NonNull Task task) {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "Luu noi dung bai viet thanh cong");
-                        storeImageToFirebseStorage();
+                        storeImageToFirebseStorage(mCurrentUserId + " " + mPostRandomName);
                         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                         startActivity(intent);
                     } else {
@@ -228,11 +231,8 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
 
 
 
-    private void storeImageToFirebseStorage() {
+    private void storeImageToFirebseStorage(final String postId) {
 
-        mSaveCurrentDate = mTime.getDateCurrent();
-        mSaveCurrentTime = mTime.getTimeHourCurrent();
-        mPostRandomName = mTime.getTimeCurrent();
 
 
         if (mUriImage != null) {
@@ -254,7 +254,7 @@ public class AddPostActivity extends AppCompatActivity implements View.OnClickLi
                         Uri downLoadUri = task.getResult();
                         String postUrl = downLoadUri.toString();
 
-                        mPostDatabase.child(mCurrentUserId + " " + mPostRandomName).child("imagePost").setValue(postUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        mPostDatabase.child(postId).child("imagePost").setValue(postUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {

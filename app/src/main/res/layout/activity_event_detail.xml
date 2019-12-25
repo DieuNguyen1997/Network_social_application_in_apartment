@@ -367,10 +367,11 @@
             android:orientation="vertical">
 
             <com.google.android.material.tabs.TabLayout
+
                 android:id="@+id/taplayout_event_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorWhite"
+                android:background="@color/color_pink"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:tabSelectedTextColor="@color/color_yellow"

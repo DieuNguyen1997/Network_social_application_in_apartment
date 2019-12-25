@@ -35,7 +35,6 @@
             android:layout_marginLeft="@dimen/margin_10dp"
             android:layout_marginRight="@dimen/margin_10dp"
             android:layout_marginBottom="@dimen/margin_5dp"
-            android:text="@string/txt_content_post_list"
             android:textColor="@color/color_bg_toolbar"
             android:textSize="@dimen/txt_size_12sp" />
     </LinearLayout>
@@ -77,14 +76,7 @@
             android:textColor="@color/color_Background"
             android:textSize="@dimen/txt_size_12sp" />
 
-        <TextView
-            android:id="@+id/txt_reply_item_comment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_10dp"
-            android:text="@string/txt_reply_item_post"
-            android:textColor="@color/color_Background"
-            android:textSize="@dimen/txt_size_12sp" />
+
 
         <TextView
             android:id="@+id/txt_time_item_comment"

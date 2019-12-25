@@ -1,5 +1,6 @@
 package com.example.networksocialapplication.adapters;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -286,7 +287,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     if (dataSnapshot.exists()){
                         Resident user = dataSnapshot.getValue(Resident.class);
                         mUserName.setText(user.getUsername());
-                        Glide.with(context).load(user.getAvatar()).into(mAvatar);
+                        if (isValidContextForGlide(context)){
+                            Glide.with(context).load(user.getAvatar()).into(mAvatar);
+
+                        }
                     }
                 }
 
@@ -295,6 +299,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
                 }
             });
+        }
+        public static boolean isValidContextForGlide(final Context context) {
+            if (context == null) {
+                return false;
+            }
+            if (context instanceof Activity) {
+                final Activity activity = (Activity) context;
+                if (activity.isDestroyed() || activity.isFinishing()) {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public void addNotification(String userID, String postID, String userPost){

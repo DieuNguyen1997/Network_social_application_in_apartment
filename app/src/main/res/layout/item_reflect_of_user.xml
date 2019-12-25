@@ -17,17 +17,27 @@
         android:textSize="@dimen/txt_size_15sp" />
 
     <TextView
+        android:id="@+id/txt_field_item_reflect_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_time_item_reflect_user"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginTop="@dimen/margin_10dp"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/txt_size_18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_toRightOf="@+id/txt_field_item_reflect_user"
         android:id="@+id/txt_title_item_reflect_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/txt_time_item_reflect_user"
         android:layout_marginLeft="@dimen/margin_10dp"
         android:layout_marginTop="@dimen/margin_10dp"
-        android:text="@string/txt_username"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/txt_size_18sp"
         android:textStyle="bold" />
-
     <ImageView
         android:id="@+id/img_item_reflect_user"
         android:layout_width="match_parent"
@@ -43,7 +53,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/img_item_reflect_user"
         android:layout_margin="@dimen/margin_10dp"
-        android:text="0000000000000000000000000000000000"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/txt_size_15sp" />
 

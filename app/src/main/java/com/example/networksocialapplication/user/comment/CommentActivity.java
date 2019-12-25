@@ -200,6 +200,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         mCommentRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mComments.clear();
                 for (DataSnapshot data : dataSnapshot.getChildren()){
                     Comment comment = data.getValue(Comment.class);
                     Log.d(TAG, comment.toString());

@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +33,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 public class CreateEventActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener {
@@ -117,12 +121,16 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
                 chooseImage();
                 break;
             case R.id.btn_create_event:
-                createEvent();
+                try {
+                    createEvent();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }
 
-    private void createEvent() {
+    private void createEvent() throws ParseException {
         final String name = mNameEvent.getText().toString();
         final String location = mLocation.getText().toString();
         final String des = mDes.getText().toString();
@@ -134,6 +142,11 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
         final String timeFinish = mTimeFinish.getText().toString();
         final String idEvent = mEventRef.push().getKey();
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+            Date DateStart = sdf.parse(dateStart);
+            Date DateFinish = sdf.parse(dateFinish);
+
         if (TextUtils.isEmpty(name)) {
             mNameEvent.setError("Tên sự kiện không được bỏ trống");
         }
@@ -142,7 +155,11 @@ public class CreateEventActivity extends AppCompatActivity implements View.OnCli
         }
         if (TextUtils.isEmpty(des)) {
             mDes.setError("Mô tả sự kiện không được bỏ trống");
-        } else {
+        }
+        if (DateFinish.before(DateStart)){
+            Toast.makeText(getApplicationContext(), "Ngày kết thúc phải lớn hơn ngày bắt đầu", Toast.LENGTH_SHORT).show();
+        }
+        else {
             Event notification = new Event(datePost,timePost,des,idEvent,name,location,dateStart,timeStart,dateFinish,timeFinish);
             mEventRef.child(idEvent).setValue(notification).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override

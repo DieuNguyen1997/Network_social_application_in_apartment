@@ -186,6 +186,25 @@ public class EventDetailActivity extends AppCompatActivity {
     }
 
     private void displayEvent(Event event) {
+        final DatabaseReference mManagerRef = FirebaseDatabase.getInstance().getReference().child("Manager");
+        mManagerRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child(mCurrentUserId).exists()){
+                    mBtntCare.setVisibility(View.GONE);
+                    mBtnJoin.setVisibility(View.GONE);
+                }else {
+                    mBtntCare.setVisibility(View.VISIBLE);
+                    mBtnJoin.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         Glide.with(getApplicationContext()).load(event.getImagePost()).into(mImage);
         mName.setText(event.getNameEvent());
         mTime.setText("Bắt đầu: " + event.getDateStart() + " : " + event.getTimeStar() + " - " + "Kết thúc: " + event.getDateFinish() + " : " + event.getTimeFinish());
