@@ -128,7 +128,6 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
     }
 
     private void initNavigationView() {
-        mDrawerLayout = findViewById(R.id.drawer_layout);
         mNavigationView = findViewById(R.id.navigationview);
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -218,6 +217,7 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
     }
 
     private void initToolbar() {
+        mDrawerLayout = findViewById(R.id.drawer_layout);
         Toolbar toolbar = findViewById(R.id.toolbar_home);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.home_toolbar_title);
@@ -225,7 +225,7 @@ public class HomeActivity extends AppCompatActivity implements HomeFragment.OnFr
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mNavigationView.setVisibility(View.VISIBLE);
+                mDrawerLayout.setVisibility(View.VISIBLE);
             }
         });
     }
